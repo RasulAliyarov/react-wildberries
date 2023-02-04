@@ -1,0 +1,305 @@
+body {
+    height: 300vh;
+}
+
+.header {
+    background: linear-gradient(to right, #cb11ab 0, #481173 100%) no-repeat;
+    padding: 16px 0 22px;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &__wrapper {
+        &__top {
+            margin-bottom: 16px;
+
+            button {
+                margin-right: 28px;
+                color: white;
+
+                .headerTitle {
+                    opacity: .6;
+                    color: white;
+                    font-size: 14px;
+                }
+            }
+
+            .headerLang {
+                .headerLangImg {
+                    margin-right: 7px;
+                    width: 11px;
+                }
+
+                .headerLanguageModal {
+                    width: 300px;
+                    height: 220px;
+                    background-color: white;
+                    position: absolute;
+                    top: 50px;
+                    left: 32px;
+                    border-radius: 10px;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    visibility: hidden;
+                    transition: .2s;
+
+                    &__top {
+                        padding: 20px 20px 10px;
+
+                        &__title {
+                            font-size: 16px;
+                            font-weight: 700;
+                            color: black;
+                            width: fit-content;
+                        }
+                    }
+
+                    &__languages {
+                        &__language {
+                            display: flex;
+                            padding: 8px 62px 8px 20px;
+                            position: relative;
+                            align-items: center;
+                            cursor: pointer;
+                            margin-top: 2px;
+                            color: black;
+
+                            img {
+                                width: 35px;
+                            }
+
+                            span {
+                                opacity: .4;
+                                font-weight: 600;
+                                margin: 0 15px;
+                            }
+
+                            h5 {
+                                width: 100%;
+                                font-size: 14px;
+                            }
+
+                            .ActiveTick {
+                                background: url(../../images/Icons//Tick.svg);
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                width: 20px;
+                                background-size: 20px;
+                                position: absolute;
+                                right: 20px;
+                                height: 100%;
+                                margin: 0 !important;
+                            }
+
+                            &:hover {
+                                background-color: #dddddd;
+
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    transition: .2s;
+
+                    .headerLanguageModal {
+                        visibility: visible;
+
+                    }
+                }
+            }
+
+            .headerLocation {
+                img {
+                    opacity: .6;
+                    width: 10px;
+                    margin-right: 5px;
+                }
+
+                &:hover {
+
+                    span,
+                    img {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            .saleWithWild {
+                background: #cb11ab linear-gradient(90deg, #bf5ae0 0, #a811da 100%);
+                border-radius: 40px;
+                padding: 1px 12px 3px;
+                font-size: 14px;
+                color: white;
+                margin-left: 7px;
+            }
+
+            .workInWild {
+                color: #fff;
+                padding: 1px 12px 3px;
+                background-color: #ff636d;
+                background-image: linear-gradient(90.4deg, #ff636d .17%, #f88245 57.13%, #f3a720 103.22%);
+                border-radius: 40px;
+                font-size: 14px;
+                margin-left: 30px;
+            }
+        }
+
+        &__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 25px;
+
+            .logo {
+                margin-left: 20px;
+
+                img {
+                    width: 240px;
+                }
+            }
+
+            .burger {
+                padding: 2px;
+                border: 1px solid rgb(255, 255, 255, .4);
+                border-radius: 6px;
+
+                img {
+                    width: 40px;
+                }
+            }
+
+            .searchInput {
+                position: relative;
+                width: 100%;
+                margin: 0 20px 0 20px;
+                .cameraIcon {
+                    position: absolute;
+                    top: 50%;
+                    right: 3%;
+                    transform: translateY(-50%);
+                    transition: .3s;
+                    opacity: .6;
+                    z-index: 10;
+
+                    svg {
+                        font-size: 20px;
+                        color: white;
+                    }
+                }
+
+                .searchIcon {
+                    position: absolute;
+                    top: 50%;
+                    left: 2%;
+                    transform: translateY(-50%);
+                    opacity: .6;
+                    transition: .3s;
+                    z-index: 10;
+
+                    svg {
+                        font-size: 23px;
+                        color: white;
+                    }
+                }
+
+                span {
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 1;
+                        transition: .3s;
+                    }
+                }
+
+                input {
+                    width: 100%;
+                    padding: 20px 15px 20px 40px;
+                    border: 0;
+                    border-radius: 25px;
+                    opacity: .2;
+                    cursor: pointer;
+                    transition: .4s;
+                    position: relative;
+                    z-index: 9;
+
+                    &:focus {
+                        outline: none;
+                        cursor: auto;
+
+                    }
+
+                    &:hover {
+                        opacity: .5;
+                        transition: .4s;
+                    }
+                }
+
+                [placeholder~="ищу..."] {
+                    color: rgb(216, 11, 11);
+                    font-size: 16px;
+                }
+                .seacrchInputBody {
+                    height: 350px;
+                    background-color: white;
+                    position: absolute;
+                    width: 100%;
+                    top: 0;
+                    z-index: 1;
+                    border-radius: 25px;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                }
+            }
+
+            ul {
+                display: flex;
+
+                li {
+                    margin-left: 35px;
+
+                    &:nth-child(2) {
+                        img {
+                            height: 21px;
+                        }
+
+                        p {
+                            margin-top: 15px;
+                        }
+                    }
+
+                    button {
+                        display: flex;
+                        flex-direction: column;
+
+                        img {
+                            height: 25px;
+
+                        }
+
+                        p {
+                            margin-top: 10px;
+                            color: white;
+                            opacity: .6;
+                            font-size: 14px;
+                            transition: .3s;
+                        }
+
+                        &:hover {
+                            p {
+                                opacity: 1;
+                                transition: .3s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.changeSvgColor {
+    opacity: 1 !important;
+    span{
+        svg {
+            color: black !important;
+        }
+    }
+}
