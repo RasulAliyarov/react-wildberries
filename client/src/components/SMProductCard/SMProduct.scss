@@ -1,0 +1,46 @@
+.home {
+    &__wrapper {
+        &__salesmans {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 26px;
+            margin-top: 80px;
+
+            &__salesman {
+                cursor: pointer;
+                overflow: hidden;
+                width: 300px;
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                transition: .4s;
+
+                img {
+                    transition: .4s;
+                    width: 305px !important;
+                    width: fit-content;
+                    position: relative;
+                }
+
+                &:hover {
+                    img {
+                        transform: scale(1.035);
+                        transition: .4s;
+                    }
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        background-color: black;
+                        width: 100%;
+                        height: 227.5px;
+                        opacity: .3;
+                        transition: .4s;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,94 @@
+.footer {
+    background-color: #481173;
+    padding: 40px 0;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        ul {
+            max-width: 230px;
+
+            h6 {
+                color: white;
+                margin-bottom: 12px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            li {
+                margin-bottom: 12px;
+
+                a {
+                    color: rgba(255, 255, 255, .7);
+                    font-size: 18px;
+
+                    &:hover {
+                        color: rgba(255, 255, 255, 1);
+                    }
+                }
+            }
+        }
+
+        &__contact {
+            border: 1px solid rgba(206, 206, 206, .6);
+            text-align: center;
+            border-radius: 15px;
+            padding: 20px 10px;
+            height: fit-content;
+
+            .wildberriesQR {
+                width: 136px;
+                border-radius: 15px;
+            }
+
+            p {
+                margin: 8px auto 16px;
+                width: 200px;
+                color: rgba(255, 255, 255, .7);
+            }
+
+            span {
+                a {
+                    transition: .4s;
+                    &:nth-child(2) {
+                        margin: 0 20px;
+                    }
+
+                    img {
+                        width: 40px;
+                    }
+                    &:hover{
+                        opacity: .6;
+                        transition: .4s;
+                    }
+                }
+            }
+        }
+
+        .FooterOutProject {
+            margin-top: 50px;
+        }
+    }
+
+    .footerPrava {
+        text-align: center;
+        margin-top: 40px;
+
+        p {
+            color: rgba(255, 255, 255, .6);
+            margin: 0 auto;
+            width: 650px;
+            margin-bottom: 10px;
+
+        }
+
+        a {
+            color: rgba(255, 255, 255, .6);
+            &:hover {
+                opacity: 1;
+                color: white;
+            }
+        }
+    }
+}

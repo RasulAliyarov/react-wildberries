@@ -1,5 +1,6 @@
 body {
-    height: 300vh;
+    background: #481173;
+    position: relative;
 }
 
 .header {
@@ -41,6 +42,7 @@ body {
                     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                     visibility: hidden;
                     transition: .2s;
+                    z-index: 9;
 
                     &__top {
                         padding: 20px 20px 10px;
@@ -172,6 +174,7 @@ body {
                 position: relative;
                 width: 100%;
                 margin: 0 20px 0 20px;
+
                 .cameraIcon {
                     position: absolute;
                     top: 50%;
@@ -238,6 +241,7 @@ body {
                     color: rgb(216, 11, 11);
                     font-size: 16px;
                 }
+
                 .seacrchInputBody {
                     height: 350px;
                     background-color: white;
@@ -247,6 +251,7 @@ body {
                     z-index: 1;
                     border-radius: 25px;
                     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    z-index: 5;
                 }
             }
 
@@ -266,7 +271,7 @@ body {
                         }
                     }
 
-                    button {
+                    a {
                         display: flex;
                         flex-direction: column;
 
@@ -295,9 +300,38 @@ body {
         }
     }
 }
+
+.UpToTopActive {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #cb11ab;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 8;
+    cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    span {
+        svg{
+            font-size: 22px;
+        }
+        color: white;
+    }
+}
+
+.UpToTop {
+    display: none;
+}
+
 .changeSvgColor {
     opacity: 1 !important;
-    span{
+
+    span {
         svg {
             color: black !important;
         }

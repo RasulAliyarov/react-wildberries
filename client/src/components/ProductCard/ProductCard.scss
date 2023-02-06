@@ -1,0 +1,82 @@
+.home {
+    &__wrapper {
+        &__products {
+            &__product {
+                width: 156px;
+                overflow: hidden;
+                cursor: pointer;
+                position: relative;
+
+                &__top {
+                    border-radius: 10px;
+                    overflow: hidden;
+                    position: relative;
+
+                    img {
+                        width: 156px;
+                    }
+
+                    .cardDiscount {
+                        background-color: #f44;
+                        padding: 3px 4px;
+                        font-weight: 600;
+                        color: white;
+                        position: absolute;
+                        bottom: 10px;
+                        left: 10px;
+                        font-size: 12px;
+                        border-radius: 5px;
+                    }
+                }
+
+                &__bottom {
+                    .price {
+                        display: flex;
+                        margin: 10px 0;
+
+                        h5 {
+                            font-weight: 700;
+                            font-size: 18px;
+                            margin-right: 10px;
+                        }
+
+                        span {
+                            text-decoration: line-through;
+                            font-weight: 500;
+                            color: #999;
+                        }
+                    }
+
+                    .productTitle {
+                        p {
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            font-size: 15px;
+                            color: #242424;
+                        }
+                    }
+                }
+
+                .cardModalBtn {
+                    display: none;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    padding: 12px 15px;
+                    background-color: rgba(255, 255, 255, .9);
+                    border-radius: 15px;
+                    width: max-content;
+                    font-size: 12px;
+                }
+
+                &:hover {
+                    .cardModalBtn {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

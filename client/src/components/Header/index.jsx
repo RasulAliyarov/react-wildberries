@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { searchInput } from "../../redux/Slices/wildSlice"
+import { searchInputReducer, scrollSizeReducer } from "../../redux/Slices/wildSlice"
 
 const LNGUAGES = [
     {
@@ -32,11 +32,27 @@ const LNGUAGES = [
 function Header() {
     const wildberries = useSelector(state => state.wildberries)
     const dispatch = useDispatch()
-    console.log(wildberries)
+
+    window.onscroll = function () {
+        let scroll = window.pageYOffset;
+        if (600 < scroll) {
+            dispatch(scrollSizeReducer(true))
+        }
+        else {
+            dispatch(scrollSizeReducer(false))
+        }
+    }
+
+
+
+
+
+
+
 
     return (
         <>
-            <header className='header'>
+            <header id="top" className='header'>
                 <div className="header__wrapper container1500">
                     <div className="header__wrapper__top">
                         <button className='headerLang'>
@@ -65,10 +81,7 @@ function Header() {
                             </div>
                         </button>
 
-                        <button className='headerLocation' onClick={() => {
-                            dispatch(searchInput("slalala"))
-
-                        }}>
+                        <button className='headerLocation' >
                             <img src={Images.Location} alt="" />
                             <span className='headerTitle'>Москва</span>
                         </button>
@@ -81,47 +94,55 @@ function Header() {
                         <button className='burger'><img src={Images.Burger} alt="" /></button>
                         <Link to="/" className='logo'><img src={Images.Logo} alt="" /></Link>
 
-                        <div className={wildberries.searchInputToggle ? "changeSvgColor searchInput" : "searchInput"} >
+                        <div className={wildberries.searchInputState ? "changeSvgColor searchInput" : "searchInput"} >
                             <span className='searchIcon'>
                                 {Icons.Search}
                             </span>
                             <input type="text" placeholder='Я ищу...' onClick={() => {
-                                dispatch(searchInput(!wildberries.searchInputToggle))
+                                dispatch(searchInputReducer(!wildberries.searchInputState))
                             }} />
                             <span className='cameraIcon' >
                                 {Icons.Camera}
                             </span>
 
-                            <div className={wildberries.searchInputToggle ? "seacrchInputBody" : ""}>
+                            <div className={wildberries.searchInputState ? "seacrchInputBody" : ""}>
 
                             </div>
                         </div>
 
                         <ul>
                             <li>
-                                <button>
+                                <Link to="/services">
                                     <img src={Images.Location} alt="" />
                                     <p>Адресa</p>
-                                </button>
+                                </Link>
                             </li>
                             <li>
-                                <button>
+                                <Link to="/auth">
                                     <img src={Images.User} alt="" />
                                     <p>Войти</p>
-                                </button>
+                                </Link>
                             </li>
                             <li>
-                                <button>
+                                <Link to="/cart">
                                     <img src={Images.Cart} alt="" />
                                     <p>Корзина</p>
-                                </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>
                 </div>
-                {/* <Link to="/" >Home</Link>
-                    <Link to="/auth">Auth</Link> */}
             </header>
+            <button onClick={() => {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth"
+                });
+            }} className={wildberries.scrollSizeState ? "UpToTopActive" : "UpToTop"}>
+                <span>{Icons.UpArrow}</span>
+
+            </button>
         </>
     )
 }

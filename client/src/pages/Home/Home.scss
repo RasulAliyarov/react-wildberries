@@ -1,0 +1,191 @@
+.home {
+    &__wrapper {
+        padding-top: 30px;
+
+        &__carousel {
+            .swiper {
+                height: 420px;
+                border-radius: 25px;
+
+                .swiper-slide {
+                    a {
+                        border-radius: 25px;
+                        overflow: hidden;
+                    }
+                }
+
+                .swiper-button-next,
+                .swiper-button-prev {
+                    background-color: white;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    opacity: .4;
+                    transition: .4s;
+
+                    &::after {
+                        font-size: 20px !important;
+                        position: absolute;
+                        color: black;
+                    }
+
+                    &:hover {
+                        opacity: 1;
+                        transition: .4s;
+
+                        &::after {
+                            color: #CB11AB;
+                        }
+                    }
+                }
+
+                .swiper-pagination {
+                    .swiper-pagination-bullet {
+                        background-color: #CB11AB;
+                        color: #CB11AB;
+                        width: 11px;
+                        height: 11px;
+                    }
+                }
+            }
+
+        }
+
+        .sectionTtile {
+            margin: 50px 0 30px;
+            font-weight: 700;
+            color: #242424;
+            font-size: 24px;
+        }
+
+        &__products {
+            position: relative;
+        }
+    }
+}
+
+.contentBg {
+    border-radius: 25px;
+    background-color: white;
+}
+
+.productModalWrapper {
+    .productModalWrapperBg {
+        background-color: rgba(0, 0, 0, .6);
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+    }
+
+    .productModalConent {
+        border-radius: 15px;
+        position: fixed;
+        left: 50%;
+        right: 50%;
+        width: 70%;
+        height: 90vh;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        display: block;
+        background-color: white;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+
+        &__left {
+            width: 50%;
+
+            .imgDiv {}
+        }
+
+        &__right {
+            padding: 28px 40px 20px;
+            width: 50%;
+
+            &__title {
+                transition: .4s;
+                font-size: 24px;
+                font-weight: 700;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                cursor: pointer;
+
+                &:hover {
+                    color: #CB11AB;
+                    transition: .4s;
+                }
+            }
+
+            &__info {
+                display: flex;
+                margin: 12px 0 20px;
+                align-items: center;
+                font-size: 14px;
+
+                span {
+                    svg {
+                        color: #CB11AB;
+                        font-size: 20px;
+                    }
+                }
+
+                a {
+                    color: #000000;
+                    opacity: .6;
+                    margin: 0 15px;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+                h5 {
+                    span {
+                        opacity: .6;
+                    }
+                }
+            }
+
+            h3 {
+                font-weight: 700;
+                font-size: 24px;
+                color: #242424;
+                margin-bottom: 20px;
+
+                span {
+                    font-size: 14px;
+                    opacity: .6;
+                    text-decoration: line-through;
+                }
+            }
+
+            .swiper {
+                .swiper-slide {
+                    position: relative;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .swiper-button-next {
+                    &::after {
+                        font-size: 20px !important;
+                        position: absolute;
+                        right: -10px !important;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+
+.productModalNone {
+    display: none;
+}
