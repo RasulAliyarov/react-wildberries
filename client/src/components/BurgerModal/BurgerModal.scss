@@ -1,0 +1,217 @@
+.burgerModal {
+    position: relative;
+
+    .burgerModal__content {
+        // overflow-y: scroll;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 310px;
+        height: 100vh;
+        background-color: white;
+        z-index: 10;
+        transform: translateX(0);
+        transition: .8s;
+        padding: 30px 0 20px 30px;
+
+        &__close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            border-radius: 50%;
+            background-color: #cb11ab;
+            color: white;
+            font-weight: 600;
+            padding: 3px 5px;
+        }
+
+        &__list {
+            height: 100vh;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                display: none;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgba(134, 134, 134, 0.5);
+                border-radius: 10px;
+                width: 5px;
+                display: none;
+            }
+
+            li {
+                margin-bottom: 5px;
+                width: 100%;
+
+                a {
+                    font-size: 16px;
+                    padding: 5px 5px 5px 5px;
+                    color: #242424;
+                    display: flex;
+                    align-items: center;
+
+                    svg {
+                        font-size: 20px;
+                        margin-right: 10px;
+                        color: gray;
+                        width: 20px;
+                    }
+                }
+
+                // UnderList
+                .underList {
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    background-color: rgb(255, 255, 255);
+                    right: -100%;
+                    padding: 30px 30px 20px 30px;
+                    width: 310px;
+                    overflow-y: auto;
+                    height: 100vh;
+
+                    &::-webkit-scrollbar {
+                        width: 5px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background: rgba(134, 134, 134, 0.5);
+                        border-radius: 10px;
+                        width: 5px;
+                    }
+
+                    h4 {
+                        font-weight: 600;
+                        font-size: 18px;
+                        transition: .4s;
+                        margin-bottom: 10px;
+                        padding: 5px 0;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: #cb11ab;
+                            transition: .4s;
+                        }
+                    }
+
+                    &__link {
+                        a {
+                            transition: .4s;
+                            color: #242424 !important;
+                            opacity: .6;
+                            padding-left: 0;
+                            background-color: transparent !important;
+
+                        }
+
+                        &:hover {
+                            background-color: transparent !important;
+
+                            a {
+                                opacity: 1;
+                                transition: .4s;
+                            }
+                        }
+                    }
+
+
+                }
+
+                .underList__block {
+                    position: absolute;
+                    top: 0;
+                    width: 310px;
+                    height: 100vh;
+                    background-color: white;
+                    left: 200%;
+                    display: none;
+                    padding: 30px;
+                    text-align: center;
+
+                    &__content {
+                        cursor: pointer;
+                        &__imgBox {
+                            overflow: hidden;
+                            border-radius: 25px;
+                            img {
+                                width: 100%;
+                                border-radius: 25px;
+                                transition: .4s;
+                            }
+                        }
+
+                        h2 {
+                            margin: 10px 0 5px;
+                            font-size: 18px;
+                            font-weight: 700;
+                            transition: .4s;
+                        }
+
+                        &:hover {
+                            h2 {
+                                color: #cb11ab;
+                                transition: .4s;
+                            }
+
+                            img {
+                                transform: scale(1.045);
+                                transition: .4s;
+                            }
+                         
+                            
+                        }
+                    }
+                }
+
+                // UnderList
+                &:hover {
+                    transition: .5s;
+                    width: 100%;
+
+                    a {
+                        border-radius: 8px;
+                        background-color: #cb11ab;
+                        transition: .8s;
+                        color: white;
+                        width: 80%;
+                    }
+
+                    svg {
+                        color: white;
+                    }
+
+                    .underList,
+                    .underList__block {
+                        display: block;
+
+                    }
+                }
+            }
+        }
+    }
+
+    .burgerModal__background {
+        background-color: rgba(0, 0, 0, .6);
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+    }
+}
+
+.burgerModalUnCloseContent {
+    position: fixed;
+    top: 0;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: .1s;
+    height: 100vh;
+}
+
+.burgerModalUnVisible {
+    position: fixed;
+    z-index: 10;
+}

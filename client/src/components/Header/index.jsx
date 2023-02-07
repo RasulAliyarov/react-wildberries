@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { searchInputReducer, scrollSizeReducer } from "../../redux/Slices/wildSlice"
+import { searchInputReducer, burgerModaToggleReducer,scrollSizeReducer } from "../../redux/Slices/wildSlice"
 
 const LNGUAGES = [
     {
@@ -42,12 +42,6 @@ function Header() {
             dispatch(scrollSizeReducer(false))
         }
     }
-
-
-
-
-
-
 
 
     return (
@@ -91,7 +85,9 @@ function Header() {
                     </div>
 
                     <div className="header__wrapper__bottom">
-                        <button className='burger'><img src={Images.Burger} alt="" /></button>
+                        <button className='burger' onClick={()=>{
+                            dispatch(burgerModaToggleReducer(true))
+                        }}><img src={Images.Burger} alt="" /></button>
                         <Link to="/" className='logo'><img src={Images.Logo} alt="" /></Link>
 
                         <div className={wildberries.searchInputState ? "changeSvgColor searchInput" : "searchInput"} >

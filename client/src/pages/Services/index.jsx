@@ -12,6 +12,7 @@ import {
 } from 'react-accessible-accordion';
 import { useDispatch, useSelector } from 'react-redux';
 import { accordionHeadinNumberReducer, accordionChevronToggleReducer } from "../../redux/Slices/wildSlice"
+import CountUp from 'react-countup';
 
 
 function Address() {
@@ -228,7 +229,10 @@ function Address() {
             </div>
 
             <div className='countBase'>
-              <h4>26 987</h4>
+              <h4> <CountUp delay={0} end={26987} separator={" "} enableScrollSpy={true} /></h4>
+
+
+
               <p>пунктов выдачи</p>
             </div>
 

@@ -1,9 +1,11 @@
 import { ImLocation } from "react-icons/im";
-import { MdOutlinePhotoCamera } from "react-icons/md";
-import { MdOutlineSearch } from "react-icons/md";
-import { AiOutlineArrowUp, AiOutlineHeart, AiFillStar } from "react-icons/ai";
-import { FiChevronDown } from "react-icons/fi";
-import { FiChevronUp } from "react-icons/fi";
+import { MdOutlinePhotoCamera, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
+import { AiOutlineArrowUp, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { FiChevronDown, FiChevronUp, FaUserAlt } from "react-icons/fi";
+import { GiConverseShoe,GiSmartphone } from "react-icons/gi";
+import { CgLogIn } from "react-icons/cg";
+import { HiUserCircle } from "react-icons/hi";
+import { GrContactInfo } from "react-icons/gr";
 
 import RusFlag from "../images/Flags/RusFlag.svg"
 import BelFlag from "../images/Flags/BelFlag.svg"
@@ -21,6 +23,8 @@ import HowDoOrder5 from "../images/Services/HowDoOrder5.jpg"
 import HowDoOrder6 from "../images/Services/HowDoOrder6.jpg"
 import HowDoOrder7 from "../images/Services/HowDoOrder7.jpg"
 import HowDoOrder8 from "../images/Services/HowDoOrder8.jpg"
+
+import Woman from "../images/GoodsIcons/icons8-lady-50 (1).png"
 
 import Location from "../images/Icons/Location.svg"
 import Logo from "../images/Logo.png"
@@ -41,6 +45,16 @@ export const Icons = {
     DownChevron: <FiChevronDown />,
     OutlineHeart: <AiOutlineHeart />,
     FillStar: <AiFillStar />,
+    Shoes: <GiConverseShoe />,
+    Woman: <AiOutlineWoman />,
+    Child: <MdOutlineChildFriendly />,
+    Login: <CgLogIn />,
+    Registrtion: <MdAppRegistration />,
+    Password: <MdPassword />,
+    Username: <HiUserCircle />,
+    Email: <MdOutlineAlternateEmail />,
+    Phone: <GiSmartphone />,
+    Fullname: <GrContactInfo />,
 }
 
 
@@ -75,4 +89,6 @@ export const Images = {
     HowDoOrder8: HowDoOrder8,
 
     Drone: Drone,
+
+    Woman: Woman,
 }

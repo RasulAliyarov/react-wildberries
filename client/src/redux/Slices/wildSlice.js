@@ -8,6 +8,7 @@ const wildSlice = createSlice({
         productModalState: false,
         accordionHeadinNumber: 0,
         accordionChevronToggle: false,
+        burgerModalToggle: false,
     },
     reducers: {
         searchInputReducer: (state, action) => {
@@ -25,8 +26,11 @@ const wildSlice = createSlice({
         accordionChevronToggleReducer: (state, action) => {
             state.accordionChevronToggle = action.payload
         },
+        burgerModaToggleReducer: (state, action) => {
+            state.burgerModalToggle = action.payload
+        },
     }
 })
 
-export const { searchInputReducer, scrollSizeReducer, accordionChevronToggleReducer, accordionHeadinNumberReducer, productModalReducer } = wildSlice.actions
+export const { searchInputReducer, burgerModaToggleReducer, scrollSizeReducer, accordionChevronToggleReducer, accordionHeadinNumberReducer, productModalReducer } = wildSlice.actions
 export default wildSlice
