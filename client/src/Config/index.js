@@ -1,8 +1,8 @@
 import { ImLocation } from "react-icons/im";
 import { MdOutlinePhotoCamera, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
-import { AiOutlineArrowUp,AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { AiOutlineArrowUp,AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { FiChevronDown, FiChevronUp, FaUserAlt } from "react-icons/fi";
-import { GiConverseShoe,GiSmartphone } from "react-icons/gi";
+import { GiConverseShoe, GiSmartphone } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
 import { HiUserCircle } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
@@ -24,6 +24,8 @@ import HowDoOrder5 from "../images/Services/HowDoOrder5.jpg"
 import HowDoOrder6 from "../images/Services/HowDoOrder6.jpg"
 import HowDoOrder7 from "../images/Services/HowDoOrder7.jpg"
 import HowDoOrder8 from "../images/Services/HowDoOrder8.jpg"
+import NotFound from "../images/NotFound.gif"
+import CartEmpty from "../images/CartEmpty.gif"
 
 import Woman from "../images/GoodsIcons/icons8-lady-50 (1).png"
 
@@ -51,6 +53,7 @@ export const Icons = {
     UpChevron: <FiChevronUp />,
     DownChevron: <FiChevronDown />,
     OutlineHeart: <AiOutlineHeart />,
+    FillHeart: <AiFillHeart />,
     FillStar: <AiFillStar />,
     Shoes: <GiConverseShoe />,
     Woman: <AiOutlineWoman />,
@@ -63,6 +66,7 @@ export const Icons = {
     Phone: <GiSmartphone />,
     Fullname: <GrContactInfo />,
     Navigation: <AiOutlineAlignRight />,
+    Delete: <AiFillDelete />,
 }
 
 
@@ -102,4 +106,6 @@ export const Images = {
     Shop: Shop,
     Users: Users,
     Products: Products,
+    NotFound: NotFound,
+    CartEmpty: CartEmpty,
 }

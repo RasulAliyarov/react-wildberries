@@ -1,9 +1,10 @@
-import React, {  } from 'react'
+import React, { } from 'react'
 import { Link } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { searchInputReducer, burgerModaToggleReducer,scrollSizeReducer } from "../../../redux/Slices/wildSlice"
+import { searchInputReducer, burgerModaToggleReducer, scrollSizeReducer } from "../../../redux/Slices/wildSlice"
+import { Toaster } from "react-hot-toast"
 
 const LNGUAGES = [
     {
@@ -85,7 +86,7 @@ function Header() {
                     </div>
 
                     <div className="header__wrapper__bottom">
-                        <button className='burger' onClick={()=>{
+                        <button className='burger' onClick={() => {
                             dispatch(burgerModaToggleReducer(true))
                         }}><img src={Images.Burger} alt="" /></button>
                         <Link to="/" className='logo'><img src={Images.Logo} alt="" /></Link>
@@ -101,8 +102,16 @@ function Header() {
                                 {Icons.Camera}
                             </span>
 
-                            <div className={wildberries.searchInputState ? "seacrchInputBody" : ""}>
-
+                            <div className={wildberries.searchInputState ? "seacrchInputBody" : "seacrchInputBodyNone"}>
+                                <ul className="seacrchInputBody__list">
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>джинсы</span> </li>
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>косметика</span> </li>
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>zarina</span> </li>
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>платье женское</span> </li>
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>шуба</span> </li>
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>футболка</span> </li>
+                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>твое</span> </li>
+                                </ul>
                             </div>
                         </div>
 
@@ -139,6 +148,10 @@ function Header() {
                 <span>{Icons.UpArrow}</span>
 
             </button>
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
         </>
     )
 }

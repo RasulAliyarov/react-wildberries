@@ -1,13 +1,20 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Keyboard, Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Icons, Images } from "../../../Config/index"
 import "./ProductModal.scss"
+import { addToCartReducer } from "../../../redux/Slices/wildSlice"
+import { useDispatch, useSelector } from "react-redux"
+import {  toast } from "react-hot-toast"
 
 function ProductModal() {
+
+    const wildberries = useSelector(state => state.wildberries)
+    const dispatch = useDispatch()
+
     return (
         <div className='productModalConent' >
             <div className="productModalConent__left">
@@ -55,8 +62,9 @@ function ProductModal() {
                             spaceBetween: 20,
                         },
                     }}
-                    modules={[Navigation]}
+                    modules={[Navigation, Autoplay]}
                     className="mySwiper"
+                    autoplay={true}
                 >
                     <div className='sadad'>
                         <SwiperSlide><img src="	https://basket-01.wb.ru/vol20/part2026/2026369/images/c246x328/1.webp" alt="" /></SwiperSlide>
@@ -68,7 +76,26 @@ function ProductModal() {
                 </Swiper>
 
                 <span className='productModalConent__right__buttons'>
-                    <button className='addToCart'><img src={Images.Cart} alt="" /> Добавить в корзину</button>
+                    <button className='addToCart' onClick={() => {
+                        dispatch(addToCartReducer({
+                            img: "https://basket-01.wb.ru/vol20/part2026/2026369/images/c246x328/1.webp",
+                            name: "Fructis Укрепляющий шампунь для поврежденных волос,700мл",
+                            brand: "Garnier",
+                            price: 186,
+                            color: "black"
+                        }))
+                        toast.success('Товар в корзине.', {
+                            style: {
+                                border: '1px solid #4C1174',
+                                padding: '16px',
+                                color: '#4C1174',
+                            },
+                            iconTheme: {
+                                primary: '#4C1174',
+                                secondary: '#FFFAEE',
+                            },
+                        });
+                    }}><img src={Images.Cart} alt="" /> Добавить в корзину</button>
                     <button className='addToFavorite'>{Icons.OutlineHeart}</button>
                 </span>
             </div>

@@ -1,12 +1,39 @@
-.home {
+.cart {
+    background-color: white;
+    border-radius: 25px;
+    padding: 30px 0;
+    position: relative;
+
     &__wrapper {
-        &__products {
-            &__product {
+        button{
+            padding: 15px 15px;
+            background-color: #CB11AB;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            transition: .4s;
+            svg{
+                margin-right: 5px;
+                font-size: 16px;
+            }
+            &:hover {
+                background-color: red;
+                transition: .4s;
+            }
+        }
+        &__items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+            &__item {
                 width: 156px;
                 overflow: hidden;
                 cursor: pointer;
                 position: relative;
-                transition: .4s;
 
                 &__top {
                     border-radius: 10px;
@@ -34,7 +61,6 @@
                     .price {
                         display: flex;
                         margin: 10px 0;
-                        color: black;
 
                         h5 {
                             font-weight: 700;
@@ -60,33 +86,42 @@
                     }
                 }
 
-                .cardModalBtn {
-                    display: none;
+                .cartHeart {
                     position: absolute;
-                    top: 40%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    padding: 12px 15px;
-                    background-color: rgba(255, 255, 255, .9);
-                    border-radius: 15px;
-                    width: max-content;
-                    font-size: 12px;
-                    
-                    &:hover{
-                        display:block;
+                    top: 10px;
+                    right: 10px;
+                    color: white;
+                    font-size: 22px;
+                    transition: .3s;
 
+                    &:hover {
+                        transform: scale(1.075);
+                        transition: .3s;
+                        color: #63117E;
                     }
                 }
 
-                &:hover {
-                    .cardModalBtn {
-                        display: block;
-                    }
-
+                transition: .4s;
+                &:hover{
                     transform: scale(1.065);
                     transition: .4s;
                 }
             }
         }
+
+        .CartEmpty {
+            width: 100%;
+            justify-content: center;
+            display: flex;
+
+            img {
+                width: 35%;
+            }
+
+        }
+    }
+
+    .CartFull {
+        display: none;
     }
 }

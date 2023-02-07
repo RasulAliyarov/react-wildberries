@@ -277,6 +277,38 @@ body {
                     border-radius: 25px;
                     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                     z-index: 5;
+                    padding: 60px 4px 13px 8px;
+                    
+                    &__list{
+                        display: flex;
+                        flex-direction: column;
+                        &__link{
+                            margin: 0;
+                            padding: 4px 8px 6px;
+                            display: flex;
+                            align-items: center;
+                            transition: .4s;
+                            cursor: pointer;
+                            svg{
+                                font-size: 23px;
+                                opacity: .4;
+                                transition: .4s;
+                                margin: 5px 8px 0 0 ;
+                            }
+                            &:hover{
+                                background-color: rgb(232, 232, 232);
+                                transition: .4s;
+                                border-radius: 10px;
+                                svg{
+                                    opacity: 1;
+                                    transition: .4s;
+                                }
+                            }
+                        }
+                    }
+                }
+                .seacrchInputBodyNone{
+                    display: none;
                 }
             }
 

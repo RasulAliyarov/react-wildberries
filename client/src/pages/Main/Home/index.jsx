@@ -3,16 +3,17 @@ import React from 'react'
 import "./Home.scss"
 import { Icons, Images } from "../../../Config/index"
 import SMProduct from '../../../components/Main/SMProductCard/SMProduct';
-import ProductCard from '../../../components/ProductCard/ProductCard';
+import ProductCard from '../../../components/Main/ProductCard/ProductCard';
 import ProductModal from "../../../components/Main/ProductModal"
 import BurgerModal from '../../../components/Main/BurgerModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { productModalReducer } from "../../../redux/Slices/wildSlice"
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Keyboard, Autoplay } from "swiper";
+import { Pagination, Navigation, EffectFade, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/effect-fade";
 import ShowMoreText from "react-show-more-text";
 
 function Home() {
@@ -35,11 +36,11 @@ function Home() {
                 disableOnInteraction: false,
               }}
               loop={true}
-              modules={[Autoplay, Pagination, Pagination, Navigation]}
+              modules={[Autoplay,EffectFade, Pagination, Pagination, Navigation]}
               keyboard={{
                 enabled: true,
               }}
-
+              effect={"fade"}
               navigation={true}
               className="mySwiper"
             >

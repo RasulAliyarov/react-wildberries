@@ -9,6 +9,7 @@ const wildSlice = createSlice({
         accordionHeadinNumber: 0,
         accordionChevronToggle: false,
         burgerModalToggle: false,
+        cart: []
     },
     reducers: {
         searchInputReducer: (state, action) => {
@@ -29,8 +30,14 @@ const wildSlice = createSlice({
         burgerModaToggleReducer: (state, action) => {
             state.burgerModalToggle = action.payload
         },
+        addToCartReducer: (state, action) => {
+            state.cart.push(action.payload)
+        },
+        deleteToCartReducer: (state, action) => {
+            state.cart = []
+        },
     }
 })
 
-export const { searchInputReducer, burgerModaToggleReducer, scrollSizeReducer, accordionChevronToggleReducer, accordionHeadinNumberReducer, productModalReducer } = wildSlice.actions
+export const { searchInputReducer, addToCartReducer, deleteToCartReducer, burgerModaToggleReducer, scrollSizeReducer, accordionChevronToggleReducer, accordionHeadinNumberReducer, productModalReducer } = wildSlice.actions
 export default wildSlice

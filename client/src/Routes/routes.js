@@ -4,6 +4,7 @@ import Auth from "../pages/Main/Auth"
 import Services from "../pages/Main/Services"
 import Cart from "../pages/Main/Cart"
 import AdminLogin from "../pages/Admin/AdminLogin"
+import Detail from "../pages/Main/Detail"
 import PageNotFound from "../pages/PageNotFound"
 import AdminRoot from "../components/Admin/AdminRoot"
 import MainRoot from "../components/Main/MainRoot"
@@ -33,6 +34,10 @@ export const router = createBrowserRouter(
                 {
                     path: "cart",
                     element: <Cart />
+                },
+                {
+                    path: "detail",
+                    element: <Detail />
                 },
 
             ]
