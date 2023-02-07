@@ -1,17 +1,20 @@
 .home {
+    padding-bottom: 30px;
+
     &__wrapper {
         padding-top: 30px;
 
         &__carousel {
             .swiper {
-                height: 420px;
+                height: 370px;
                 border-radius: 25px;
 
                 .swiper-slide {
                     a {
                         overflow: hidden;
                         border-radius: 25px;
-                        img{
+
+                        img {
                             border-radius: 25px;
                             width: 100%;
                         }
@@ -26,6 +29,8 @@
                     border-radius: 50%;
                     opacity: .4;
                     transition: .4s;
+                    top: 50%;
+                    transform: translateY(-50%);
 
                     &::after {
                         font-size: 20px !important;
@@ -64,6 +69,52 @@
 
         &__products {
             position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        &__text {
+            margin-top: 100px;
+            .content-css {
+                color: #8b8b8b;
+                position: relative;
+
+                span {
+                    line-height: 22px;
+                    font-size: 16px;
+                }
+
+                h3{
+                    margin: 20px 0 ;
+                    font-weight: 700;
+                }
+                .topP{
+                    margin-top: 15px;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 30px;
+                    background-color: rgba(255, 255, 255, .8);
+                    height: 30px;
+                    width: 100%;
+                }
+
+                .show-more-less-clickable {
+                    display: block;
+                    text-decoration: none;
+                    margin-top: 20px;
+                    transition: .4s;
+                    color: #CB11AB;
+                    font-weight: 600;
+
+                    &:hover {
+                        text-decoration: dashed;
+                        transition: .4s;
+                    }
+                }
+            }
         }
     }
 }

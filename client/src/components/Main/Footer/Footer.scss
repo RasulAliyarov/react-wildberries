@@ -85,7 +85,10 @@
 
         a {
             color: rgba(255, 255, 255, .6);
+            font-size: 14px;
+            transition: .3s;
             &:hover {
+                transition: .3s;
                 opacity: 1;
                 color: white;
             }

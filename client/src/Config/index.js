@@ -1,11 +1,12 @@
 import { ImLocation } from "react-icons/im";
 import { MdOutlinePhotoCamera, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
-import { AiOutlineArrowUp, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { AiOutlineArrowUp,AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { FiChevronDown, FiChevronUp, FaUserAlt } from "react-icons/fi";
 import { GiConverseShoe,GiSmartphone } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
 import { HiUserCircle } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
+
 
 import RusFlag from "../images/Flags/RusFlag.svg"
 import BelFlag from "../images/Flags/BelFlag.svg"
@@ -36,6 +37,12 @@ import FooterGoogleplay from "../images/Icons/FooterGoogleplay.png"
 import FooterHuawei from "../images/Icons/FooterHuawei.svg"
 import Drone from "../images/Drone.png"
 
+import Shop from "../images/Icons/Shop.png"
+import Users from "../images/Icons/Users.png"
+import Products from "../images/Icons/Products.png"
+
+import WbAdmin from "../images/WbAdmin.png"
+
 export const Icons = {
     Location: <ImLocation />,
     Camera: <MdOutlinePhotoCamera />,
@@ -55,6 +62,7 @@ export const Icons = {
     Email: <MdOutlineAlternateEmail />,
     Phone: <GiSmartphone />,
     Fullname: <GrContactInfo />,
+    Navigation: <AiOutlineAlignRight />,
 }
 
 
@@ -89,6 +97,9 @@ export const Images = {
     HowDoOrder8: HowDoOrder8,
 
     Drone: Drone,
-
     Woman: Woman,
+    WbAdmin: WbAdmin,
+    Shop: Shop,
+    Users: Users,
+    Products: Products,
 }

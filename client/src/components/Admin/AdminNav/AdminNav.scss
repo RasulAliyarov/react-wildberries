@@ -1,0 +1,101 @@
+.admin {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+
+    .adminNav {
+        width: 20%;
+        height: 100vh;
+        background: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/51708d08-0e1c-4701-85da-8de9c20e6b4f/ddve3n8-02e38e2e-f6a8-4a48-8cb5-712d12e01e4b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzUxNzA4ZDA4LTBlMWMtNDcwMS04NWRhLThkZTljMjBlNmI0ZlwvZGR2ZTNuOC0wMmUzOGUyZS1mNmE4LTRhNDgtOGNiNS03MTJkMTJlMDFlNGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.zW7S0eO0njCYJa7P29vpD4Whtyq8D3JmG_jn3ZlCcuA);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            width: 100%;
+            opacity: .4;
+            height: 100vh;
+            content: "";
+        }
+
+        &__wrapper {
+            display: flex;
+            flex-direction: column;
+
+            &__top {
+                background-color: #4C1175;
+                display: flex;
+                align-items: center;
+                z-index: 9;
+                height: 120px;
+
+                img {
+                    width: 100px;
+                    padding: 0 15px;
+                }
+
+                span {
+                    color: white;
+                    font-size: 26px;
+                    font-weight: 600;
+                }
+            }
+
+            &__title {
+                font-size: 20px;
+                color: white;
+                font-weight: 600;
+                border-bottom: 2px solid #F01A8A;
+                padding: 20px 20px 20px 15px;
+                z-index: 9;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                svg {
+                    color: white;
+                }
+            }
+
+
+            &__list {
+                padding: 15px;
+                z-index: 9;
+
+                li {
+                    margin-bottom: 15px;
+                    a {
+                        color: rgb(255, 255, 255);
+                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        img{
+                            margin-right: 10px;
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .adminPages {
+        width: 80%;
+    }
+}
+
+.activeLink {
+    color: black !important;
+    background-color: white;
+    border-radius: 6px;
+    span{
+        padding: 0 5px;
+    }
+}

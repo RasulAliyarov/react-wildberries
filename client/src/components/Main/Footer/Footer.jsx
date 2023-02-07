@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Footer.scss"
 import { Link } from "react-router-dom"
-import { Images } from "../../Config"
+import { Images } from "../../../Config"
 
 function Footer() {
     return (

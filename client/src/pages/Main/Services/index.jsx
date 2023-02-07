@@ -2,7 +2,7 @@ import React from 'react'
 import "./Services.scss"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { Icons, Images } from "../../Config/index"
+import { Icons, Images } from "../../../Config/index"
 import {
   Accordion,
   AccordionItem,
@@ -11,9 +11,8 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion';
 import { useDispatch, useSelector } from 'react-redux';
-import { accordionHeadinNumberReducer, accordionChevronToggleReducer } from "../../redux/Slices/wildSlice"
+import { accordionHeadinNumberReducer, accordionChevronToggleReducer } from "../../../redux/Slices/wildSlice"
 import CountUp from 'react-countup';
-
 
 function Address() {
   const wildberries = useSelector(state => state.wildberries)
@@ -22,8 +21,6 @@ function Address() {
   const callback = () => {
     dispatch(accordionChevronToggleReducer(!wildberries.accordionChevronToggle))
   }
-
-
 
   return (
     <div className='services contentBg'>
@@ -230,16 +227,12 @@ function Address() {
 
             <div className='countBase'>
               <h4> <CountUp delay={0} end={26987} separator={" "} enableScrollSpy={true} /></h4>
-
-
-
               <p>пунктов выдачи</p>
             </div>
 
             <h2 className='tabTtile'>Информация о доставке и пунктах выдачи</h2>
 
             <div className="services__wrapper__delivered__bottom">
-
               <div className="services__wrapper__delivered__bottom__map">
                 <div className="services__wrapper__delivered__bottom__map__left">
                   <span className='services__wrapper__delivered__bottom__map__left__top'>

@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, {  } from 'react'
 import { Link } from "react-router-dom"
 import "./Header.scss"
-import { Icons, Images } from "../../Config"
+import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { searchInputReducer, burgerModaToggleReducer,scrollSizeReducer } from "../../redux/Slices/wildSlice"
+import { searchInputReducer, burgerModaToggleReducer,scrollSizeReducer } from "../../../redux/Slices/wildSlice"
 
 const LNGUAGES = [
     {

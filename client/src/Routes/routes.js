@@ -1,14 +1,22 @@
 import { createBrowserRouter } from "react-router-dom"
-import MainRooting from "../components/MainRooting"
-import Home from "../pages/Home"
-import Auth from "../pages/Auth"
-import Services from "../pages/Services"
-import Cart from "../pages/Cart"
+import Home from "../pages/Main/Home"
+import Auth from "../pages/Main/Auth"
+import Services from "../pages/Main/Services"
+import Cart from "../pages/Main/Cart"
+import AdminLogin from "../pages/Admin/AdminLogin"
+import PageNotFound from "../pages/PageNotFound"
+import AdminRoot from "../components/Admin/AdminRoot"
+import MainRoot from "../components/Main/MainRoot"
+import Users from "../pages/Admin/Users"
+import Products from "../pages/Admin/Products"
+import Sellers from "../pages/Admin/Sellers"
+
 export const router = createBrowserRouter(
     [
+        // MAIN PAGE
         {
             path: "/",
-            element: <MainRooting />,
+            element: <MainRoot />,
             children: [
                 {
                     path: "",
@@ -26,7 +34,49 @@ export const router = createBrowserRouter(
                     path: "cart",
                     element: <Cart />
                 },
+
             ]
-        }
+        },
+
+
+        // ADMIN
+        {
+            path: "/admin/",
+            children: [
+                {
+                    path: "/admin/",
+                    element: <PageNotFound />
+                },
+                {
+                    path: "login",
+                    element: <AdminLogin />
+                },
+                {
+                    path: "panel/",
+                    element: <AdminRoot />,
+                    children:[
+                        {
+                            path: "products",
+                            element: <Products />
+                        },
+                        {
+                            path: "users",
+                            element: <Users />
+                        },
+                        {
+                            path: "sellers",
+                            element: <Sellers />
+                        },
+                    ]
+                },
+            ]
+        },
+
+
+        // NOT FOUND
+        {
+            path: "*",
+            element: <PageNotFound />
+        },
     ]
 ) 

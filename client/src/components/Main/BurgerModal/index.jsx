@@ -2,8 +2,8 @@ import React from 'react'
 import "./BurgerModal.scss"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
-import { burgerModaToggleReducer } from "../../redux/Slices/wildSlice"
-import { Icons, Images } from "../../Config/index"
+import { burgerModaToggleReducer } from "../../../redux/Slices/wildSlice"
+import { Icons, Images } from "../../../Config/index"
 
 function BurgerModal() {
     const wildberries = useSelector(state => state.wildberries)

@@ -6,7 +6,7 @@ import 'react-tabs/style/react-tabs.css';
 import "./Auth.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
-import { Icons } from "../../Config/index"
+import { Icons } from "../../../Config/index"
 
 function Auth() {
 
@@ -23,6 +23,7 @@ function Auth() {
     repeatPassword: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите повторно пароль"),
   })
 
+  
   const formikSignIn = useFormik({
     initialValues: {
       username: "",
@@ -32,11 +33,10 @@ function Auth() {
     validationSchema: SignInValidation,
     onSubmit: (values) => {
       console.log(values);
-  
+
       formikSignIn.resetForm()
     }
   })
-
   const formikSignUp = useFormik({
     initialValues: {
       fullname: "",
@@ -53,7 +53,6 @@ function Auth() {
       formikSignUp.resetForm()
     }
   })
-
   return (
     <div className="auth contentBg">
       <div className="auth__content ">
