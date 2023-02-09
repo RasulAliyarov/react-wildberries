@@ -1,5 +1,5 @@
-import React from 'react'
-import { deleteToCartReducer } from "../../../redux/Slices/wildSlice"
+import React, { useEffect, useState } from 'react'
+import { deleteToCartReducer, addToCartReducer } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Icons, Images } from "../../../Config/index"
 import "./Cart.scss"
@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast"
 function Cart() {
   const wildberries = useSelector(state => state.wildberries)
   const dispatch = useDispatch()
+  
   return (
     <>
       <div className="cart">
@@ -32,11 +33,11 @@ function Cart() {
           }}>{Icons.Delete} <span>Очистить корзину</span></button>
           <div className="cart__wrapper__items">
             {
-              wildberries.cart.map(value => {
+              wildberries.cart.map((value, index) => {
                 return (
-                  <div className="cart__wrapper__items__item">
+                  <div key={index} className="cart__wrapper__items__item">
                     <div className="home__wrapper__products__product__top">
-                      <img src={value.img} alt="" />
+                      <img src={`${value.img}`} alt="" />
                       <span className='cardDiscount'>-30%</span>
                     </div>
                     <div className="home__wrapper__products__product__bottom">

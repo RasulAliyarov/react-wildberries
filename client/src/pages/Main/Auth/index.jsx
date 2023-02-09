@@ -1,14 +1,26 @@
-import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
+import { useEffect } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./Auth.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
+import { useNavigate } from "react-router-dom"
 import { Icons } from "../../../Config/index"
+import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slices/wildSlice"
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function Auth() {
+  const navigate = useNavigate()
+  const wildberries = useSelector(state => state.wildberries)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(checkAuth())
+      navigate("/")
+    }
+  }, [])
 
   const SignInValidation = Yup.object().shape({
     username: Yup.string().required("Введите логин"),
@@ -18,12 +30,12 @@ function Auth() {
     fullname: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите полное имя"),
     email: Yup.string().email("Не корректный формат").required("Введите емайл"),
     username: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите логин"),
-    phoneNumber: Yup.number().typeError("Используйте цифры").required("Введите номер телефона"),
+    phonenumber: Yup.string().required("Введите номер телефона"),
     password: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите пароль"),
-    repeatPassword: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите повторно пароль"),
+    repeatpassword: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите повторно пароль"),
   })
 
-  
+
   const formikSignIn = useFormik({
     initialValues: {
       username: "",
@@ -32,27 +44,31 @@ function Auth() {
     validateOnBlur: "",
     validationSchema: SignInValidation,
     onSubmit: (values) => {
-      console.log(values);
-
+      dispatch(loginReduce({ ...values }))
+      navigate("/")
       formikSignIn.resetForm()
     }
   })
+
   const formikSignUp = useFormik({
     initialValues: {
       fullname: "",
       email: "",
-      phoneNumber: "",
+      phonenumber: "",
       username: "",
       password: "",
-      repeatPassword: "",
+      repeatpassword: "",
     },
     validateOnBlur: "",
     validationSchema: SignUpValidation,
     onSubmit: (values) => {
-      console.log(values);
+      console.log(values)
+      dispatch(registrationReduce({ ...values }))
+      navigate("/auth")
       formikSignUp.resetForm()
     }
   })
+
   return (
     <div className="auth contentBg">
       <div className="auth__content ">
@@ -83,6 +99,7 @@ function Auth() {
               </button>
             </form>
           </TabPanel>
+
           {/* Sing Up */}
           <TabPanel>
             <form className="form" onSubmit={formikSignUp.handleSubmit}>
@@ -97,8 +114,8 @@ function Auth() {
                 {Icons.Email}
               </span>
               <span className="form__field">
-                {formikSignUp.errors.phoneNumber && formikSignUp.touched.phoneNumber ? (<div className="errorMessage">{formikSignUp.errors.phoneNumber}</div>) : null}
-                <input value={formikSignUp.values.phoneNumber} name="phoneNumber" type="number" placeholder="Номер телефона" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
+                {formikSignUp.errors.phonenumber && formikSignUp.touched.phonenumber ? (<div className="errorMessage">{formikSignUp.errors.phonenumber}</div>) : null}
+                <input value={formikSignUp.values.phonenumber} name="phonenumber" type="tel" placeholder="Номер телефона" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
                 {Icons.Phone}
               </span>
               <span className="form__field">
@@ -113,8 +130,8 @@ function Auth() {
                 {Icons.Password}
               </span>
               <span className="form__field">
-                {formikSignUp.errors.repeatPassword && formikSignUp.touched.repeatPassword ? (<div className="errorMessage">{formikSignUp.errors.repeatPassword}</div>) : null}
-                <input value={formikSignUp.values.repeatPassword} name="repeatPassword" type="password" placeholder="Потвторите пароль" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
+                {formikSignUp.errors.repeatpassword && formikSignUp.touched.repeatpassword ? (<div className="errorMessage">{formikSignUp.errors.repeatpassword}</div>) : null}
+                <input value={formikSignUp.values.repeatpassword} name="repeatpassword" type="password" placeholder="Потвторите пароль" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
                 {Icons.Password}
               </span>
 

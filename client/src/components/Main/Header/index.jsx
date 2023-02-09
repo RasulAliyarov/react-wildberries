@@ -1,9 +1,9 @@
-import React, { } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { searchInputReducer, burgerModaToggleReducer, scrollSizeReducer } from "../../../redux/Slices/wildSlice"
+import { searchInputReducer, burgerModaToggleReducer, checkAuth, scrollSizeReducer } from "../../../redux/Slices/wildSlice"
 import { Toaster } from "react-hot-toast"
 
 const LNGUAGES = [
@@ -29,11 +29,16 @@ const LNGUAGES = [
     },
 
 ]
-
 function Header() {
     const wildberries = useSelector(state => state.wildberries)
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            dispatch(checkAuth())
+        }
+    }, [])
+    console.log(wildberries.isAuth)
     window.onscroll = function () {
         let scroll = window.pageYOffset;
         if (600 < scroll) {
@@ -44,7 +49,6 @@ function Header() {
         }
     }
 
-
     return (
         <>
             <header id="top" className='header'>
@@ -53,7 +57,6 @@ function Header() {
                         <button className='headerLang'>
                             <img className='headerLangImg' src={Images.RusFlag} alt="" />
                             <span className='headerTitle' >RUB</span>
-
 
                             <div className="headerLanguageModal">
                                 <div className="headerLanguageModal__top">
@@ -122,17 +125,45 @@ function Header() {
                                     <p>Адресa</p>
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="/auth">
+                            <li >
+                                <Link to="/auth" style={wildberries.isAuth ? { display: "none" } : null}>
                                     <img src={Images.User} alt="" />
                                     <p>Войти</p>
                                 </Link>
                             </li>
-                            <li>
+                            <li className='cartBtn'>
                                 <Link to="/cart">
                                     <img src={Images.Cart} alt="" />
                                     <p>Корзина</p>
                                 </Link>
+                                <span className='cartCount'>{wildberries.cart.length}</span>
+                                <div className='dropdownCart'>
+                                    <div className="dropdownCart__content">
+                                        <div className="dropdownCart__content__top__products">
+                                            {
+                                                wildberries.cart.map((value, index) => {
+                                                    return (
+                                                        <div key={index} className="dropdownCart__content__top__products__product">
+                                                            <div>
+                                                                <img src={value.img} alt="" />
+                                                                <span>
+                                                                    <h2>{value.name}</h2>
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <h3>{value.price}</h3>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div className="dropdownCart__content__bottom">
+                                            <span><h4>Итог</h4><h4>{wildberries.totalPrice} ₽</h4></span>
+                                            <Link to="/cart">Перейти в корзину</Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>

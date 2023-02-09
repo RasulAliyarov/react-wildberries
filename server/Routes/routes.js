@@ -1,18 +1,21 @@
 const Router = require("express")
 const router = new Router
-const authController = require("../Controller/authController")
-const { check } = require("express-validator")
+const controller = require("../Controller/user-controller")
+const { body } = require("express-validator")
 
 router.post("/registration",
-    check("password", "Пароль должен состоять мин. из 4").isLength({ min: 4 }),
-    check("username", "Введите имя пользователя").notEmpty(),
-    check("repeatpassword", "Повторите пароль").notEmpty(),
-    check("phonenumber", "Введите номер мобильного телефона").notEmpty(),
-    check("fullname", "Введите имя и фамилию").notEmpty(),
-    check("email", "Введите eмейл").notEmpty(),
-    authController.Registration)
-router.post("/login", authController.Login)
-router.get("/users", authController.GetUsers)
-router.get("/logout", authController.Logout)
+    body("email").isEmail(),
+    body("password").isLength({ min: 4, max: 32 }),
+    body("username").notEmpty(),
+    body("phonenumber").notEmpty(),
+    body("repeatpassword").notEmpty(),
+    body("fullname").notEmpty(), controller.Registration)
+router.post("/login", controller.Login)
+router.post("/logout", controller.Logout)
+router.get("/activate/:link", controller.Activate)
+router.get("/refresh", controller.Refresh)
+router.get("/users", controller.GetUsers)
+router.get("/products", controller.GetProducts)
+router.get("/products/id", controller.GetProductsById)
 
 module.exports = router

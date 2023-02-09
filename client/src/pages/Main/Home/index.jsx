@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
 import "./Home.scss"
 import { Icons, Images } from "../../../Config/index"
 import SMProduct from '../../../components/Main/SMProductCard/SMProduct';
@@ -7,7 +6,7 @@ import ProductCard from '../../../components/Main/ProductCard/ProductCard';
 import ProductModal from "../../../components/Main/ProductModal"
 import BurgerModal from '../../../components/Main/BurgerModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { productModalReducer } from "../../../redux/Slices/wildSlice"
+import { productModalReducer, checkAuth } from "../../../redux/Slices/wildSlice"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectFade, Autoplay } from "swiper";
 import "swiper/css";
@@ -19,6 +18,12 @@ import ShowMoreText from "react-show-more-text";
 function Home() {
   const wildberries = useSelector(state => state.wildberries)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(checkAuth())
+    }
+  }, [])
 
   return (
     <>
@@ -36,7 +41,7 @@ function Home() {
                 disableOnInteraction: false,
               }}
               loop={true}
-              modules={[Autoplay,EffectFade, Pagination, Pagination, Navigation]}
+              modules={[Autoplay, EffectFade, Pagination, Pagination, Navigation]}
               keyboard={{
                 enabled: true,
               }}

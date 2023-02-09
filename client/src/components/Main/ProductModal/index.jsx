@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper";
 import "swiper/css";
@@ -6,14 +6,19 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Icons, Images } from "../../../Config/index"
 import "./ProductModal.scss"
-import { addToCartReducer } from "../../../redux/Slices/wildSlice"
+import { addToCartReducer, totalPriceReduce } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from "react-redux"
-import {  toast } from "react-hot-toast"
+import { toast } from "react-hot-toast"
 
 function ProductModal() {
 
     const wildberries = useSelector(state => state.wildberries)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        localStorage.setItem("Products", JSON.stringify(wildberries.cart))
+    }, [wildberries.cart])
+
 
     return (
         <div className='productModalConent' >
@@ -84,7 +89,8 @@ function ProductModal() {
                             price: 186,
                             color: "black"
                         }))
-                        toast.success('Товар в корзине.', {
+                        dispatch(totalPriceReduce(186))
+                        toast.success('Товар в корзине.', { // saddddassssssssssssssssssss WRITE NAME
                             style: {
                                 border: '1px solid #4C1174',
                                 padding: '16px',
