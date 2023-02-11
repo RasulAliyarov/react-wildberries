@@ -1,0 +1,220 @@
+.adminPages {
+    position: relative;
+
+    &__wrapper {
+        &__top {
+            display: flex;
+            padding: 30px 10px;
+            height: 120px;
+        }
+
+        &__bottom {
+            &__table {
+                font-size: 14px;
+                border-collapse: collapse;
+                text-align: center;
+                width: 100%;
+                overflow: hidden;
+
+                th,
+                td:first-child {
+                    background: #280055;
+                    color: rgb(255, 255, 255);
+                    padding: 10px 20px;
+                }
+
+                th:first-child {
+                    width: 2%;
+                }
+
+                th,
+                td {
+                    border-style: solid;
+                    border-width: 0 1px 1px 0;
+                    border-color: white;
+                }
+
+                th {
+                    font-weight: 600;
+                    color: rgb(255, 255, 255);
+                    font-size: 15px;
+                    height: 53px;
+                    padding-top: 20px;
+                    border-bottom: 2px solid rgb(255, 255, 255);
+                }
+
+                .descTh {
+                    width: 17%;
+                }
+
+                .descTd {
+                    margin: 0;
+
+                    p {
+                        max-width: 100px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        margin: 0 auto;
+                    }
+                }
+
+                .imgTd {
+                    width: 50px;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                td {
+                    background: #db81ff;
+                    vertical-align: middle;
+                    height: 100px;
+                    font-size: 16px;
+
+                    button,
+                    a {
+                        background-color: red;
+                        padding: 10px 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: white;
+                        width: 100%;
+                        height: 100%;
+                        transition: .4s;
+
+                        &:hover {
+                            transform: scale(.95);
+                            transition: .4s;
+                        }
+                    }
+
+                    .adminProductDetail {
+                            background-color: #280055 ;
+                            &:hover{
+                                background-color: #ffa000;
+                            }
+                    }
+
+                    .productDelete {
+                        background-color: #280055;
+
+                        &:hover {
+                            background-color: red;
+                        }
+                    }
+
+                    .productEdit {
+                        background-color: #280055;
+
+                        &:hover {
+                            background-color: rgb(63, 107, 201);
+                        }
+                    }
+
+                }
+
+                .delTh,
+                .editTh {
+                    width: 20px;
+                    padding: 10px 10px;
+                }
+
+                th:first-child,
+                td:first-child {
+                    text-align: left;
+                }
+
+                .contentRow {
+                    transition: .4s;
+                    cursor: pointer;
+
+                    &:hover {
+                        transition: .4s;
+                        td {
+                            background-color: #d8d8d8;
+                            transition: .4s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .attentionModal {
+        display: block;
+
+        &__bg {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            opacity: .4;
+            z-index: 10;
+
+        }
+
+        &__content {
+            width: 350px;
+            height: 300px;
+            background-color: white;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+            img {
+                width: 150px;
+            }
+
+            &__buttons {
+                display: flex;
+                width: 100%;
+                gap: 20px;
+
+                button {
+                    padding: 10px 15px;
+                    color: white;
+                    font-weight: 600;
+                    width: 50%;
+                    border-radius: 6px;
+                    display: flex;
+                    justify-content: center;
+                    transition: .4s;
+
+                    &:hover {
+                        transform: scale(1.050);
+                        transition: .4s;
+                        opacity: .7;
+                    }
+                }
+
+                &__ok {
+                    background-color: green;
+                }
+
+                &__cancel {
+                    background-color: red;
+                }
+            }
+        }
+    }
+
+    .attentionModalNone {
+        display: none;
+    }
+}

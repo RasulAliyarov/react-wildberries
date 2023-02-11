@@ -4,6 +4,7 @@ import Auth from "../pages/Main/Auth"
 import Services from "../pages/Main/Services"
 import Cart from "../pages/Main/Cart"
 import AdminLogin from "../pages/Admin/AdminLogin"
+import ProductDetail from "../pages/Admin/ProductDetail"
 import Detail from "../pages/Main/Detail"
 import PageNotFound from "../pages/PageNotFound"
 import AdminRoot from "../components/Admin/AdminRoot"
@@ -61,8 +62,12 @@ export const router = createBrowserRouter(
                     element: <AdminRoot />,
                     children:[
                         {
-                            path: "products",
-                            element: <Products />
+                            path: "products/",
+                            element: <Products />,
+                        },
+                        {
+                            path: "products/:id",
+                            element:<ProductDetail/>
                         },
                         {
                             path: "users",

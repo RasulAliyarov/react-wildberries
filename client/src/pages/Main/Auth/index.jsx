@@ -6,13 +6,15 @@ import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom"
 import { Icons } from "../../../Config/index"
-import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slices/wildSlice"
+import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
+import _api from "../../../http";
+
 
 
 function Auth() {
   const navigate = useNavigate()
-  const wildberries = useSelector(state => state.wildberries)
+  const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +22,11 @@ function Auth() {
       dispatch(checkAuth())
       navigate("/")
     }
+    // if(localStorage.getItem("token")){
+
+    // }
   }, [])
+
 
   const SignInValidation = Yup.object().shape({
     username: Yup.string().required("Введите логин"),
@@ -30,7 +36,7 @@ function Auth() {
     fullname: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите полное имя"),
     email: Yup.string().email("Не корректный формат").required("Введите емайл"),
     username: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите логин"),
-    phonenumber: Yup.string().required("Введите номер телефона"),
+    // phonenumber: Yup.string().required("Введите номер телефона"),
     password: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите пароль"),
     repeatpassword: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите повторно пароль"),
   })
@@ -44,9 +50,13 @@ function Auth() {
     validateOnBlur: "",
     validationSchema: SignInValidation,
     onSubmit: (values) => {
-      dispatch(loginReduce({ ...values }))
-      navigate("/")
+      _api.post("/login", ({ ...values }))
+        .then((value) => {
+          dispatch(loginReduce(value.data))
+        })
+        
       formikSignIn.resetForm()
+      navigate("/")
     }
   })
 
@@ -54,7 +64,7 @@ function Auth() {
     initialValues: {
       fullname: "",
       email: "",
-      phonenumber: "",
+      // phonenumber: "",
       username: "",
       password: "",
       repeatpassword: "",
@@ -62,8 +72,10 @@ function Auth() {
     validateOnBlur: "",
     validationSchema: SignUpValidation,
     onSubmit: (values) => {
-      console.log(values)
-      dispatch(registrationReduce({ ...values }))
+      _api.post("/registration", ({ ...values }))
+        .then((value) => {
+          dispatch(registrationReduce(value.data))
+        })
       navigate("/auth")
       formikSignUp.resetForm()
     }
@@ -113,11 +125,11 @@ function Auth() {
                 <input value={formikSignUp.values.email} name="email" type="email" placeholder="Емейл" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
                 {Icons.Email}
               </span>
-              <span className="form__field">
+              {/* <span className="form__field">
                 {formikSignUp.errors.phonenumber && formikSignUp.touched.phonenumber ? (<div className="errorMessage">{formikSignUp.errors.phonenumber}</div>) : null}
                 <input value={formikSignUp.values.phonenumber} name="phonenumber" type="tel" placeholder="Номер телефона" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
                 {Icons.Phone}
-              </span>
+              </span> */}
               <span className="form__field">
                 {formikSignUp.errors.username && formikSignUp.touched.username ? (<div className="errorMessage">{formikSignUp.errors.username}</div>) : null}
                 <input value={formikSignUp.values.username} name="username" type="text" placeholder="Логин" onChange={formikSignUp.handleChange} onBlur={formikSignUp.handleBlur} />
@@ -139,9 +151,12 @@ function Auth() {
                 <span className="btnName">Авторизоваться</span>
               </button>
             </form>
+
+
           </TabPanel>
 
         </Tabs>
+       
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, {  } from 'react'
 import "./Home.scss"
-import { Icons, Images } from "../../../Config/index"
+import {  Images } from "../../../Config/index"
 import SMProduct from '../../../components/Main/SMProductCard/SMProduct';
 import ProductCard from '../../../components/Main/ProductCard/ProductCard';
 import ProductModal from "../../../components/Main/ProductModal"
 import BurgerModal from '../../../components/Main/BurgerModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { productModalReducer, checkAuth } from "../../../redux/Slices/wildSlice"
+import { productModalReducer } from "../../../redux/Slices/wildSlice"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectFade, Autoplay } from "swiper";
 import "swiper/css";
@@ -17,18 +17,14 @@ import ShowMoreText from "react-show-more-text";
 
 function Home() {
   const wildberries = useSelector(state => state.wildberries)
+  const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      dispatch(checkAuth())
-    }
-  }, [])
 
   return (
     <>
       <div className='home contentBg'>
-        <div className="home__wrapper container1500">
+        {/* <div style={admin.isLoadingState ? { display: "block" } : { display: "none" }}><h1>Loading</h1></div> */}
+        <div className="home__wrapper container1500" style={admin.isLoadingState ? { display: "none" } : { display: "block" }}>
           <div className="home__wrapper__carousel">
             <Swiper
               pagination={{
@@ -122,6 +118,12 @@ function Home() {
           </section>
         </div>
       </div >
+
+
+      {/* <div className='activatedModal' style={admin.userState.activated ? { display: "none" } : { display: "block" }}>
+
+      </div> */}
+
 
       {/* Product Modal */}
       <div className={wildberries.productModalState ? "productModalWrapper" : "productModalNone"}>

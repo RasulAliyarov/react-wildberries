@@ -6,6 +6,9 @@ import { GiConverseShoe, GiSmartphone } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
 import { HiUserCircle } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
+import { FaUserCircle } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
+import { BiLogOut } from "react-icons/bi";
 
 
 import RusFlag from "../images/Flags/RusFlag.svg"
@@ -27,23 +30,27 @@ import HowDoOrder8 from "../images/Services/HowDoOrder8.jpg"
 import NotFound from "../images/NotFound.gif"
 import CartEmpty from "../images/CartEmpty.gif"
 
-import Woman from "../images/GoodsIcons/icons8-lady-50 (1).png"
+import ProductsCabinet from "../images/GoodsIcons/Products.png"
 
 import Location from "../images/Icons/Location.svg"
 import Logo from "../images/Logo.png"
 import Burger from "../images/Icons/Burger.svg"
 import User from "../images/Icons/User.svg"
+import FooterHuawei from "../images/Icons/FooterHuawei.svg"
 import Cart from "../images/Icons/Cart.svg"
 import FooterApple from "../images/Icons/FooterApp.png"
 import FooterGoogleplay from "../images/Icons/FooterGoogleplay.png"
-import FooterHuawei from "../images/Icons/FooterHuawei.svg"
 import Drone from "../images/Drone.png"
+import Cancel from "../images/Cancel.gif"
+import Success from "../images/SuccessTick.gif"
+import Loader from "../images/Loader.gif"
 
 import Shop from "../images/Icons/Shop.png"
 import Users from "../images/Icons/Users.png"
 import Products from "../images/Icons/Products.png"
 
 import WbAdmin from "../images/WbAdmin.png"
+import EmtyCart from "../images/EmtyCart.png"
 
 export const Icons = {
     Location: <ImLocation />,
@@ -67,6 +74,9 @@ export const Icons = {
     Fullname: <GrContactInfo />,
     Navigation: <AiOutlineAlignRight />,
     Delete: <AiFillDelete />,
+    LoginUser: <FaUserCircle />,
+    Setting: <IoMdSettings />,
+    Logout: <BiLogOut />,
 }
 
 
@@ -101,11 +111,15 @@ export const Images = {
     HowDoOrder8: HowDoOrder8,
 
     Drone: Drone,
-    Woman: Woman,
     WbAdmin: WbAdmin,
     Shop: Shop,
     Users: Users,
     Products: Products,
     NotFound: NotFound,
     CartEmpty: CartEmpty,
+    ProductsCabinet: ProductsCabinet,
+    EmtyCart: EmtyCart,
+    Cancel: Cancel,
+    Success: Success,
+    Loader: Loader,
 }

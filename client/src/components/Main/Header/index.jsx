@@ -3,9 +3,13 @@ import { Link } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { searchInputReducer, burgerModaToggleReducer, checkAuth, scrollSizeReducer } from "../../../redux/Slices/wildSlice"
+import { burgerModaToggleReducer, scrollSizeReducer } from "../../../redux/Slices/wildSlice"
+import { logoutReduce, checkAuth } from "../../../redux/Slices/adminSlice"
 import { Toaster } from "react-hot-toast"
-
+import axios from 'axios';
+import _api, { API_URL } from '../../../http';
+import DatalistInput from 'react-datalist-input';
+import 'react-datalist-input/dist/styles.css';
 const LNGUAGES = [
     {
         flag: Images.RusFlag,
@@ -31,14 +35,18 @@ const LNGUAGES = [
 ]
 function Header() {
     const wildberries = useSelector(state => state.wildberries)
+    const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
-            dispatch(checkAuth())
+            axios.get(`${API_URL}/refresh`, { withCredentials: true })
+                .then((value) => {
+                    dispatch(checkAuth(value.data))
+                })
         }
     }, [])
-    console.log(wildberries.isAuth)
+
     window.onscroll = function () {
         let scroll = window.pageYOffset;
         if (600 < scroll) {
@@ -48,7 +56,6 @@ function Header() {
             dispatch(scrollSizeReducer(false))
         }
     }
-
     return (
         <>
             <header id="top" className='header'>
@@ -94,30 +101,28 @@ function Header() {
                         }}><img src={Images.Burger} alt="" /></button>
                         <Link to="/" className='logo'><img src={Images.Logo} alt="" /></Link>
 
-                        <div className={wildberries.searchInputState ? "changeSvgColor searchInput" : "searchInput"} >
-                            <span className='searchIcon'>
+                        <div className="searchInput"  >
+                            <span className='searchIcon' >
                                 {Icons.Search}
                             </span>
-                            <input type="text" placeholder='Я ищу...' onClick={() => {
-                                dispatch(searchInputReducer(!wildberries.searchInputState))
-                            }} />
-                            <span className='cameraIcon' >
+                            <DatalistInput
+                                placeholder="Я ищу..."
+                                onSelect={(item) => console.log(item.value)}
+                                items={[
+                                    { id: 'джинсы', value: "джинсы" },
+                                    { id: 'косметика', value: 'косметика' },
+                                    { id: 'zarina', value: 'zarina' },
+                                    { id: 'платье женское', value: 'платье женское' },
+                                    { id: 'шуба', value: 'шуба' },
+                                    { id: 'футболка', value: 'футболка' },
+                                    { id: 'твое', value: 'твое' },
+                                ]}
+                            />
+
+                            <span className='cameraIcon'>
                                 {Icons.Camera}
                             </span>
-
-                            <div className={wildberries.searchInputState ? "seacrchInputBody" : "seacrchInputBodyNone"}>
-                                <ul className="seacrchInputBody__list">
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>джинсы</span> </li>
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>косметика</span> </li>
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>zarina</span> </li>
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>платье женское</span> </li>
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>шуба</span> </li>
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>футболка</span> </li>
-                                    <li className='seacrchInputBody__list__link'>{Icons.Search} <span>твое</span> </li>
-                                </ul>
-                            </div>
                         </div>
-
                         <ul>
                             <li>
                                 <Link to="/services">
@@ -125,38 +130,73 @@ function Header() {
                                     <p>Адресa</p>
                                 </Link>
                             </li>
-                            <li >
-                                <Link to="/auth" style={wildberries.isAuth ? { display: "none" } : null}>
+
+
+                            <li className='userCabinet' style={!admin.isAuth ? { display: "none" } : { display: "block" }}>
+                                <Link to="/#" >
+                                    <div className='userCabinetİcon'>
+                                        {
+                                            admin.userState?.username?.charAt()
+                                        }
+                                    </div>
+                                    <p>Профиль</p>
+                                </Link>
+                                <div className='dropdownuserCabinet'>
+                                    <div className="dropdownuserCabinet__content">
+                                        <ul className='dropdownuserCabinet__content__list'>
+                                            <li><Link to="#">Кабинет</Link> {Icons.LoginUser}</li>
+                                            <li><Link to="#">Понравившиеся</Link>{Icons.FillHeart}</li>
+                                            <li><Link to="#">Покупки</Link><img src={Images.ProductsCabinet} alt="" /></li>
+                                            <li><Link to="#">Настройки</Link>{Icons.Setting}</li>
+                                            <li>Начать продавать</li>
+                                            <button onClick={() => {
+                                                dispatch(logoutReduce())
+                                            }}> <span>Выйти</span> {Icons.Logout}</button>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li style={admin.isAuth ? { display: "none" } : null}>
+                                <Link to="/auth" >
                                     <img src={Images.User} alt="" />
                                     <p>Войти</p>
                                 </Link>
                             </li>
+
+
                             <li className='cartBtn'>
                                 <Link to="/cart">
                                     <img src={Images.Cart} alt="" />
                                     <p>Корзина</p>
                                 </Link>
-                                <span className='cartCount'>{wildberries.cart.length}</span>
+                                <span className='cartCount'>{wildberries.cart?.length}</span>
                                 <div className='dropdownCart'>
                                     <div className="dropdownCart__content">
-                                        <div className="dropdownCart__content__top__products">
-                                            {
-                                                wildberries.cart.map((value, index) => {
-                                                    return (
-                                                        <div key={index} className="dropdownCart__content__top__products__product">
-                                                            <div>
-                                                                <img src={value.img} alt="" />
-                                                                <span>
-                                                                    <h2>{value.name}</h2>
-                                                                </span>
+                                        <div className="dropdownCart__content__top">
+                                            <div className={wildberries.cart?.length < 1 ? "dropdownCart__content__top__emptyCart" : "dropdownCartNone"}>
+                                                <img src={Images.EmtyCart} alt="" />
+                                            </div>
+                                            <div className={wildberries.cart?.length > 0 ? "dropdownCart__content__top__products" : "dropdownCartNone"}>
+                                                {
+                                                    wildberries.cart.map((value, index) => {
+                                                        return (
+                                                            <div key={index} className="dropdownCart__content__top__products__product">
+                                                                <div>
+                                                                    <img src={value?.img} alt="" />
+                                                                    <span>
+                                                                        <h2>{value?.name}</h2>
+                                                                    </span>
+                                                                </div>
+                                                                <div>
+                                                                    <h3>{value?.price}</h3>
+                                                                </div>
                                                             </div>
-                                                            <div>
-                                                                <h3>{value.price}</h3>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
+                                                        )
+                                                    })
+                                                }
+                                            </div>
                                         </div>
                                         <div className="dropdownCart__content__bottom">
                                             <span><h4>Итог</h4><h4>{wildberries.totalPrice} ₽</h4></span>
@@ -169,6 +209,7 @@ function Header() {
                     </div>
                 </div>
             </header>
+
             <button onClick={() => {
                 window.scrollTo({
                     top: 0,
@@ -179,6 +220,7 @@ function Header() {
                 <span>{Icons.UpArrow}</span>
 
             </button>
+
             <Toaster
                 position="top-right"
                 reverseOrder={false}

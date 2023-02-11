@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom"
 import "./AdminNav.scss"
 import { Icons, Images } from "../../../Config"
+import { Toaster } from "react-hot-toast"
 
 function AdminNav() {
     return (
@@ -26,6 +27,10 @@ function AdminNav() {
                     </li>
                 </ul>
             </div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </nav>
     )
 }

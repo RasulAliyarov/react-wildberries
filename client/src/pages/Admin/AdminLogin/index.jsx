@@ -3,7 +3,7 @@ import "./AdminLogin.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { Icons, Images } from "../../../Config"
-import {loginReduce} from "../../../redux/Slices/wildSlice"
+import {loginReduce} from "../../../redux/Slices/adminSlice"
 import {useNavigate} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,6 +11,7 @@ function AdminLogin() {
 
     const navigate = useNavigate()
     const wildberries = useSelector(state => state.wildberries)
+    const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
 
     const SignInAdminValidation = Yup.object().shape({
