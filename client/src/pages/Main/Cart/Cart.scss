@@ -5,7 +5,7 @@
     position: relative;
 
     &__wrapper {
-        button{
+        button {
             padding: 15px 15px;
             background-color: #CB11AB;
             border: none;
@@ -15,20 +15,24 @@
             display: flex;
             justify-content: center;
             transition: .4s;
-            svg{
+
+            svg {
                 margin-right: 5px;
                 font-size: 16px;
             }
+
             &:hover {
                 background-color: red;
                 transition: .4s;
             }
         }
+
         &__items {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             margin-top: 30px;
+
             &__item {
                 width: 156px;
                 overflow: hidden;
@@ -93,35 +97,59 @@
                     color: white;
                     font-size: 22px;
                     transition: .3s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .cartTick {
+                        position: absolute;
+                        color: #63117E;
+                        font-size: 10px;
+                    }
+
+                    .cartTickX {
+                        position: absolute;
+                        display: none;
+                        font-size: 10px;
+                        color: white;
+                    }
 
                     &:hover {
                         transform: scale(1.075);
                         transition: .3s;
                         color: #63117E;
+
+                        .cartTick {
+                            display: none;
+                        }
+                        .cartTickX {
+                            display: block;
+                        }
                     }
                 }
 
                 transition: .4s;
-                &:hover{
+
+                &:hover {
                     transform: scale(1.065);
                     transition: .4s;
                 }
             }
         }
+    }
+}
 
-        .CartEmpty {
-            width: 100%;
-            justify-content: center;
-            display: flex;
+.CartFull {
+    display: none;
+}
 
-            img {
-                width: 35%;
-            }
+.CartEmpty {
+    width: 100%;
+    justify-content: center;
+    display: flex;
 
-        }
+    img {
+        width: 35%;
     }
 
-    .CartFull {
-        display: none;
-    }
 }

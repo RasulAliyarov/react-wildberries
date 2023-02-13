@@ -93,9 +93,15 @@ class UserService {
         const users = UserModel.find();
         return users;
     }
+    async getUserById(id) {
+        const users = UserModel.findById({ _id: id }).populate("favorite").exec(
+
+        )
+        return users;
+    }
+
     async deleteUser(id) {
-        const user = UserModel.findByIdAndUpdate(id, {deleteState: true});
-        console.log(user, "sasa")
+        const user = UserModel.findByIdAndUpdate(id, { deleteState: true });
         return user;
     }
 
@@ -123,7 +129,7 @@ class UserService {
     }
 
     async deleteProduct(id) {
-        const product = ProductModel.findByIdAndUpdate(id, {deleteState: true});
+        const product = ProductModel.findByIdAndUpdate(id, { deleteState: true });
         return product;
     }
 
@@ -140,6 +146,27 @@ class UserService {
 
         });
         return product;
+    }
+
+
+    async updateStatus(req) {
+        const { phonenumber, postIndex, country } = req.body
+        const userRole = await RoleModel.findOne({ value: "SELLER" })
+
+        const user = UserModel.findByIdAndUpdate(req.params.id, {
+            roles: [userRole.value],
+            phonenumber: phonenumber,
+            postIndex: postIndex,
+            country: country
+        });
+        return user;
+    }
+
+    async addToFavorite(req) {
+        const newFav = UserModel.findByIdAndUpdate(req.params.id, {
+            favorite: req.body.data
+        });
+        return newFav;
     }
 }
 

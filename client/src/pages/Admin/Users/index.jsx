@@ -33,7 +33,8 @@ function User() {
     }, 2200)
 
     if (imgState === "yes") {
-      UserService.deleteUser(id, getData)
+      const res =  UserService.deleteUser(id, getData)
+
     }
   }
   return (
@@ -60,6 +61,7 @@ function User() {
               <th>Username</th>
               <th>Email</th>
               <th>Phone number</th>
+              <th>country</th>
               <th>Roles</th>
               <th className='delTh'>Action</th>
               <th className='editTh'>Action</th>
@@ -74,6 +76,7 @@ function User() {
                     <td >{p?.username}</td>
                     <td>{p?.email}</td>
                     <td>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
+                    <td>{p?.country ? p?.country : "🏴"}</td>
                     <td>{p?.roles}</td>
                     <td className='delTd'><button className='productDelete' onClick={() => {
                       dispatch(attentionReduce(true))

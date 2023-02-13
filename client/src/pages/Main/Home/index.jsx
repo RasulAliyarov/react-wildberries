@@ -1,12 +1,13 @@
-import React, {  } from 'react'
+import React, { useEffect } from 'react'
 import "./Home.scss"
-import {  Images } from "../../../Config/index"
+import { Images } from "../../../Config/index"
 import SMProduct from '../../../components/Main/SMProductCard/SMProduct';
 import ProductCard from '../../../components/Main/ProductCard/ProductCard';
 import ProductModal from "../../../components/Main/ProductModal"
 import BurgerModal from '../../../components/Main/BurgerModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { productModalReducer } from "../../../redux/Slices/wildSlice"
+import { productsReduce } from "../../../redux/Slices/adminSlice"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectFade, Autoplay } from "swiper";
 import "swiper/css";
@@ -14,11 +15,26 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import ShowMoreText from "react-show-more-text";
+import AuthService from '../../../Services/AuthService';
+import { API_URL } from '../../../http';
+import axios from 'axios';
 
 function Home() {
   const wildberries = useSelector(state => state.wildberries)
   const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
+
+  function getData() {
+    axios.get(`${API_URL}/products`).then((value) => {
+      dispatch(productsReduce(
+        value.data.filter(p => p.deleteState === false),
+      ))
+    })
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <>
@@ -71,13 +87,13 @@ function Home() {
           <h2 className='sectionTtile'>Хиты продаж</h2>
 
           <section className='home__wrapper__products'>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {
+              admin.productsState.map(p => {
+                return (
+                  <ProductCard p={p} />
+                )
+              })
+            }
           </section>
 
           <section className='home__wrapper__text'>
@@ -126,9 +142,9 @@ function Home() {
 
 
       {/* Product Modal */}
-      <div className={wildberries.productModalState ? "productModalWrapper" : "productModalNone"}>
+      <div className={wildberries.productModalState?.state ? "productModalWrapper" : "productModalNone"}>
         <div className='productModalWrapperBg' onClick={() => {
-          dispatch(productModalReducer(false))
+          dispatch(productModalReducer({ state: false }))
         }}></div>
         <ProductModal />
       </div>

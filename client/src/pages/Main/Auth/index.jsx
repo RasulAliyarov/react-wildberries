@@ -5,7 +5,7 @@ import "./Auth.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom"
-import { Icons } from "../../../Config/index"
+import { Icons,Images } from "../../../Config/index"
 import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import _api from "../../../http";
@@ -93,7 +93,7 @@ function Auth() {
           {/* Sign in */}
           <TabPanel>
             <form className="form" onSubmit={formikSignIn.handleSubmit}>
-              <img src="https://partner-cons.com/files/73810-business-idea-animation.gif" alt="" />
+              <img src={Images.Login} alt="" />
               <span className="form__field">
                 {formikSignIn.errors.username && formikSignIn.touched.username ? (<div className="errorMessage">{formikSignIn.errors.username}</div>) : null}
                 <input value={formikSignIn.values.username} name="username" type="text" placeholder="Username" onChange={formikSignIn.handleChange} onBlur={formikSignIn.handleBlur} />

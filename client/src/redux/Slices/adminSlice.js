@@ -14,6 +14,7 @@ const adminSlice = createSlice({
         attentionState: false,
         yesNoState: "neitral",
         oneProductState: {},
+        startSellerModalState: false,
 
     },
     reducers: {
@@ -84,6 +85,9 @@ const adminSlice = createSlice({
         usersStateReduce: (state, action) => {
             state.usersState = action.payload
         },
+        startSellerModalReduce: (state, action) => {
+            state.startSellerModalState = action.payload
+        },
     },
 })
 
@@ -98,6 +102,7 @@ export const {
     usersStateReduce,
     oneProductReduce,
     isLoadingReduce,
+    startSellerModalReduce,
     deleteToCartReducer,
     yesNoReduce,
 } = adminSlice.actions

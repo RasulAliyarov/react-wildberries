@@ -14,7 +14,7 @@ _api.interceptors.request.use((config) => {
 
 _api.interceptors.response.use((config) => { return config }, async error => {
     const originlRequest = error.config;
-    if (error.response.status == 401) {
+    if (error.response.status === 401) {
         try{
 
             await axios.get(`${API_URL}/refresh`, { withCredentials: true }).then(resp=>{

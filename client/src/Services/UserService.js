@@ -14,5 +14,11 @@ export default class UserService {
     static async updateProduct(id, data) {
         return _api.put(`/updateProduct/${id}`, { ...data })
     }
-
+    static updateStatus(id, data) {
+        return _api.put(`/updateStatus/${id}`, { ...data })
+    }
+    static async addToFavorite(id, data) {
+        console.log(id, data)
+        return _api.put(`/addToFavorite/${id}`, {data})
+    }
 }

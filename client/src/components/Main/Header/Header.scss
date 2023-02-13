@@ -326,6 +326,8 @@ body {
                     position: absolute;
                     top: 0;
                     margin: 0 !important;
+                    display: flex;
+                    flex-direction: column;
                 }
 
                 .react-datalist-input__textbox {
@@ -377,7 +379,7 @@ body {
                         }
 
                         p {
-                            margin-top: 15px;
+                            margin-top: 10px;
                         }
                     }
 

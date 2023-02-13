@@ -4,30 +4,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { productModalReducer } from "../../../redux/Slices/wildSlice"
 import { Link } from "react-router-dom"
 
-function ProductCard() {
+function ProductCard({ p }) {
     const wildberries = useSelector(state => state.wildberries)
     const dispatch = useDispatch()
-
     return (
         <div className='home__wrapper__products__product'>
             <Link to="/detail">
                 <div className="home__wrapper__products__product__top">
-                    <img src="https://basket-01.wb.ru/vol20/part2026/2026369/images/c246x328/1.webp" alt="" />
+                    <img src={p.image} alt="" />
 
                     <span className='cardDiscount'>-30%</span>
                 </div>
                 <div className="home__wrapper__products__product__bottom">
                     <span className='price'>
-                        <h5>387 ₽ </h5>
+                        <h5>{p.price} ₽ </h5>
                         <span>615 ₽</span>
                     </span>
                     <span className='productTitle'>
-                        <p>Garnier/Fructis Укрепляющий шампунь для поврежденных волос,700мл</p>
+                        <p>{p.brand}/{p.name}</p>
                     </span>
                 </div>
             </Link>
             <button className='cardModalBtn' onClick={() => {
-                dispatch(productModalReducer(true))
+                dispatch(productModalReducer({
+                    state: true,
+                    productData: { ...p }
+                }))
             }}>Быстрый просмотр</button>
         </div>
 

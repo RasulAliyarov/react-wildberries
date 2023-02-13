@@ -66,13 +66,6 @@
 
         }
 
-        .sectionTtile {
-            margin: 50px 0 30px;
-            font-weight: 700;
-            color: #242424;
-            font-size: 24px;
-        }
-
         &__products {
             position: relative;
             display: flex;
@@ -128,4 +121,11 @@
 .contentBg {
     border-radius: 25px;
     background-color: white;
+}
+
+.sectionTtile {
+    margin: 50px 0 30px;
+    font-weight: 700;
+    color: #242424;
+    font-size: 24px;
 }

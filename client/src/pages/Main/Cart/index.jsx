@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { deleteToCartReducer, addToCartReducer } from "../../../redux/Slices/wildSlice"
+import { deleteToCartReducer, addToCartReducer, deleteToCartByIdReducer } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Icons, Images } from "../../../Config/index"
 import "./Cart.scss"
@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast"
 function Cart() {
   const wildberries = useSelector(state => state.wildberries)
   const dispatch = useDispatch()
-  
+
   return (
     <>
       <div className="cart">
@@ -49,7 +49,12 @@ function Cart() {
                         <p>{value.brand}/{value.name}</p>
                       </span>
                     </div>
-                    <span className='cartHeart'>{Icons.FillHeart}</span>
+                    <span className='cartHeart' onClick={() => {
+                      dispatch(deleteToCartByIdReducer(value.id))
+                    }}>{Icons.CartFill}
+                      <span className='cartTick'>✔</span>
+                      <span className='cartTickX'>⨉</span>
+                    </span>
                   </div>
                 )
               })

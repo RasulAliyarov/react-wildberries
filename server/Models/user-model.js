@@ -11,7 +11,8 @@ const UserShema = new mongoose.Schema({
     postIndex: { type: String },
     country: { type: String },
     deleteState: { type: Boolean, default: false },
-    roles: [{ type: String, ref: "Roles" }]
+    roles: [{ type: String, ref: "Roles" }],
+    favorite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Products" }]
 })
 
 const UserModel = new mongoose.model("Users", UserShema)

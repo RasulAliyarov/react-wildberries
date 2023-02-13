@@ -15,6 +15,7 @@ router.get("/activate/:link", controller.Activate)
 router.get("/refresh", controller.Refresh)
 
 router.get("/users", controller.GetUsers)
+router.get("/getUserById/:id", controller.GetUserById)
 router.put("/deleteUser/:id", controller.DeleteUser)
 
 router.get("/products", controller.GetProducts)
@@ -23,4 +24,6 @@ router.post("/addProduct", controller.AddProduct)
 router.put("/deleteProduct/:id", controller.DeleteProduct)
 router.put("/updateProduct/:id", controller.UpdateProduct)
 
+router.put("/updateStatus/:id", controller.ChangeStatus)
+router.put("/addToFavorite/:id", controller.AddToFavorite)
 module.exports = router

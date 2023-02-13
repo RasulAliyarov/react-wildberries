@@ -1,14 +1,16 @@
 import { ImLocation } from "react-icons/im";
 import { MdOutlinePhotoCamera, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
 import { AiOutlineArrowUp,AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
-import { FiChevronDown, FiChevronUp, FaUserAlt } from "react-icons/fi";
-import { GiConverseShoe, GiSmartphone } from "react-icons/gi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import { GiConverseShoe, GiSmartphone, GiPostStamp } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
 import { HiUserCircle } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
+import { TbWorld } from "react-icons/tb";
+import { BsFillCartFill } from "react-icons/bs";
 
 
 import RusFlag from "../images/Flags/RusFlag.svg"
@@ -29,6 +31,7 @@ import HowDoOrder7 from "../images/Services/HowDoOrder7.jpg"
 import HowDoOrder8 from "../images/Services/HowDoOrder8.jpg"
 import NotFound from "../images/NotFound.gif"
 import CartEmpty from "../images/CartEmpty.gif"
+import SSCongrat from "../images/SSCongrat.gif"
 
 import ProductsCabinet from "../images/GoodsIcons/Products.png"
 
@@ -44,6 +47,8 @@ import Drone from "../images/Drone.png"
 import Cancel from "../images/Cancel.gif"
 import Success from "../images/SuccessTick.gif"
 import Loader from "../images/Loader.gif"
+import Login from "../images/Login.gif"
+import StartSeller from "../images/StartSeller.gif"
 
 import Shop from "../images/Icons/Shop.png"
 import Users from "../images/Icons/Users.png"
@@ -51,6 +56,7 @@ import Products from "../images/Icons/Products.png"
 
 import WbAdmin from "../images/WbAdmin.png"
 import EmtyCart from "../images/EmtyCart.png"
+import FavoriteBG from "../images/Favorite.png"
 
 export const Icons = {
     Location: <ImLocation />,
@@ -77,6 +83,9 @@ export const Icons = {
     LoginUser: <FaUserCircle />,
     Setting: <IoMdSettings />,
     Logout: <BiLogOut />,
+    World: <TbWorld />,
+    PostStamp: <GiPostStamp />,
+    CartFill: <BsFillCartFill />,
 }
 
 
@@ -122,4 +131,8 @@ export const Images = {
     Cancel: Cancel,
     Success: Success,
     Loader: Loader,
+    Login: Login,
+    StartSeller: StartSeller,
+    SSCongrat: SSCongrat,
+    FavoriteBG: FavoriteBG,
 }

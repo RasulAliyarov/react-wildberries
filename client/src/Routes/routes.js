@@ -12,6 +12,8 @@ import MainRoot from "../components/Main/MainRoot"
 import Users from "../pages/Admin/Users"
 import Products from "../pages/Admin/Products"
 import Sellers from "../pages/Admin/Sellers"
+import StartSell from "../pages/Sellers/StartSell"
+import Favorite from "../pages/Main/Favorite"
 
 export const router = createBrowserRouter(
     [
@@ -40,6 +42,14 @@ export const router = createBrowserRouter(
                     path: "detail",
                     element: <Detail />
                 },
+                {
+                    path: "favorite",
+                    element: <Favorite />
+                },
+                {
+                    path: "sellerRegistration",
+                    element: <StartSell />
+                },
 
             ]
         },
@@ -60,14 +70,14 @@ export const router = createBrowserRouter(
                 {
                     path: "panel/",
                     element: <AdminRoot />,
-                    children:[
+                    children: [
                         {
                             path: "products/",
                             element: <Products />,
                         },
                         {
                             path: "products/:id",
-                            element:<ProductDetail/>
+                            element: <ProductDetail />
                         },
                         {
                             path: "users",

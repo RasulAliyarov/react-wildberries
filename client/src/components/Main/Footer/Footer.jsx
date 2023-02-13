@@ -119,7 +119,7 @@ function Footer() {
                 </div>
 
             </div>
-            <div className='footerPrava'>
+            <div className='footerPrava container1500'>
                 <p>2004-2023 © Wildberries — модный интернет-магазин одежды, обуви и аксессуаров. Все права защищены. Доставка по всей России.</p>
                 <Link to="#">Проверка совместимости</Link>
             </div>

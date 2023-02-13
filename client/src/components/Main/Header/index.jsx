@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import _api, { API_URL } from '../../../http';
 import DatalistInput from 'react-datalist-input';
-import 'react-datalist-input/dist/styles.css';
+
 const LNGUAGES = [
     {
         flag: Images.RusFlag,
@@ -131,7 +131,6 @@ function Header() {
                                 </Link>
                             </li>
 
-
                             <li className='userCabinet' style={!admin.isAuth ? { display: "none" } : { display: "block" }}>
                                 <Link to="/#" >
                                     <div className='userCabinetİcon'>
@@ -145,10 +144,10 @@ function Header() {
                                     <div className="dropdownuserCabinet__content">
                                         <ul className='dropdownuserCabinet__content__list'>
                                             <li><Link to="#">Кабинет</Link> {Icons.LoginUser}</li>
-                                            <li><Link to="#">Понравившиеся</Link>{Icons.FillHeart}</li>
+                                            <li><Link to="/favorite">Понравившиеся</Link>{Icons.FillHeart}</li>
                                             <li><Link to="#">Покупки</Link><img src={Images.ProductsCabinet} alt="" /></li>
                                             <li><Link to="#">Настройки</Link>{Icons.Setting}</li>
-                                            <li>Начать продавать</li>
+                                            <li style={admin.userState.roles==="USER"? {display: "block"}: {display: "none"}}><Link to="/sellerRegistration">Начать продавать</Link>{Icons.Setting}</li>
                                             <button onClick={() => {
                                                 dispatch(logoutReduce())
                                             }}> <span>Выйти</span> {Icons.Logout}</button>
@@ -164,7 +163,6 @@ function Header() {
                                     <p>Войти</p>
                                 </Link>
                             </li>
-
 
                             <li className='cartBtn'>
                                 <Link to="/cart">

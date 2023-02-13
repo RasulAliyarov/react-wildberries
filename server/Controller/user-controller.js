@@ -3,6 +3,8 @@ const { validationResult, cookie } = require("express-validator")
 const ApiError = require("../exceptions/api-error")
 const ProductModel = require("../Models/products-model")
 const TokenModel = require("../Models/token-model")
+const RoleModel = require("../Models/token-model")
+const UserModel = require("../Models/user-model")
 
 class UserController {
     async Registration(req, res, next) {
@@ -88,7 +90,18 @@ class UserController {
             next(e)
         }
     }
-    // GET USERS
+    // GET GetUserById
+    async GetUserById(req, res, next) {
+        try {
+            const user = await userService.getUserById(req.params.id);
+            return res.send(user)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    // GET DELETE
     async DeleteUser(req, res, next) {
         try {
             await userService.deleteUser(req.params.id)
@@ -134,6 +147,7 @@ class UserController {
             next(e)
         }
     }
+   
     // DELETE DeleteProduct
     async DeleteProduct(req, res, next) {
         try {
@@ -155,6 +169,30 @@ class UserController {
             next(e)
         }
     }
+
+    // UPDATE UpdateProduct
+    async ChangeStatus(req, res, next) {
+        try {
+            await userService.updateStatus(req)
+            res.json("Статус изменен")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+     // PUT AddToFavorite
+     async AddToFavorite(req, res, next) {
+        try {
+            await userService.addToFavorite(req);
+            res.json("Продукт в добавлен в избранное")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+    
+
 }
 
 module.exports = new UserController

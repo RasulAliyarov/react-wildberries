@@ -4,20 +4,24 @@ const wildSlice = createSlice({
     name: "wildberries",
     initialState: {
         scrollSizeState: false,
-        productModalState: false,
+        productModalState: {
+            state: false,
+            productData: {}
+        },
         accordionHeadinNumber: 0,
+        favoriteState: [],
         accordionChevronToggle: false,
         burgerModalToggle: false,
         totalPrice: 0,
         cart: localStorage.getItem("Products") ? JSON.parse(localStorage.getItem("Products")) : [],
-  
     },
     reducers: {
         scrollSizeReducer: (state, action) => {
             state.scrollSizeState = action.payload
         },
         productModalReducer: (state, action) => {
-            state.productModalState = action.payload
+            state.productModalState.state = action.payload.state
+            state.productModalState.productData = action.payload.productData
         },
         accordionHeadinNumberReducer: (state, action) => {
             state.accordionHeadinNumber = action.payload
@@ -36,17 +40,29 @@ const wildSlice = createSlice({
             state.totalPrice = 0
             localStorage.removeItem("Products")
         },
+        deleteToCartByIdReducer: (state, action) => {
+            const id = action.payload
+            const cartData = JSON.parse(localStorage.getItem("Products"))
+            const filtered = cartData.filter(item => item.id !== id);
+            localStorage.removeItem('Products', JSON.stringify(filtered))
 
+            state.cart = state.cart.filter(v => v.id !== id)
+        },
         totalPriceReduce: (state, action) => {
             state.totalPrice += action.payload
+        },
+        favoriteReduce: (state, action) => {
+            state.favoriteState = action.payload
         },
     },
 })
 
-export const { 
+export const {
     totalPriceReduce,
     addToCartReducer,
+    favoriteReduce,
     deleteToCartReducer,
+    deleteToCartByIdReducer,
     burgerModaToggleReducer,
     scrollSizeReducer,
     accordionChevronToggleReducer,
