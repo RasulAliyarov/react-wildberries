@@ -1,0 +1,45 @@
+.cabinet {
+    padding: 40px 0;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+
+        &__menu {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 300px;
+            span {
+                display: contents;
+                a {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: black;
+                    padding: 5px 0;
+                }
+
+                .activeCabinetLink {
+                    color: #a22bc0;
+                    border-bottom: 1px solid #a22bc0;
+                }
+            }
+        }
+
+        .productDetail {
+            padding: 0 30px;
+            .formFieldWrapper {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+
+                span {
+                    width: 48.8%;
+
+                    input {}
+                }
+            }
+        }
+    }
+
+}

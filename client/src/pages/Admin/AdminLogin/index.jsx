@@ -31,6 +31,7 @@ function AdminLogin() {
             _api.post("/loginAdmin", ({ ...values }))
                 .then((value) => {
                     dispatch(loginAdminReduce(value.data))
+                    navigate("/admin/panel")
                     formikAdminSignIn.resetForm()
                 })
         }

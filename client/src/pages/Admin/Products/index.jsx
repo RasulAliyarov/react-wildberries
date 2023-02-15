@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import "./AdminPanel.scss"
 import { Link, parsePath } from "react-router-dom"
-import { productsReduce, attentionReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
+import { productsReduce, searchStringReduce, attentionReduce, priceToggleReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { API_URL } from '../../../http';
 import axios from 'axios';
-import { Images } from '../../../Config/index';
+import { Icons, Images } from '../../../Config/index';
 import UserService from '../../../Services/UserService';
 
 let id = null
+
 function Products() {
   const admin = useSelector(state => state.admin)
+  const category = useSelector(state => state.category)
   const dispatch = useDispatch()
-
   function getData() {
     axios.get(`${API_URL}/products`).then((value) => {
       dispatch(productsReduce(
@@ -35,21 +36,36 @@ function Products() {
       UserService.deleteProduct(id, getData)
     }
   }
+
+  function sortData(obj) {
+    dispatch(priceToggleReduce(!admin.priceToggleState))
+    if (admin.priceToggleState) {
+      let sortedData = [...obj].slice().sort((a, b) => b.price - a.price);
+      dispatch(productsReduce([...sortedData]))
+    } else {
+      let sortedData = obj.slice().sort((a, b) => a.price - b.price);
+      dispatch(productsReduce([...sortedData]))
+    }
+  }
   return (
     <div className='adminPages'>
 
       <div className="adminPages__wrapper">
         <div className="adminPages__wrapper__top">
-          <input type="text" placeholder='Search by name' />
+          <input type="text" placeholder='Search by name' onChange={(e) => dispatch(searchStringReduce({ string: e.target.value }))} />
 
-          <input type="text" list='categories' placeholder='Search by category' />
+          <input type="text" list='categories' placeholder='Search by category' onChange={(e) => dispatch(searchStringReduce({ category: e.target.value }))} />
           <datalist id="categories">
-            <option value="Cloth" />
-            <option value="Man" />
-            <option value="Woman" />
-            <option value="Home" />
+            {
+              category.categoriesState?.map(c => {
+                return (
+                  <option key={c?._id} value={c?.categoryName}/>
+                )
+              })
+            }
           </datalist>
 
+          <button onClick={() => sortData(admin.productsState)} >{Icons.Sort}Sort by price </button>
         </div>
         <div className="adminPages__wrapper__bottom">
           <table className='adminPages__wrapper__bottom__table'>
@@ -68,29 +84,32 @@ function Products() {
               <th className='detailTh'>Action</th>
             </tr>
             {
-              admin?.productsState?.map((p, index) => {
-                return (
-                  <tr key={p._id} className="contentRow">
-                    <td>{index}</td>
-                    <td className='imgTd'><img src={p?.image} alt="" /></td>
-                    <td >{p?.brand}</td>
-                    <td>{p?.name}</td>
-                    <td>{p?.category}</td>
-                    <td>{p?.price}</td>
-                    <td>{p?.count}</td>
-                    <td>{p?.color}</td>
-                    <td className='descTd' dangerouslySetInnerHTML={{ __html: p.desc }}></td>
-                    <td className='delTd'><button className='productDelete' onClick={() => {
-                      dispatch(attentionReduce(true))
-                      id = p._id
-                    }}>Delete</button></td>
-                    <td className='editTd'><button className='productEdit'>Edit</button></td>
-                    <td className='detailTd'>
-                      <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
-                    </td>
-                  </tr>
-                )
-              })
+              admin?.productsState?.
+                filter(s => s.name?.toLowerCase()?.includes(admin.searchString?.string?.toLowerCase())
+                  || s.category?.toLowerCase()?.includes(admin.searchString?.category?.toLowerCase())).
+                map((p, index) => {
+                  return (
+                    <tr key={p._id} className="contentRow">
+                      <td className='productsTd'>{index}</td>
+                      <td className='imgTd productsTd'><img src={p?.image} alt="" /></td>
+                      <td className='productsTd'>{p?.brand}</td>
+                      <td className='productsTd'>{p?.name}</td>
+                      <td className='productsTd'>{p?.category}</td>
+                      <td className='productsTd'>{p?.price}</td>
+                      <td className='productsTd'>{p?.count}</td>
+                      <td className='productsTd'>{p?.color}</td>
+                      <td className='descTd productsTd' dangerouslySetInnerHTML={{ __html: p.desc }}></td>
+                      <td className='delTd productsTd'><button className='productDelete' onClick={() => {
+                        dispatch(attentionReduce(true))
+                        id = p._id
+                      }}>Delete</button></td>
+                      <td className='editTd productsTd'><button className='productEdit'>Edit</button></td>
+                      <td className='detailTd productsTd'>
+                        <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
+                      </td>
+                    </tr>
+                  )
+                })
             }
           </table>
         </div>

@@ -17,14 +17,16 @@ function User() {
   function getData(accessToken) {
     axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${accessToken}` } }).then((value) => {
       dispatch(usersStateReduce(
-        value.data.filter(p => p.deleteState === false)
+        value.data.filter(p => p.deleteState === false && p.roles[0] === "USER")
       ))
     })
   }
   useEffect(() => {
-    const accessToken = localStorage.getItem("token")
+    const accessToken = localStorage.getItem("admintoken")
     getData(accessToken)
   }, [])
+
+  console.log(admin.usersState)
 
   function handlerAttentioModal(state, imgState) {
     dispatch(yesNoReduce(imgState))
@@ -72,19 +74,19 @@ function User() {
               admin?.usersState?.map((p, index) => {
                 return (
                   <tr key={p._id} className="contentRow">
-                    <td>{index}</td>
-                    <td >{p?.fullname}</td>
-                    <td >{p?.username}</td>
-                    <td>{p?.email}</td>
-                    <td>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
-                    <td>{p?.country ? p?.country : "🏴"}</td>
-                    <td>{p?.roles}</td>
-                    <td className='delTd'><button className='productDelete' onClick={() => {
+                    <td className='userData productsTd'>{index}</td>
+                    <td className='userData productsTd'>{p?.fullname}</td>
+                    <td className='userData productsTd'>{p?.username}</td>
+                    <td className='userData productsTd'>{p?.email}</td>
+                    <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
+                    <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
+                    <td className='userData productsTd'>{p?.roles}</td>
+                    <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
                       dispatch(attentionReduce(true))
                       id = p._id
                     }}>Delete</button></td>
-                    <td className='editTd'><button className='productEdit'>Edit</button></td>
-                    <td className='detailTd'>
+                    <td className='editTd userData productsTd'><button className='productEdit'>Edit</button></td>
+                    <td className='detailTd userData productsTd'>
                       <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
                     </td>
                   </tr>

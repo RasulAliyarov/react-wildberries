@@ -8,9 +8,10 @@ import { HiUserCircle } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut} from "react-icons/bi";
 import { TbWorld } from "react-icons/tb";
 import { BsFillCartFill } from "react-icons/bs";
+import { TiArrowUnsorted } from "react-icons/ti";
 
 
 import RusFlag from "../images/Flags/RusFlag.svg"
@@ -86,6 +87,7 @@ export const Icons = {
     World: <TbWorld />,
     PostStamp: <GiPostStamp />,
     CartFill: <BsFillCartFill />,
+    Sort: <TiArrowUnsorted />,
 }
 
 

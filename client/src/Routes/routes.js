@@ -9,6 +9,9 @@ import Detail from "../pages/Main/Detail"
 import PageNotFound from "../pages/PageNotFound"
 import AdminRoot from "../components/Admin/AdminRoot"
 import MainRoot from "../components/Main/MainRoot"
+import AddProduct from "../pages/Main/Cabinet/AddProduct"
+import EditInfo from "../pages/Main/Cabinet/EditInfo"
+import CabinetRoot from "../pages/Main/Cabinet/CabinetRoot"
 import Users from "../pages/Admin/Users"
 import Products from "../pages/Admin/Products"
 import Sellers from "../pages/Admin/Sellers"
@@ -50,6 +53,20 @@ export const router = createBrowserRouter(
                 {
                     path: "sellerRegistration",
                     element: <StartSell />
+                },
+                {
+                    path: "cabinet/:id",
+                    element: <CabinetRoot />,
+                    children:[
+                        {
+                            path: "addProduct",
+                            element: <AddProduct/>
+                        },
+                        {
+                            path: "editInfo",
+                            element: <EditInfo/>
+                        },
+                    ]
                 },
 
             ]

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,9 +37,9 @@ function Header() {
     const wildberries = useSelector(state => state.wildberries)
     const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     useEffect(() => {
-     if(localStorage.getItem("token")) {
+        if (localStorage.getItem("token")) {
             axios.get(`${API_URL}/refresh`, { withCredentials: true })
                 .then((value) => {
                     dispatch(checkAuth(value.data))
@@ -143,13 +143,17 @@ function Header() {
                                 <div className='dropdownuserCabinet'>
                                     <div className="dropdownuserCabinet__content">
                                         <ul className='dropdownuserCabinet__content__list'>
-                                            <li><Link to="#">Кабинет</Link> {Icons.LoginUser}</li>
+                                            <li><Link to={`/cabinet/${admin.userState.id}`}>Кабинет</Link> {Icons.LoginUser}</li>
                                             <li><Link to="/favorite">Понравившиеся</Link>{Icons.FillHeart}</li>
-                                            <li><Link to="#">Покупки</Link><img src={Images.ProductsCabinet} alt="" /></li>
+                                            <li><Link to="#">Покупки</Link> <img src={Images.ProductsCabinet} alt="" /></li>
                                             <li><Link to="#">Настройки</Link>{Icons.Setting}</li>
-                                            <li style={admin.userState.roles === "USER" ? { display: "block" } : { display: "none" }}><Link to="/sellerRegistration">Начать продавать</Link>{Icons.Setting}</li>
+                                            <li style={admin.userState?.roles?.[0] === "USER" ? { display: "flex" } : { display: "none" }}>
+                                                <Link to="/sellerRegistration">Начать продавать</Link>
+                                                {Icons.Setting}
+                                            </li>
                                             <button onClick={() => {
                                                 dispatch(logoutReduce())
+                                                navigate("/")
                                             }}> <span>Выйти</span> {Icons.Logout}</button>
                                         </ul>
 

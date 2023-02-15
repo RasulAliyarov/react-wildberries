@@ -143,7 +143,7 @@ class UserService {
     }
 
     async addProduct(data) {
-        const userCookie = data.headers?.cookie.value
+        const userCookie = data.headers?.cookie?.value
         const userToken = await TokenModel.findOne({ userCookie })
         if (!userToken) {
             throw new Error("Не удалось добавить товар")
@@ -203,6 +203,11 @@ class UserService {
     }
 
     async addCategory(categoryName, categoryİmage) {
+        const checkCategory = await CategoryModel.findOne({ categoryName: categoryName });
+        if (checkCategory) {
+            throw new Error("Category already have ")
+        }
+
         const newCategory = await new CategoryModel({
             categoryName: categoryName,
             categoryİmage: categoryİmage

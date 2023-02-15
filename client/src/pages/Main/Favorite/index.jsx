@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Icons, Images } from "../../../Config/index"
 import { toast } from "react-hot-toast"
 import axios from 'axios'
+import { API_URL } from '../../../http'
+import { checkAuth } from '../../../redux/Slices/adminSlice'
 
 function Favorite() {
     const wildberries = useSelector(state => state.wildberries)
@@ -11,11 +13,12 @@ function Favorite() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/getUserById/${admin.userState.id}`).then(u => {
+        console.log(admin.userState)
+        axios.get(`${API_URL}/getUserById/${admin.userState.id}`).then(u => {
             console.log(u.data)
             dispatch(favoriteReduce(u.data.favorite))
         })
-    },[])
+    }, [])
 
     return (
         <div className="cart">

@@ -5,7 +5,7 @@ import { Icons, Images } from "../../../Config"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import _api, { API_URL } from '../../../http';
-import { logoutReduce, checkAuth } from "../../../redux/Slices/adminSlice"
+import { logoutReduce, checkAdminAuth } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 
 function AdminNav() {
@@ -14,13 +14,13 @@ function AdminNav() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (localStorage.getItem("adminToken")) {
+        if (localStorage.getItem("admintoken")) {
             axios.get(`${API_URL}/refresh`, { withCredentials: true })
                 .then((value) => {
-                    dispatch(checkAuth(value.data))
+                    dispatch(checkAdminAuth(value.data))
                 })
         }
-        if (!localStorage.getItem("adminToken")) {
+        if (!localStorage.getItem("admintoken")) {
             navigate("*")
         }
     }, [])

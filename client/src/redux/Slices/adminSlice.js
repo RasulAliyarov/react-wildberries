@@ -10,11 +10,17 @@ const adminSlice = createSlice({
         userState: {},
         isLoadingState: false,
         productsState: [],
+        sellersState: [],
         usersState: [],
         attentionState: false,
         yesNoState: "neitral",
         oneProductState: {},
         startSellerModalState: false,
+        priceToggleState: true,
+        searchString: {
+            string: "",
+            category: ""
+        },
 
     },
     reducers: {
@@ -30,7 +36,7 @@ const adminSlice = createSlice({
         },
         loginAdminReduce: (state, action) => {
             try {
-                localStorage.setItem('adminToken', action.payload.accessToken);
+                localStorage.setItem('admintoken', action.payload.accessToken);
                 state.userState = action.payload.user;
                 state.isAuth = true
             }
@@ -65,7 +71,20 @@ const adminSlice = createSlice({
 
         checkAuth: (state, action) => {
             try {
+                console.log(action)
                 localStorage.setItem('token', action.payload.accessToken);
+                state.userState = action.payload.user
+                state.isAuth = true
+            }
+            catch (e) {
+                console.log({ error: e })
+            } finally {
+                state.isLoadingState = false
+            }
+        },
+        checkAdminAuth: (state, action) => {
+            try {
+                localStorage.setItem('admintoken', action.payload.accessToken);
                 state.userState = action.payload.user
                 state.isAuth = true
             }
@@ -96,8 +115,19 @@ const adminSlice = createSlice({
         usersStateReduce: (state, action) => {
             state.usersState = action.payload
         },
+        sellersReduce: (state, action) => {
+            state.sellersState = action.payload
+        },
         startSellerModalReduce: (state, action) => {
             state.startSellerModalState = action.payload
+        },
+        priceToggleReduce: (state, action) => {
+            state.priceToggleState = action.payload
+        },
+        searchStringReduce: (state, action) => {
+            console.log(action)
+            state.searchString.string = action.payload.string
+            state.searchString.category = action.payload.category
         },
     },
 })
@@ -105,13 +135,17 @@ const adminSlice = createSlice({
 export const {
     checkAuth,
     loginReduce,
+    searchStringReduce,
     logoutReduce,
+    priceToggleReduce,
     registrationReduce,
     deleteProduct,
     loginAdminReduce,
+    sellersReduce,
     productsReduce,
     attentionReduce,
     usersStateReduce,
+    checkAdminAuth,
     oneProductReduce,
     isLoadingReduce,
     startSellerModalReduce,
