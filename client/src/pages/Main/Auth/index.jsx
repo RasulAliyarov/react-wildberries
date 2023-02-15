@@ -22,9 +22,6 @@ function Auth() {
       dispatch(checkAuth())
       navigate("/")
     }
-    // if(localStorage.getItem("token")){
-
-    // }
   }, [])
 
 

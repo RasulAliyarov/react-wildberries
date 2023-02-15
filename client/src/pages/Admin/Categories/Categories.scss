@@ -1,0 +1,138 @@
+.adminPages {
+    &__category {
+        padding: 30px;
+
+        &__content {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+
+            &__accordion {
+                width: 400px;
+
+                .catAccordionHead {
+                    transition: .4s;
+                    cursor: pointer;
+                    padding: 0 10px;
+
+                    &:hover {
+                        background-color: #ebebeb;
+                        transition: .4s;
+                    }
+                }
+
+                .accordion__item {
+                    border-bottom: 1px solid rgb(211, 210, 210);
+
+                    &:first-child {
+                        border-top: 1px solid rgb(211, 210, 210);
+                    }
+
+                    .accordion__heading {
+                        cursor: pointer;
+
+                        .accordion__button {
+                            display: flex;
+                            justify-content: space-between;
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .accordion__button {
+                    padding: 15px 50px 18px 0;
+                }
+
+                &__panel {
+                    padding: 20px 10px;
+                    border-top: 1px solid #ebebeb;
+                    border-right: 1px solid #ebebeb;
+                    border-left: 1px solid #ebebeb;
+                    border-radius: 5px;
+
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        span {
+                            position: relative;
+                            display: flex;
+                            align-items: flex-end;
+
+                            input {
+                                border: 1px solid #cacaca;
+                                padding: 10px 50px 10px 5px;
+                                border-radius: 6px;
+                                transition: .4s;
+                                width: 100%;
+                                cursor: pointer;
+
+                                &:focus {
+                                    outline: none;
+                                    cursor: text;
+                                }
+
+                                &:hover {
+                                    border: 1px solid #F01A8A;
+                                    transition: .4s;
+                                }
+                            }
+
+                            .errorMessage {
+                                color: red;
+                                font-size: 12px;
+                                position: absolute;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                right: 3%;
+                            }
+                        }
+
+                        button {
+                            padding: 10px 30px;
+                            width: fit-content;
+                            margin-top: 10px;
+                            color: white;
+                            background-color: #F01A8A;
+                            border-radius: 6px;
+                            transition: .4s;
+
+                            &:hover {
+                                opacity: .6;
+                                transition: .4s;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            &__list {
+                width: 400px;
+                overflow-y: auto;
+                height: 80vh;
+                border: 1px solid #ebebeb;
+                border-radius: 6px;
+
+                li {
+                    padding: 10px;
+                    padding: 10px 5px;
+                    border-bottom: 1px solid #ebebeb;
+                    cursor: pointer;
+                    transition: .4s;
+
+                    &:hover {
+                        background-color: #ebebeb;
+                        transition: .4s;
+                    }
+                }
+            }
+
+            span {
+                text-align: end;
+            }
+        }
+    }
+}

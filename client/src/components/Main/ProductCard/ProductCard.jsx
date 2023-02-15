@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./ProductCard.scss"
 import { useDispatch, useSelector } from 'react-redux';
 import { productModalReducer } from "../../../redux/Slices/wildSlice"
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 function ProductCard({ p }) {
     const wildberries = useSelector(state => state.wildberries)
     const dispatch = useDispatch()
+
     return (
         <div className='home__wrapper__products__product'>
             <Link to="/detail">

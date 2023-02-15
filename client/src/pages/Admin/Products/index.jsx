@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import "./AdminPanel.scss"
-import { Link } from "react-router-dom"
+import { Link, parsePath } from "react-router-dom"
 import { productsReduce, attentionReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { API_URL } from '../../../http';
@@ -79,7 +79,7 @@ function Products() {
                     <td>{p?.price}</td>
                     <td>{p?.count}</td>
                     <td>{p?.color}</td>
-                    <td className='descTd'><p>{p?.desc}</p></td>
+                    <td className='descTd' dangerouslySetInnerHTML={{ __html: p.desc }}></td>
                     <td className='delTd'><button className='productDelete' onClick={() => {
                       dispatch(attentionReduce(true))
                       id = p._id

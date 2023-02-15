@@ -5,6 +5,7 @@ const ProductModel = require("../Models/products-model")
 const TokenModel = require("../Models/token-model")
 const RoleModel = require("../Models/token-model")
 const UserModel = require("../Models/user-model")
+const CategoryModel = require("../Models/category-model")
 
 class UserController {
     async Registration(req, res, next) {
@@ -30,6 +31,19 @@ class UserController {
         try {
             const { username, password } = req.body;
             const userData = await userService.login(username, password)
+            res.cookie("refreshToken", userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+            return res.send(userData)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    // LoginAdmin
+    async LoginAdmin(req, res, next) {
+        try {
+            const { username, password } = req.body;
+            const userData = await userService.loginAdmin(username, password)
             res.cookie("refreshToken", userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
             return res.send(userData)
         }
@@ -147,7 +161,7 @@ class UserController {
             next(e)
         }
     }
-   
+
     // DELETE DeleteProduct
     async DeleteProduct(req, res, next) {
         try {
@@ -181,8 +195,8 @@ class UserController {
         }
     }
 
-     // PUT AddToFavorite
-     async AddToFavorite(req, res, next) {
+    // PUT AddToFavorite
+    async AddToFavorite(req, res, next) {
         try {
             await userService.addToFavorite(req);
             res.json("Продукт в добавлен в избранное")
@@ -191,8 +205,53 @@ class UserController {
             next(e)
         }
     }
-    
 
+
+    //  GET GetCategories
+    async GetCategories(req, res, next) {
+        try {
+            const categories = await userService.getCategories();
+            return res.send(categories)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    //  GET AddCategory
+    async AddCategory(req, res, next) {
+        try {
+            const { categoryName, categoryİmage } = req.body
+            const newCategory = await userService.addCategory(categoryName, categoryİmage);
+            newCategory.save()
+            res.json("Категория добавлена")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    // UPDATE UpdateCategoryById
+    async UpdateCategoryByName(req, res, next) {
+        try {
+            await userService.updateCategory(req)
+            res.json("Категория изменена")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    // DELETE DeleteCategories
+    async DeleteCategory(req, res, next) {
+        try {
+            await userService.deleteCategory(req.params.name)
+            res.json("Категория удаленa")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = new UserController

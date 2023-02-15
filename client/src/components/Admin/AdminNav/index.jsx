@@ -1,10 +1,29 @@
-import React from 'react'
-import { NavLink } from "react-router-dom"
+import React, { useEffect } from 'react'
+import { NavLink, useNavigate } from "react-router-dom"
 import "./AdminNav.scss"
 import { Icons, Images } from "../../../Config"
 import { Toaster } from "react-hot-toast"
+import axios from 'axios';
+import _api, { API_URL } from '../../../http';
+import { logoutReduce, checkAuth } from "../../../redux/Slices/adminSlice"
+import { useDispatch, useSelector } from 'react-redux';
 
 function AdminNav() {
+    const admin = useSelector(state => state.admin)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.getItem("adminToken")) {
+            axios.get(`${API_URL}/refresh`, { withCredentials: true })
+                .then((value) => {
+                    dispatch(checkAuth(value.data))
+                })
+        }
+        if (!localStorage.getItem("adminToken")) {
+            navigate("*")
+        }
+    }, [])
     return (
         <nav className='adminNav'>
             <div className="adminNav__wrapper">
@@ -25,10 +44,18 @@ function AdminNav() {
                     <li>
                         <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to="/admin/panel/sellers"><span>Sellers</span><img src={Images.Shop} alt="" /></NavLink>
                     </li>
+                    <li>
+                        <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to="/admin/panel/categories"><span>Categories</span>{Icons.Navigation} </NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to="/" onClick={() => {
+                            dispatch(logoutReduce())
+                        }}><span>Logout</span>{Icons.Logout} </NavLink>
+                    </li>
                 </ul>
             </div>
             <Toaster
-                position="top-center"
+                position="top-right"
                 reverseOrder={false}
             />
         </nav>

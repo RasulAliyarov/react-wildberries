@@ -14,6 +14,7 @@ import Products from "../pages/Admin/Products"
 import Sellers from "../pages/Admin/Sellers"
 import StartSell from "../pages/Sellers/StartSell"
 import Favorite from "../pages/Main/Favorite"
+import Categories from "../pages/Admin/Categories"
 
 export const router = createBrowserRouter(
     [
@@ -86,6 +87,10 @@ export const router = createBrowserRouter(
                         {
                             path: "sellers",
                             element: <Sellers />
+                        },
+                        {
+                            path: "categories",
+                            element: <Categories />
                         },
                     ]
                 },

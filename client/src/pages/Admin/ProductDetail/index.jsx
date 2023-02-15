@@ -39,7 +39,6 @@ function ProductDetail() {
         color: Yup.string().required("Required"),
         desc: Yup.string().required("Required"),
     })
-    console.log(admin.isLoadingState ? "salam" : "yox")
     const formikProductDetail = useFormik({
         initialValues: {
             name: "",
@@ -54,7 +53,6 @@ function ProductDetail() {
         validateOnBlur: "",
         validationSchema: ProductDetailValidation,
         onSubmit: (values) => {
-            console.log(values)
             UserService.updateProduct(id, { ...values }).then(() => {
                 toast.success('Successfully edited!')
                 navigate("/admin/panel/products")
@@ -128,10 +126,8 @@ function ProductDetail() {
                                     onBlur={formikProductDetail.handleBlur}
                                     apiKey='7zeaozk8x4rsjk6496uw2ochhmh7gebusfyvic5e0svr7js3'
                                     onInit={(evt, editor) => editorRef.current = editor}
-                                    initialValue={admin.oneProductState.desc}
+                                    initialValue={`${admin.oneProductState.desc}`}
                                     init={{
-                                        height: 220,
-                                        menubar: false,
                                         plugins: [
                                             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                                             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
@@ -141,7 +137,8 @@ function ProductDetail() {
                                             'bold italic forecolor | alignleft aligncenter ' +
                                             'alignright alignjustify | bullist numlist outdent indent | ' +
                                             'removeformat | help',
-                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+
                                     }}
                                 />
                             </span>

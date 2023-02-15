@@ -3,9 +3,10 @@ import "./AdminLogin.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { Icons, Images } from "../../../Config"
-import {loginReduce} from "../../../redux/Slices/adminSlice"
-import {useNavigate} from "react-router-dom"
+import { loginReduce, loginAdminReduce } from "../../../redux/Slices/adminSlice"
+import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
+import _api from '../../../http';
 
 function AdminLogin() {
 
@@ -27,12 +28,13 @@ function AdminLogin() {
         validateOnBlur: "",
         validationSchema: SignInAdminValidation,
         onSubmit: (values) => {
-            dispatch(loginReduce({...values}))
-            navigate("/admin/panel")
-            formikAdminSignIn.resetForm()
+            _api.post("/loginAdmin", ({ ...values }))
+                .then((value) => {
+                    dispatch(loginAdminReduce(value.data))
+                    formikAdminSignIn.resetForm()
+                })
         }
     })
-
     return (
         <div className='adminLogin'>
             <div className="adminLogin__wrapper">

@@ -14,15 +14,16 @@ function User() {
   const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
 
-  function getData() {
-    axios.get(`${API_URL}/users`).then((value) => {
+  function getData(accessToken) {
+    axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${accessToken}` } }).then((value) => {
       dispatch(usersStateReduce(
         value.data.filter(p => p.deleteState === false)
       ))
     })
   }
   useEffect(() => {
-    getData()
+    const accessToken = localStorage.getItem("token")
+    getData(accessToken)
   }, [])
 
   function handlerAttentioModal(state, imgState) {
@@ -33,7 +34,7 @@ function User() {
     }, 2200)
 
     if (imgState === "yes") {
-      const res =  UserService.deleteUser(id, getData)
+      const res = UserService.deleteUser(id, getData)
 
     }
   }

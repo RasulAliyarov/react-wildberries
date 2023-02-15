@@ -28,6 +28,16 @@ const adminSlice = createSlice({
                 console.log({ error: e })
             }
         },
+        loginAdminReduce: (state, action) => {
+            try {
+                localStorage.setItem('adminToken', action.payload.accessToken);
+                state.userState = action.payload.user;
+                state.isAuth = true
+            }
+            catch (e) {
+                console.log({ error: e })
+            }
+        },
 
         registrationReduce: (state, action) => {
             try {
@@ -44,6 +54,7 @@ const adminSlice = createSlice({
             try {
                 AuthService.logout().then(res => res.data);
                 localStorage.removeItem("token");
+                localStorage.removeItem("adminToken");
                 state.isAuth = false
                 state.userState = {}
             }
@@ -97,6 +108,7 @@ export const {
     logoutReduce,
     registrationReduce,
     deleteProduct,
+    loginAdminReduce,
     productsReduce,
     attentionReduce,
     usersStateReduce,

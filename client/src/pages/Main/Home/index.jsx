@@ -24,6 +24,8 @@ function Home() {
   const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
 
+  
+
   function getData() {
     axios.get(`${API_URL}/products`).then((value) => {
       dispatch(productsReduce(
@@ -90,7 +92,7 @@ function Home() {
             {
               admin.productsState.map(p => {
                 return (
-                  <ProductCard p={p} />
+                  <ProductCard key={p._id} p={p} />
                 )
               })
             }

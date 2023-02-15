@@ -2,6 +2,7 @@ const UserModel = require("../Models/user-model")
 const RoleModel = require("../Models/roles-model")
 const ProductModel = require("../Models/products-model")
 const TokenModel = require("../Models/token-model")
+const CategoryModel = require("../Models/category-model")
 
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -54,6 +55,30 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
+        if (user.roles.map((r) => r) === "ADMIN") {
+            throw ApiError.BadRequest("Пользователь не найден");
+        }
+
+        const isPassEquals = await bcrypt.compare(password, user.password);
+        if (!isPassEquals) {
+            throw ApiError.BadRequest("Неверный пароль");
+        }
+
+
+
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+        return { ...tokens, user: userDto }
+    }
+
+    async loginAdmin(username, password) {
+        const user = await UserModel.findOne({ username });
+
+        if (!user) {
+            throw ApiError.BadRequest("Пользователь не найден");
+        }
 
         const isPassEquals = await bcrypt.compare(password, user.password);
         if (!isPassEquals) {
@@ -86,6 +111,7 @@ class UserService {
         const tokens = tokenService.generateTokens({ ...userDto });
 
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
         return { ...tokens, user: userDto }
     }
 
@@ -93,6 +119,7 @@ class UserService {
         const users = UserModel.find();
         return users;
     }
+
     async getUserById(id) {
         const users = UserModel.findById({ _id: id }).populate("favorite").exec(
 
@@ -163,11 +190,51 @@ class UserService {
     }
 
     async addToFavorite(req) {
-        const newFav = UserModel.findByIdAndUpdate(req.params.id, {
+        const newFav = await UserModel.findByIdAndUpdate(req.params.id, {
             favorite: req.body.data
         });
         return newFav;
     }
+
+
+    async getCategories() {
+        const categories = await CategoryModel.find();
+        return categories;
+    }
+
+    async addCategory(categoryName, categoryİmage) {
+        const newCategory = await new CategoryModel({
+            categoryName: categoryName,
+            categoryİmage: categoryİmage
+        });
+        return newCategory;
+    }
+
+    async deleteCategory(name) {
+        const category = await CategoryModel.findOneAndUpdate({ categoryName: name }, { deleteState: true });
+        return category;
+    }
+
+    async updateCategory(req) {
+        const { categoryName, categoryİmage } = req.body
+        let name = req.params.name
+        const searchCategory = await CategoryModel.findOne({ categoryName: name });
+        if (!searchCategory) {
+            throw new Error("Category not found")
+        }
+
+        const checkCategory = await CategoryModel.findOne({ categoryName: categoryName });
+        if (checkCategory) {
+            throw new Error("Category already have ")
+        }
+
+        const updateCategory = await CategoryModel.findOneAndUpdate({ categoryName: name }, {
+            categoryName: categoryName,
+            categoryİmage: categoryİmage
+        });
+        return updateCategory;
+    }
+
 }
 
 module.exports = new UserService();

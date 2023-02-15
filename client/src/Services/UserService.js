@@ -18,7 +18,13 @@ export default class UserService {
         return _api.put(`/updateStatus/${id}`, { ...data })
     }
     static async addToFavorite(id, data) {
-        console.log(id, data)
-        return _api.put(`/addToFavorite/${id}`, {data})
+        return _api.put(`/addToFavorite/${id}`, { data })
+    }
+
+    static async updateCategory(name, data) {
+        return _api.put(`/updateCategoryByName/${name}`, { ...data })
+    }
+    static async deleteCategory(name) {
+        return _api.put(`/deleteCategory/${name}`)
     }
 }

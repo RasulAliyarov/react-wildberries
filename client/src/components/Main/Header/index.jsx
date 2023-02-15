@@ -39,7 +39,7 @@ function Header() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (localStorage.getItem("token")) {
+     if(localStorage.getItem("token")) {
             axios.get(`${API_URL}/refresh`, { withCredentials: true })
                 .then((value) => {
                     dispatch(checkAuth(value.data))
@@ -147,7 +147,7 @@ function Header() {
                                             <li><Link to="/favorite">Понравившиеся</Link>{Icons.FillHeart}</li>
                                             <li><Link to="#">Покупки</Link><img src={Images.ProductsCabinet} alt="" /></li>
                                             <li><Link to="#">Настройки</Link>{Icons.Setting}</li>
-                                            <li style={admin.userState.roles==="USER"? {display: "block"}: {display: "none"}}><Link to="/sellerRegistration">Начать продавать</Link>{Icons.Setting}</li>
+                                            <li style={admin.userState.roles === "USER" ? { display: "block" } : { display: "none" }}><Link to="/sellerRegistration">Начать продавать</Link>{Icons.Setting}</li>
                                             <button onClick={() => {
                                                 dispatch(logoutReduce())
                                             }}> <span>Выйти</span> {Icons.Logout}</button>
