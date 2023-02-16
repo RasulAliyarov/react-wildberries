@@ -19,7 +19,9 @@ const adminSlice = createSlice({
         priceToggleState: true,
         searchString: {
             string: "",
-            category: ""
+            category: "",
+            username: "",
+            country: ""
         },
 
     },
@@ -60,7 +62,7 @@ const adminSlice = createSlice({
             try {
                 AuthService.logout().then(res => res.data);
                 localStorage.removeItem("token");
-                localStorage.removeItem("adminToken");
+                localStorage.removeItem("admintoken");
                 state.isAuth = false
                 state.userState = {}
             }
@@ -71,7 +73,6 @@ const adminSlice = createSlice({
 
         checkAuth: (state, action) => {
             try {
-                console.log(action)
                 localStorage.setItem('token', action.payload.accessToken);
                 state.userState = action.payload.user
                 state.isAuth = true
@@ -125,9 +126,10 @@ const adminSlice = createSlice({
             state.priceToggleState = action.payload
         },
         searchStringReduce: (state, action) => {
-            console.log(action)
             state.searchString.string = action.payload.string
             state.searchString.category = action.payload.category
+            state.searchString.username = action.payload.username
+            state.searchString.country = action.payload.country
         },
     },
 })

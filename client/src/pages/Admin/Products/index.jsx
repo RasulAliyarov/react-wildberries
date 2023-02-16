@@ -9,7 +9,7 @@ import { Icons, Images } from '../../../Config/index';
 import UserService from '../../../Services/UserService';
 
 let id = null
-
+let accessToken = "salam"
 function Products() {
   const admin = useSelector(state => state.admin)
   const category = useSelector(state => state.category)
@@ -22,6 +22,7 @@ function Products() {
     })
   }
   useEffect(() => {
+    accessToken = localStorage.getItem("admintoken")
     getData()
   }, [])
 
@@ -32,8 +33,7 @@ function Products() {
       dispatch(yesNoReduce("neitral"))
     }, 2200)
     if (imgState === "yes") {
-      console.log(id)
-      UserService.deleteProduct(id, getData)
+      UserService.deleteProduct(id, getData, accessToken)
     }
   }
 
@@ -59,7 +59,7 @@ function Products() {
             {
               category.categoriesState?.map(c => {
                 return (
-                  <option key={c?._id} value={c?.categoryName}/>
+                  <option key={c?._id} value={c?.categoryName} />
                 )
               })
             }

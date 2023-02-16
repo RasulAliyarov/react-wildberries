@@ -4,12 +4,11 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import "../../../Admin/ProductDetail/ProductDetail.scss"
 import { Editor } from '@tinymce/tinymce-react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from "react-hot-toast"
-import { Images } from "../../../../Config"
+import { logoutReduce, checkAuth } from "../../../../redux/Slices/adminSlice"
 import { useNavigate } from "react-router-dom"
-import { API_URL } from '../../../../http';
+import axios from 'axios';
+import _api, { API_URL } from '../../../../http';
 
 function AddProduct() {
   const admin = useSelector(state => state.admin)
@@ -19,10 +18,13 @@ function AddProduct() {
   const accessToken = localStorage.getItem("token")
 
   useEffect(() => {
-    if (admin.userState.roles?.[0] !== "SELLER") {
-      navigate("*")
+
+    if (localStorage.getItem("token") && window.onload) {
+      if (admin.userState.roles?.[0] !== "SELLER") {
+        navigate("*")
+      }
     }
-  },[])
+  }, [])
 
   const AddProductValidation = Yup.object().shape({
     name: Yup.string().required("Required"),

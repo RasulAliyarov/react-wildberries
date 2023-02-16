@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Link, parsePath } from "react-router-dom"
-import { sellersReduce, attentionReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
+import { sellersReduce, attentionReduce, yesNoReduce, searchStringReduce } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { API_URL } from '../../../http';
 import axios from 'axios';
@@ -16,7 +16,7 @@ function Seller() {
   function getData(accessToken) {
     axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${accessToken}` } }).then((value) => {
       dispatch(sellersReduce(
-        value.data.filter(p => p.deleteState === false && p.roles[0] === "SELLER"),
+        value.data.filter(p => p.deleteState === false && p.roles.includes("SELLER")),
       ))
     })
   }
@@ -48,16 +48,8 @@ function Seller() {
 
       <div className="adminPages__wrapper">
         <div className="adminPages__wrapper__top">
-          <input type="text" placeholder='Search by name' />
-
-          <input type="text" list='categories' placeholder='Search by category' />
-          <datalist id="categories">
-            <option value="Cloth" />
-            <option value="Man" />
-            <option value="Woman" />
-            <option value="Home" />
-          </datalist>
-
+          <input type="text" placeholder='Search by username' onChange={(e) => dispatch(searchStringReduce({ username: e.target.value }))} />
+          <input type="text" placeholder='Search by country' onChange={(e) => dispatch(searchStringReduce({ country: e.target.value }))} />
         </div>
         <div className="adminPages__wrapper__bottom">
           <table className='adminPages__wrapper__bottom__table'>
@@ -74,27 +66,30 @@ function Seller() {
               <th className='detailTh'>Action</th>
             </tr>
             {
-              admin?.sellersState?.map((p, index) => {
-                return (
-                  <tr key={p._id} className="contentRow">
-                    <td className='userData productsTd'>{index}</td>
-                    <td className='userData productsTd'>{p?.fullname}</td>
-                    <td className='userData productsTd'>{p?.username}</td>
-                    <td className='userData productsTd'>{p?.email}</td>
-                    <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
-                    <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
-                    <td className='userData productsTd'>{p?.roles}</td>
-                    <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
-                      dispatch(attentionReduce(true))
-                      id = p._id
-                    }}>Delete</button></td>
-                    <td className='editTd userData productsTd'><button className='productEdit'>Edit</button></td>
-                    <td className='detailTd userData productsTd'>
-                      <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
-                    </td>
-                  </tr>
-                )
-              })
+              admin?.sellersState?.
+                filter(s => s.username?.toLowerCase()?.includes(admin.searchString?.username?.toLowerCase())
+                  || s.country?.toLowerCase()?.includes(admin.searchString?.country?.toLowerCase())).
+                map((p, index) => {
+                  return (
+                    <tr key={p._id} className="contentRow">
+                      <td className='userData productsTd'>{index}</td>
+                      <td className='userData productsTd'>{p?.fullname}</td>
+                      <td className='userData productsTd'>{p?.username}</td>
+                      <td className='userData productsTd'>{p?.email}</td>
+                      <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
+                      <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
+                      <td className='userData productsTd'>{p?.roles}</td>
+                      <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
+                        dispatch(attentionReduce(true))
+                        id = p._id
+                      }}>Delete</button></td>
+                      <td className='editTd userData productsTd'><button className='productEdit'>Edit</button></td>
+                      <td className='detailTd userData productsTd'>
+                        <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
+                      </td>
+                    </tr>
+                  )
+                })
             }
           </table>
         </div>

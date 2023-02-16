@@ -6,6 +6,8 @@ module.exports = function (roles) {
     return function (req, res, next) {
         if (req.method === "OPTIONS") next()
         try {
+            console.log(req.headers)
+            // const token = req.body.headers?.Authorization?.split(" ")[1] BELE YAZANDA ISHLEYIR, MIDDLEWARE QOYMAYANDA DA ISHLEYIR
             const token = req.headers?.authorization?.split(" ")[1]
             if (!token) {
                 throw ApiError.Unauthorized()

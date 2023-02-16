@@ -16,7 +16,7 @@ function StartSell() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (admin.userState.roles[0] === "SELLER") {
+        if (admin.userState.roles.includes("SELLER")) {
             navigate("/")
         }
     })

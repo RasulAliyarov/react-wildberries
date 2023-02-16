@@ -5,7 +5,7 @@ import { Icons, Images } from "../../../Config"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import _api, { API_URL } from '../../../http';
-import { logoutReduce, checkAdminAuth } from "../../../redux/Slices/adminSlice"
+import { logoutReduce, checkAdminAuth} from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 
 function AdminNav() {

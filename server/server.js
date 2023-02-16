@@ -8,10 +8,18 @@ const router = require("./Routes/routes")
 const cookieParser = require("cookie-parser")
 const errorMiddleware = require("./Middleware/error-middleware")
 
+router.get('/', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // If needed
+    res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+
+    res.send('cors problem fixed:)');
+});
 app.use(express.json())
 app.use(cors({
     credentials: true,
-    origin: process.env.CLIENT_URL
+    origin: process.env.CLIENT_URL,
 }))
 app.use(cookieParser())
 app.use("/api", router)

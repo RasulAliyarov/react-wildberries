@@ -156,6 +156,7 @@ class UserService {
     }
 
     async deleteProduct(id) {
+        console.log(id, "id")
         const product = ProductModel.findByIdAndUpdate(id, { deleteState: true });
         return product;
     }

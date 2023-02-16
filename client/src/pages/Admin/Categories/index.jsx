@@ -86,8 +86,6 @@ function Categories() {
                 formikUpdateCategory.resetForm()
                 getCategories()
             })
-
-
         }
     })
 

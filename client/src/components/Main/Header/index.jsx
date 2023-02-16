@@ -147,7 +147,7 @@ function Header() {
                                             <li><Link to="/favorite">Понравившиеся</Link>{Icons.FillHeart}</li>
                                             <li><Link to="#">Покупки</Link> <img src={Images.ProductsCabinet} alt="" /></li>
                                             <li><Link to="#">Настройки</Link>{Icons.Setting}</li>
-                                            <li style={admin.userState?.roles?.[0] === "USER" ? { display: "flex" } : { display: "none" }}>
+                                            <li style={admin.userState?.roles?.includes("USER") ? { display: "flex" } : { display: "none" }}>
                                                 <Link to="/sellerRegistration">Начать продавать</Link>
                                                 {Icons.Setting}
                                             </li>

@@ -13,9 +13,7 @@ function Favorite() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(admin.userState)
         axios.get(`${API_URL}/getUserById/${admin.userState.id}`).then(u => {
-            console.log(u.data)
             dispatch(favoriteReduce(u.data.favorite))
         })
     }, [])

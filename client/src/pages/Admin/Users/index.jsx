@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "../Products/AdminPanel.scss"
 import { Link } from "react-router-dom"
-import { usersStateReduce, attentionReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
+import { usersStateReduce, attentionReduce, yesNoReduce, searchStringReduce } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import { API_URL } from '../../../http';
 import axios from 'axios';
@@ -14,19 +14,16 @@ function User() {
   const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
 
-  function getData(accessToken) {
-    axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${accessToken}` } }).then((value) => {
+  function getData() {
+    axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${localStorage.getItem("admintoken")}` } }).then((value) => {
       dispatch(usersStateReduce(
-        value.data.filter(p => p.deleteState === false && p.roles[0] === "USER")
+        value.data.filter(p => p.deleteState === false && p.roles.includes("USER"))
       ))
     })
   }
   useEffect(() => {
-    const accessToken = localStorage.getItem("admintoken")
-    getData(accessToken)
+    getData()
   }, [])
-
-  console.log(admin.usersState)
 
   function handlerAttentioModal(state, imgState) {
     dispatch(yesNoReduce(imgState))
@@ -37,7 +34,6 @@ function User() {
 
     if (imgState === "yes") {
       const res = UserService.deleteUser(id, getData)
-
     }
   }
   return (
@@ -45,16 +41,9 @@ function User() {
 
       <div className="adminPages__wrapper">
         <div className="adminPages__wrapper__top">
-          <input type="text" placeholder='Search by name' />
+          <input type="text" placeholder='Search by username' onChange={(e) => dispatch(searchStringReduce({ username: e.target.value }))} />
 
-          <input type="text" list='categories' placeholder='Search by category' />
-          <datalist id="categories">
-            <option value="Cloth" />
-            <option value="Man" />
-            <option value="Woman" />
-            <option value="Home" />
-          </datalist>
-
+          <input type="text" placeholder='Search by country' onChange={(e) => dispatch(searchStringReduce({ country: e.target.value }))} />
         </div>
         <div className="adminPages__wrapper__bottom">
           <table className='adminPages__wrapper__bottom__table'>
@@ -71,27 +60,30 @@ function User() {
               <th className='detailTh'>Action</th>
             </tr>
             {
-              admin?.usersState?.map((p, index) => {
-                return (
-                  <tr key={p._id} className="contentRow">
-                    <td className='userData productsTd'>{index}</td>
-                    <td className='userData productsTd'>{p?.fullname}</td>
-                    <td className='userData productsTd'>{p?.username}</td>
-                    <td className='userData productsTd'>{p?.email}</td>
-                    <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
-                    <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
-                    <td className='userData productsTd'>{p?.roles}</td>
-                    <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
-                      dispatch(attentionReduce(true))
-                      id = p._id
-                    }}>Delete</button></td>
-                    <td className='editTd userData productsTd'><button className='productEdit'>Edit</button></td>
-                    <td className='detailTd userData productsTd'>
-                      <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
-                    </td>
-                  </tr>
-                )
-              })
+              admin?.usersState?.
+                filter(s => s.username?.toLowerCase()?.includes(admin.searchString?.username?.toLowerCase())
+                  || s.country?.toLowerCase()?.includes(admin.searchString?.country?.toLowerCase())).
+                map((p, index) => {
+                  return (
+                    <tr key={p._id} className="contentRow">
+                      <td className='userData productsTd'>{index}</td>
+                      <td className='userData productsTd'>{p?.fullname}</td>
+                      <td className='userData productsTd'>{p?.username}</td>
+                      <td className='userData productsTd'>{p?.email}</td>
+                      <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
+                      <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
+                      <td className='userData productsTd'>{p?.roles}</td>
+                      <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
+                        dispatch(attentionReduce(true))
+                        id = p._id
+                      }}>Delete</button></td>
+                      <td className='editTd userData productsTd'><button className='productEdit'>Edit</button></td>
+                      <td className='detailTd userData productsTd'>
+                        <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
+                      </td>
+                    </tr>
+                  )
+                })
             }
           </table>
         </div>

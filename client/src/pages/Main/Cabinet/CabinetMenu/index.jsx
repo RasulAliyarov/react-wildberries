@@ -11,12 +11,12 @@ function Cabinet() {
   return (
     <div className="cabinet__wrapper__menu">
       <span>
-        <NavLink style={admin.userState?.roles?.[0] === "SELLER" ? { display: "flex" } : { display: "none" }} className={({ isActive }) => isActive ? "activeCabinetLink" : null} to={`/cabinet/${id}/addProduct`} >Добавить товар</NavLink>
+        <NavLink style={admin.userState?.roles?.includes("SELLER") ? { display: "flex" } : { display: "none" }} className={({ isActive }) => isActive ? "activeCabinetLink" : null} to={`/cabinet/${id}/addProduct`} >Добавить товар</NavLink>
       </span>
       <span>
         <NavLink className={({ isActive }) => isActive ? "activeCabinetLink" : null} to={`/cabinet/${id}/editInfo`}>Изменить данные</NavLink>
       </span>
-    </div>
+    </div >
   )
 }
 
