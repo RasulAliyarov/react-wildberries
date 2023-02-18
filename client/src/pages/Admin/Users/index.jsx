@@ -3,19 +3,19 @@ import "../Products/AdminPanel.scss"
 import { Link } from "react-router-dom"
 import { usersStateReduce, attentionReduce, yesNoReduce, searchStringReduce } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
-import { API_URL } from '../../../http';
+import _api, { API_URL } from '../../../http';
 import axios from 'axios';
 import { Images } from '../../../Config/index';
 import UserService from '../../../Services/UserService';
 import { toast } from 'react-hot-toast';
 
-let id = null
+var id = null
 function User() {
   const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
 
   function getData() {
-    axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${localStorage.getItem("admintoken")}` } }).then((value) => {
+    _api.get(`${API_URL}/users`).then((value) => {
       dispatch(usersStateReduce(
         value.data.filter(p => p.deleteState === false && p.roles.includes("USER"))
       ))
@@ -24,7 +24,7 @@ function User() {
   useEffect(() => {
     getData()
   }, [])
-
+  
   function handlerAttentioModal(state, imgState) {
     dispatch(yesNoReduce(imgState))
     setTimeout(() => {
@@ -33,7 +33,7 @@ function User() {
     }, 2200)
 
     if (imgState === "yes") {
-      const res = UserService.deleteUser(id, getData)
+      UserService.deleteUser(id, getData)
     }
   }
   return (

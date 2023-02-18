@@ -3,20 +3,23 @@
 
     &__wrapper {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
 
         &__menu {
             display: flex;
             flex-direction: column;
             gap: 25px;
-            width: 300px;
+            width: 200px;
+
             span {
                 display: contents;
+
                 a {
                     font-size: 18px;
                     font-weight: 600;
                     color: black;
                     padding: 5px 0;
+                    width: fit-content;
                 }
 
                 .activeCabinetLink {
@@ -28,6 +31,7 @@
 
         .productDetail {
             padding: 0 30px;
+
             .formFieldWrapper {
                 display: flex;
                 flex-wrap: wrap;
@@ -35,11 +39,43 @@
 
                 span {
                     width: 48.8%;
-
-                    input {}
                 }
             }
         }
     }
 
+}
+
+.react-confirm-alert-overlay {
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.react-confirm-alert-button-group {
+    button {
+        transition: .4s;
+
+        &:first-child {
+
+            &:hover {
+                background-color: red;
+                transition: .4s;
+            }
+        }
+
+        &:last-child {
+
+            &:hover {
+                background-color: rgb(26, 189, 12);
+                transition: .4s;
+            }
+        }
+    }
+}
+
+.react-confirm-alert-body {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

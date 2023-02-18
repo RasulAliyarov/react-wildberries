@@ -2,27 +2,26 @@ import React, { useEffect, useRef } from 'react'
 import { Link, parsePath } from "react-router-dom"
 import { sellersReduce, attentionReduce, yesNoReduce, searchStringReduce } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
-import { API_URL } from '../../../http';
+import _api, { API_URL } from '../../../http';
 import axios from 'axios';
 import { Images } from '../../../Config/index';
 import UserService from '../../../Services/UserService';
 
-const id = null
+let id = null
 function Seller() {
 
   const admin = useSelector(state => state.admin)
   const dispatch = useDispatch()
 
   function getData(accessToken) {
-    axios.get(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${accessToken}` } }).then((value) => {
+    _api.get(`${API_URL}/users`).then((value) => {
       dispatch(sellersReduce(
         value.data.filter(p => p.deleteState === false && p.roles.includes("SELLER")),
       ))
     })
   }
   useEffect(() => {
-    const accessToken = localStorage.getItem("admintoken")
-    getData(accessToken)
+    getData()
   }, [])
 
   function handlerAttentioModal(state, imgState) {
@@ -32,8 +31,7 @@ function Seller() {
       dispatch(yesNoReduce("neitral"))
     }, 2200)
     if (imgState === "yes") {
-      console.log(id)
-      UserService.deleteProduct(id, getData)
+      UserService.deleteUser(id, getData)
     }
   }
 

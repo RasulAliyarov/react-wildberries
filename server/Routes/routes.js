@@ -17,21 +17,22 @@ router.post("/logout", controller.Logout)
 router.get("/activate/:link", controller.Activate)
 router.get("/refresh", controller.Refresh)
 
-router.get("/users", roleMiddleWare(["ADMIN"]), controller.GetUsers)
+router.get("/users", controller.GetUsers)
 router.get("/getUserById/:id", controller.GetUserById)
-router.put("/deleteUser/:id", roleMiddleWare(["ADMIN"]), controller.DeleteUser)
+router.delete("/deleteUser/:id", roleMiddleWare(["ADMIN"]), controller.DeleteUser)
 
 
 router.get("/categories", controller.GetCategories)
-router.post("/addCategory", controller.AddCategory)
+router.post("/addCategory", roleMiddleWare(["ADMIN"]), controller.AddCategory)
 router.put("/updateCategoryByName/:name",
-    body("categoryName").notEmpty(), controller.UpdateCategoryByName)
-router.put("/deleteCategory/:name", controller.DeleteCategory)
+    body("categoryName").notEmpty(), roleMiddleWare(["ADMIN"]), controller.UpdateCategoryByName)
+router.delete("/deleteCategory/:name", roleMiddleWare(["ADMIN"]), controller.DeleteCategory)
 
 router.get("/products", controller.GetProducts)
 router.get("/products/:id", controller.GetProductsById)
 router.post("/addProduct", roleMiddleWare(["ADMIN", "SELLER"]), controller.AddProduct)
-router.put("/deleteProduct/:id", roleMiddleWare(["ADMIN", "SELLER"]), controller.DeleteProduct)
+router.delete("/deleteProduct/:id", roleMiddleWare(["ADMIN", "SELLER"]), controller.DeleteProduct)
+router.put("/restoreProduct/:id", roleMiddleWare(["SELLER"]), controller.RestoreProduct)
 router.put("/updateProduct/:id", roleMiddleWare(["ADMIN", "SELLER"]), controller.UpdateProduct)
 
 router.put("/updateStatus/:id", controller.ChangeStatus)

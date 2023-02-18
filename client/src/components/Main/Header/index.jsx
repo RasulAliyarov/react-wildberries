@@ -143,13 +143,12 @@ function Header() {
                                 <div className='dropdownuserCabinet'>
                                     <div className="dropdownuserCabinet__content">
                                         <ul className='dropdownuserCabinet__content__list'>
-                                            <li><Link to={`/cabinet/${admin.userState.id}`}>Кабинет</Link> {Icons.LoginUser}</li>
-                                            <li><Link to="/favorite">Понравившиеся</Link>{Icons.FillHeart}</li>
-                                            <li><Link to="#">Покупки</Link> <img src={Images.ProductsCabinet} alt="" /></li>
-                                            <li><Link to="#">Настройки</Link>{Icons.Setting}</li>
+                                            <li><Link to={`/cabinet/${admin.userState.id}`}>Кабинет {Icons.LoginUser}</Link> </li>
+                                            <li><Link to="/favorite">Понравившиеся {Icons.FillHeart}</Link></li>
+                                            <li><Link to="#">Покупки <img src={Images.ProductsCabinet} alt="" /></Link> </li>
+                                            <li><Link to="#">Настройки {Icons.Setting}</Link></li>
                                             <li style={admin.userState?.roles?.includes("USER") ? { display: "flex" } : { display: "none" }}>
-                                                <Link to="/sellerRegistration">Начать продавать</Link>
-                                                {Icons.Setting}
+                                                <Link to="/sellerRegistration">Начать продавать    {Icons.Setting}</Link>
                                             </li>
                                             <button onClick={() => {
                                                 dispatch(logoutReduce())

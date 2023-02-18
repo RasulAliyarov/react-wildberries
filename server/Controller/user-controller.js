@@ -171,6 +171,16 @@ class UserController {
             next(e)
         }
     }
+    // DELETE RestoreProduct
+    async RestoreProduct(req, res, next) {
+        try {
+            await userService.restoreProduct(req.params.id)
+            res.json("Товар востановлен")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
 
     // UPDATE UpdateProduct
     async UpdateProduct(req, res, next) {

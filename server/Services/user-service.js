@@ -55,6 +55,9 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
+        if (user.deleteState) {
+            throw ApiError.BadRequest("Пользователь не найден");
+        }
         if (user.roles.map((r) => r) === "ADMIN") {
             throw ApiError.BadRequest("Пользователь не найден");
         }
@@ -63,8 +66,6 @@ class UserService {
         if (!isPassEquals) {
             throw ApiError.BadRequest("Неверный пароль");
         }
-
-
 
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({ ...userDto });
@@ -148,16 +149,21 @@ class UserService {
         if (!userToken) {
             throw new Error("Не удалось добавить товар")
         }
+        let parseToken = JSON.parse(Buffer.from(userToken.refreshToken.split('.')[1], 'base64').toString())
+
         const newProduct = new ProductModel({
-            user: userToken.user,
+            user: parseToken.id,
             ...data.body
         });
         return newProduct;
     }
 
     async deleteProduct(id) {
-        console.log(id, "id")
         const product = ProductModel.findByIdAndUpdate(id, { deleteState: true });
+        return product;
+    }
+    async restoreProduct(id) {
+        const product = ProductModel.findByIdAndUpdate(id, { deleteState: false });
         return product;
     }
 

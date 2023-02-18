@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { deleteToCartReducer, addToCartReducer, deleteToCartByIdReducer } from "../../../redux/Slices/wildSlice"
+import React from 'react'
+import { deleteToCartReducer, deleteToCartByIdReducer } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { Icons, Images } from "../../../Config/index"
 import "./Cart.scss"
@@ -10,63 +10,80 @@ function Cart() {
   const dispatch = useDispatch()
 
   return (
-    <>
-      <div className="cart">
-        <div className="cart__wrapper container1500">
-          <button onClick={() => {
-            if (wildberries.cart.length > 0) {
-              dispatch(deleteToCartReducer())
-              toast.success('Корзина очищена..', {
-                style: {
-                  border: '1px solid #4C1174',
-                  padding: '16px',
-                  color: '#4C1174',
-                },
-                iconTheme: {
-                  primary: '#4C1174',
-                  secondary: '#FFFAEE',
-                },
-              });
+    <div className="cart">
+      <div className="cart__wrapper container1500">
+        <button onClick={() => {
+          if (wildberries.cart.length > 0) {
+            dispatch(deleteToCartReducer())
+            toast.success('Корзина очищена..', {
+              style: {
+                border: '1px solid #4C1174',
+                padding: '16px',
+                color: '#4C1174',
+              },
+              iconTheme: {
+                primary: '#4C1174',
+                secondary: '#FFFAEE',
+              },
+            });
 
-            }
-            else return
-          }}>{Icons.Delete} <span>Очистить корзину</span></button>
-          <div className="cart__wrapper__items">
-            {
-              wildberries.cart.map((value, index) => {
-                return (
-                  <div key={index} className="cart__wrapper__items__item">
-                    <div className="home__wrapper__products__product__top">
-                      <img src={`${value.img}`} alt="" />
-                      <span className='cardDiscount'>-30%</span>
-                    </div>
-                    <div className="home__wrapper__products__product__bottom">
-                      <span className='price'>
-                        <h5>{value.price} ₽ </h5>
-                        <span>615 ₽</span>
-                      </span>
-                      <span className='productTitle'>
-                        <p>{value.brand}/{value.name}</p>
-                      </span>
-                    </div>
-                    <span className='cartHeart' onClick={() => {
-                      dispatch(deleteToCartByIdReducer(value.id))
-                    }}>{Icons.CartFill}
-                      <span className='cartTick'>✔</span>
-                      <span className='cartTickX'>⨉</span>
-                    </span>
-                  </div>
-                )
-              })
-            }
-          </div>
+          }
+          else return
+        }}>{Icons.Delete} <span>Очистить корзину</span></button>
 
-          <div className={wildberries.cart.length > 0 ? "CartFull" : "CartEmpty"}>
-            <img src={Images.CartEmpty} alt="" />
+        <div className={wildberries.cart.length > 0 ? "cart__wrapper__content" : "cart__wrapper__contentNone"}>
+            <table className='cart__wrapper__content__table' >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Image</th>
+                  <th>Brand</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Count</th>
+                  <th>Color</th>
+                  <th className='delTh'>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  wildberries.cart.
+                    map((p, index) => {
+                      return (
+                        <tr key={p.id} className="contentRow">
+                          <td className='cartTd'>{index}</td>
+                          <td className='imgTd cartTd'><img src={p?.img} alt="" /></td>
+                          <td className='cartTd'>{p?.brand}</td>
+                          <td className='cartTd'>{p?.name}</td>
+                          <td className='cartTd'>{p?.price}</td>
+                          <td className='cartTd'>{p?.count}</td>
+                          <td className='cartTd'>{p?.color}</td>
+                          <td className='delTd cartTd'>
+                            <span className='cartHeart' onClick={() => {
+                              dispatch(deleteToCartByIdReducer(p.id))
+                            }}>
+                              {Icons.CartFill}
+                              <span className='cartTick'>✔</span>
+                              <span className='cartTickX'>⨉</span>
+                            </span></td>
+                        </tr>
+                      )
+                    })
+                }
+              </tbody>
+            </table>
+
+          <div className='cart__wrapper__content__bill'>
+
           </div>
         </div>
+
+
+        <div className={wildberries.cart.length > 0 ? "CartFull" : "CartEmpty"}>
+          <img src={Images.CartEmpty} alt="" />
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

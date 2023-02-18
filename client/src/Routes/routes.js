@@ -11,6 +11,8 @@ import AdminRoot from "../components/Admin/AdminRoot"
 import MainRoot from "../components/Main/MainRoot"
 import AddProduct from "../pages/Main/Cabinet/AddProduct"
 import EditInfo from "../pages/Main/Cabinet/EditInfo"
+import DeleteProducts from "../pages/Main/Cabinet/DeleteProducts"
+import SellerProducts from "../pages/Main/Cabinet/SellerProducts"
 import CabinetRoot from "../pages/Main/Cabinet/CabinetRoot"
 import Users from "../pages/Admin/Users"
 import Products from "../pages/Admin/Products"
@@ -57,14 +59,22 @@ export const router = createBrowserRouter(
                 {
                     path: "cabinet/:id",
                     element: <CabinetRoot />,
-                    children:[
+                    children: [
+                        {
+                            path: "",
+                            element: <SellerProducts />,
+                        },
                         {
                             path: "addProduct",
-                            element: <AddProduct/>
+                            element: <AddProduct />
                         },
                         {
                             path: "editInfo",
-                            element: <EditInfo/>
+                            element: <EditInfo />
+                        },
+                        {
+                            path: "deleteProducts",
+                            element: <DeleteProducts />
                         },
                     ]
                 },

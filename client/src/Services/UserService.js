@@ -5,12 +5,14 @@ export default class UserService {
         return _api.get("/users")
     }
     static async deleteUser(id, getData) {
-        return _api.put(`/deleteUser/${id}`).then(() => getData())
+        return _api.delete(`/deleteUser/${id}`).then(() => getData())
     }
 
-    static async deleteProduct(id, getData, accessToken) {
-        console.log(accessToken)
-        return _api.put(`/deleteProduct/${id}`,{}, { headers: { "Authorization": `Bearer ${accessToken}` } }).then(() => getData())
+    static async deleteProduct(id, getData) {
+        return _api.delete(`/deleteProduct/${id}`).then(() => getData())
+    }
+    static async restoreProduct(id, getData) {
+        return _api.put(`/restoreProduct/${id}`).then(() => getData())
     }
     static async updateProduct(id, data) {
         return _api.put(`/updateProduct/${id}`, { ...data })
@@ -26,6 +28,6 @@ export default class UserService {
         return _api.put(`/updateCategoryByName/${name}`, { ...data })
     }
     static async deleteCategory(name) {
-        return _api.put(`/deleteCategory/${name}`)
+        return _api.delete(`/deleteCategory/${name}`)
     }
 }

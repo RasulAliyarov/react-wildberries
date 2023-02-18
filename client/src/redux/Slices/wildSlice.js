@@ -10,6 +10,8 @@ const wildSlice = createSlice({
         },
         accordionHeadinNumber: 0,
         favoriteState: [],
+        sellerProducts: [],
+        sellerDeleteProducts: [],
         accordionChevronToggle: false,
         burgerModalToggle: false,
         totalPrice: 0,
@@ -54,6 +56,12 @@ const wildSlice = createSlice({
         favoriteReduce: (state, action) => {
             state.favoriteState = action.payload
         },
+        sellerProductsReduce: (state, action) => {
+            state.sellerProducts = action.payload
+        },
+        sellerDeleteProductsReduce: (state, action) => {
+            state.sellerDeleteProducts = action.payload
+        },
     },
 })
 
@@ -63,8 +71,10 @@ export const {
     favoriteReduce,
     deleteToCartReducer,
     deleteToCartByIdReducer,
+    sellerProductsReduce,
     burgerModaToggleReducer,
     scrollSizeReducer,
+    sellerDeleteProductsReduce,
     accordionChevronToggleReducer,
     accordionHeadinNumberReducer,
     productModalReducer } = wildSlice.actions
