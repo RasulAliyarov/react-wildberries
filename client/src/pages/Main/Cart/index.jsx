@@ -32,49 +32,68 @@ function Cart() {
         }}>{Icons.Delete} <span>Очистить корзину</span></button>
 
         <div className={wildberries.cart.length > 0 ? "cart__wrapper__content" : "cart__wrapper__contentNone"}>
-            <table className='cart__wrapper__content__table' >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Image</th>
-                  <th>Brand</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Count</th>
-                  <th>Color</th>
-                  <th className='delTh'>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  wildberries.cart.
-                    map((p, index) => {
-                      return (
-                        <tr key={p.id} className="contentRow">
-                          <td className='cartTd'>{index}</td>
-                          <td className='imgTd cartTd'><img src={p?.img} alt="" /></td>
-                          <td className='cartTd'>{p?.brand}</td>
-                          <td className='cartTd'>{p?.name}</td>
-                          <td className='cartTd'>{p?.price}</td>
-                          <td className='cartTd'>{p?.count}</td>
-                          <td className='cartTd'>{p?.color}</td>
-                          <td className='delTd cartTd'>
-                            <span className='cartHeart' onClick={() => {
-                              dispatch(deleteToCartByIdReducer(p.id))
-                            }}>
-                              {Icons.CartFill}
-                              <span className='cartTick'>✔</span>
-                              <span className='cartTickX'>⨉</span>
-                            </span></td>
-                        </tr>
-                      )
-                    })
-                }
-              </tbody>
-            </table>
+          <table className='cart__wrapper__content__table' >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Count</th>
+                <th>Color</th>
+                <th className='delTh'>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                wildberries.cart.map((p, index) => {
+                  return (
+                    <tr key={index} className="contentRow">
+                      <td className='cartTd'>{index}</td>
+                      <td className='imgTd cartTd'><img src={p?.img} alt="" /></td>
+                      <td className='cartTd'>{p?.brand}</td>
+                      <td className='cartTd'>{p?.name}</td>
+                      <td className='cartTd'>{p?.price}</td>
+                      <td className='cartTd'>{p?.count}</td>
+                      <td className='cartTd'>{p?.color}</td>
+                      <td className='delTd cartTd'>
+                        <span className='cartHeart' onClick={() => {
+                          dispatch(deleteToCartByIdReducer(p.id))
+                        }}>
+                          {Icons.CartFill}
+                          <span className='cartTick'>✔</span>
+                          <span className='cartTickX'>⨉</span>
+                        </span></td>
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
+          </table>
 
           <div className='cart__wrapper__content__bill'>
+            <div className="cart__wrapper__content__bill__top">
+              <h4>Общая сумма</h4>
+            </div>
+            <ul className="cart__wrapper__content__bill__middle">
+              {
+                wildberries.cart.map(p => {
+                  return (
+                    <li key={p.id}><span>{p.name}</span><span>{p.price} ₽</span></li>
+                  )
+                })
+              }
+            </ul>
+            <div className="cart__wrapper__content__bill__total">
+              <span>Общая сумма:</span>
+              <span>{wildberries.totalPrice} ₽</span>
+            </div>
+            <div className="cart__wrapper__content__bill__bottom">
+              <button onClick={() => {
 
+              }}>Купить всё</button>
+            </div>
           </div>
         </div>
 

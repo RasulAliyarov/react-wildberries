@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import "../../../Admin/ProductDetail/ProductDetail.scss"
 import { Editor } from '@tinymce/tinymce-react';
 import { toast } from "react-hot-toast"
-import { logoutReduce, checkAuth } from "../../../../redux/Slices/adminSlice"
+import { imageUrlReduce } from "../../../../redux/Slices/wildSlice"
 import { useNavigate } from "react-router-dom"
-import axios from 'axios';
 import _api, { API_URL } from '../../../../http';
 
 function AddProduct() {
@@ -15,10 +14,8 @@ function AddProduct() {
   const dispatch = useDispatch()
   const editorRef = useRef(null);
   const navigate = useNavigate()
-  const accessToken = localStorage.getItem("token")
 
   useEffect(() => {
-
     if (localStorage.getItem("token") && window.onload) {
       if (admin.userState.roles?.[0] !== "SELLER") {
         navigate("*")
@@ -50,9 +47,11 @@ function AddProduct() {
     validateOnBlur: "",
     validationSchema: AddProductValidation,
     onSubmit: (values) => {
-      axios.post(`${API_URL}/addProduct`, { ...values }, { headers: { "Authorization": `Bearer ${accessToken}` } }).then(() => {
+      _api.post(`${API_URL}/addProduct`, { ...values }, ).then(() => {
         toast.success('Successfully added!')
-        // navigate("/admin/panel/products")
+        dispatch(imageUrlReduce())
+        formikAddProduct.resetForm()
+        navigate("/admin/panel/products")
       }).catch(() => {
         toast.error('Failed added!')
       })
@@ -98,7 +97,16 @@ function AddProduct() {
 
         <span className="productDetailField">
           {formikAddProduct.errors.image && formikAddProduct.touched.image ? (<div className="errorMessage">{formikAddProduct.errors.image}</div>) : null}
-          <input defaultValue={admin.oneProductState.image} placeholder="Image" id="image" name="image" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+          <input defaultValue={admin.oneProductState.image} placeholder="Image" id="image" name="image" type="file" onChange={event=>{
+            let reader  = new FileReader();
+            reader.onload = ()=>{
+              if(reader.readyState === 2){
+                formikAddProduct.setFieldValue("image", reader.result)
+                // serPreview(reader.result)
+              }
+            }
+            reader.readAsDataURL(event.target.files[0])
+          }} onBlur={formikAddProduct.handleBlur} />
         </span>
 
         <span className="productDetailField productDetailField--desc">

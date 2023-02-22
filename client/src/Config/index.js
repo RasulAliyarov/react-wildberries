@@ -1,6 +1,6 @@
 import { ImLocation } from "react-icons/im";
-import { MdOutlinePhotoCamera, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
-import { AiOutlineArrowUp,AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { MdOutlinePhotoCamera, MdSell, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
+import { AiOutlineArrowUp, AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { GiConverseShoe, GiSmartphone, GiPostStamp } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
@@ -8,7 +8,7 @@ import { HiUserCircle } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
-import { BiLogOut} from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import { TbWorld } from "react-icons/tb";
 import { BsFillCartFill } from "react-icons/bs";
 import { TiArrowUnsorted } from "react-icons/ti";
@@ -88,6 +88,7 @@ export const Icons = {
     PostStamp: <GiPostStamp />,
     CartFill: <BsFillCartFill />,
     Sort: <TiArrowUnsorted />,
+    Sell: <MdSell />,
 }
 
 

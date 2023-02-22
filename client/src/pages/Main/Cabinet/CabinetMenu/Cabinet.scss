@@ -1,9 +1,10 @@
 .cabinet {
     padding: 40px 0;
+    min-height: 500px;
 
     &__wrapper {
         display: flex;
-        // justify-content: space-between;
+        justify-content: space-between;
 
         &__menu {
             display: flex;

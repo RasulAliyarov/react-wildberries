@@ -20,6 +20,7 @@ router.get("/refresh", controller.Refresh)
 router.get("/users", controller.GetUsers)
 router.get("/getUserById/:id", controller.GetUserById)
 router.delete("/deleteUser/:id", roleMiddleWare(["ADMIN"]), controller.DeleteUser)
+router.put("/editUser/:id", roleMiddleWare(["ADMIN", "SELLER", "USER"]), controller.EditUser)
 
 
 router.get("/categories", controller.GetCategories)
@@ -27,6 +28,11 @@ router.post("/addCategory", roleMiddleWare(["ADMIN"]), controller.AddCategory)
 router.put("/updateCategoryByName/:name",
     body("categoryName").notEmpty(), roleMiddleWare(["ADMIN"]), controller.UpdateCategoryByName)
 router.delete("/deleteCategory/:name", roleMiddleWare(["ADMIN"]), controller.DeleteCategory)
+
+router.get("/getSells", roleMiddleWare(["ADMIN", "SELLER", "USER"]), controller.GetSells)
+// router.get("/getSells", roleMiddleWare(["ADMIN"]), controller.GetSells)
+router.get("/getSellsById/:id", controller.GetSellsById)
+router.post("/newSell", controller.NewSell)
 
 router.get("/products", controller.GetProducts)
 router.get("/products/:id", controller.GetProductsById)

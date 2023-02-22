@@ -1,74 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import { favoriteReduce } from "../../../redux/Slices/wildSlice"
+import { isLoadingReduce } from '../../../redux/Slices/adminSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { Icons, Images } from "../../../Config/index"
 import { toast } from "react-hot-toast"
 import axios from 'axios'
 import { API_URL } from '../../../http'
-import { checkAuth } from '../../../redux/Slices/adminSlice'
+import "./Favorite.scss"
 
 function Favorite() {
     const wildberries = useSelector(state => state.wildberries)
     const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        axios.get(`${API_URL}/getUserById/${admin.userState.id}`).then(u => {
+    async function getFavorite() {
+        dispatch(isLoadingReduce(true))
+        await axios.get(`${API_URL}/getUserById/${admin.userState.id}`).then(u => {
             dispatch(favoriteReduce(u.data.favorite))
         })
-    }, [])
+        dispatch(isLoadingReduce(false))
+    }
+    useEffect(() => {
+        getFavorite()
+    }, [admin.userState])
 
     return (
-        <div className="cart">
-            <div className="cart__wrapper container1500">
-                {/* <button onClick={() => {
-                    if (wildberries.cart.length > 0) {
-                        dispatch(deleteToCartReducer())
-                        toast.success('Корзина очищена..', {
-                            style: {
-                                border: '1px solid #4C1174',
-                                padding: '16px',
-                                color: '#4C1174',
-                            },
-                            iconTheme: {
-                                primary: '#4C1174',
-                                secondary: '#FFFAEE',
-                            },
-                        });
+        <div className="favorite contentBg">
+            {
+                admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
 
-                    }
-                    else return
-                }}>{Icons.Delete} <span>Очистить корзину</span></button> */}
-                <div className="cart__wrapper__items">
-                    {
-                        wildberries.favoriteState.map((value, index) => {
-                            return (
-                                <div key={index} className="cart__wrapper__items__item">
-                                    <div className="home__wrapper__products__product__top">
-                                        <img src={`${value.image}`} alt="" />
-                                        <span className='cardDiscount'>-30%</span>
-                                    </div>
-                                    <div className="home__wrapper__products__product__bottom">
-                                        <span className='price'>
-                                            <h5>{value.price} ₽ </h5>
-                                            <span>615 ₽</span>
-                                        </span>
-                                        <span className='productTitle'>
-                                            <p>{value.brand}/{value.name}</p>
-                                        </span>
-                                    </div>
-                                    <span className='cartHeart' onClick={() => {
-                                    }}>{Icons.FillHeart}</span>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                    <div className="favorite__wrapper container1500">
+                        <div className="favorite__wrapper__products">
+                            {
+                                wildberries.favoriteState.map((value, index) => {
+                                    return (
+                                        <div key={index} className="favorite__wrapper__products__product">
+                                            <div className="favorite__wrapper__products__product__top">
+                                                <img src={`${value.image}`} alt="" />
+                                                <span className='cardDiscount'>-30%</span>
+                                            </div>
+                                            <div className="favorite__wrapper__products__product__bottom">
+                                                <span className='price'>
+                                                    <h5>{value.price} ₽ </h5>
+                                                    <span>615 ₽</span>
+                                                </span>
+                                                <span className='productTitle'>
+                                                    <p>{value.brand}/{value.name}</p>
+                                                </span>
+                                            </div>
+                                            <span className='cartHeart' onClick={() => {
+                                            }}>{Icons.FillHeart}</span>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
-                <div className={wildberries.favoriteState.length > 0 ? "CartFull" : "CartEmpty"}>
-                    <img src={Images.FavoriteBG} alt="" />
-                </div>
-            </div>
+                        <div className={wildberries.favoriteState.length > 0 ? "CartFull" : "CartEmpty"}>
+                            <img src={Images.FavoriteBG} alt="" />
+                        </div>
+                    </div>
+            }
         </div>
     )
 }

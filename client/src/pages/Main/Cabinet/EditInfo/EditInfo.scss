@@ -1,0 +1,57 @@
+.editInfo {
+    width: 100%;
+    position: relative;
+    .form {
+        display: flex;
+        padding:  0 30px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 25px;
+        .errorMessage {
+            color: red;
+            font-size: 12px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 15%;
+        }
+
+        &__field {
+            position: relative;
+            cursor: pointer;
+            width: 45%;
+            display: flex;
+            align-items: center;
+            i{
+                position: absolute;
+                top: 0;
+                right: 10%;
+                display: none;
+            }
+            &:hover{
+                i{
+                    display: block;
+                }
+            }
+            label{
+                font-weight: 600;
+            }
+            input {
+                border-radius: 10px;
+                padding: 4px 15px 0 5px;
+                width: 60%;
+                border: none;
+                cursor: pointer;
+
+                &:focus {
+                    outline: none;
+                    cursor: auto;
+                }
+            }
+
+        }
+        button{
+                margin: 20px 0 0 ;
+        }
+    }
+}

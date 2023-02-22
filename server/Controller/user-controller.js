@@ -5,6 +5,7 @@ const ProductModel = require("../Models/products-model")
 const TokenModel = require("../Models/token-model")
 const RoleModel = require("../Models/token-model")
 const UserModel = require("../Models/user-model")
+const SellsModel = require("../Models/sells-model")
 const CategoryModel = require("../Models/category-model")
 
 class UserController {
@@ -103,6 +104,7 @@ class UserController {
             next(e)
         }
     }
+
     // GET GetUserById
     async GetUserById(req, res, next) {
         try {
@@ -161,6 +163,7 @@ class UserController {
         }
     }
 
+
     // DELETE DeleteProduct
     async DeleteProduct(req, res, next) {
         try {
@@ -176,6 +179,17 @@ class UserController {
         try {
             await userService.restoreProduct(req.params.id)
             res.json("Товар востановлен")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
+    // UPDATE EditUser
+    async EditUser(req, res, next) {
+        try {
+            await userService.editUser(req)
+            res.json("Данные пользователя изменены")
         }
         catch (e) {
             next(e)
@@ -227,7 +241,7 @@ class UserController {
         }
     }
 
-    //  GET AddCategory
+    //  Post AddCategory
     async AddCategory(req, res, next) {
         try {
             const { categoryName, categoryİmage } = req.body
@@ -261,6 +275,41 @@ class UserController {
             next(e)
         }
     }
+
+
+
+    // GET Sells
+    async GetSells(req, res, next) {
+        try {
+            const sells = await userService.getAllSells();
+            return res.send(sells)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+    // GET Sells
+    async GetSellsById(req, res, next) {
+        try {
+            const sells = await userService.getSellsById(req.params.id)
+            return res.send(sells)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+    // POST NewSell
+    async NewSell(req, res, next) {
+        try {
+            const newSell = await userService.newSell(req.body);
+            newSell.save()
+            res.json(newSell)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+
 }
 
 module.exports = new UserController

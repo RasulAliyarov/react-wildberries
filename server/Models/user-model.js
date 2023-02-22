@@ -10,6 +10,7 @@ const UserShema = new mongoose.Schema({
     activationLink: { type: String },
     postIndex: { type: String },
     country: { type: String },
+    bankCard: { type: String },
     deleteState: { type: Boolean, default: false },
     roles: [{ type: String, ref: "Roles" }],
     favorite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Products" }]

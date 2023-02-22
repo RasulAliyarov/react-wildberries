@@ -124,8 +124,6 @@ function BurgerModal() {
                             <li className='underList__link'>
                                 <Link to="#">Верхняя одежда</Link>
                             </li>
-
-
                         </ul>
                     </li>
                     <li>
@@ -162,9 +160,9 @@ function BurgerModal() {
                         <Link to="#">Бытовая техника</Link>
                     </li>
                     <li>
-                        <li>
-                            <Link to="#">Зоотовары</Link>
-                        </li>
+                        <Link to="#">Зоотовары</Link>
+                    </li>
+                    <li>
                         <Link to="#">Спорт</Link>
                     </li>
                     <li>

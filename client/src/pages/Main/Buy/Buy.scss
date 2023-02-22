@@ -1,0 +1,297 @@
+.buy {
+    padding: 0 0 30px;
+    min-height: 100vh;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-around;  
+        padding-top: 60px;
+        &__left {
+            .sectionTtile{
+                margin-top: 0;
+            }
+            p { 
+                a {
+                    color: red;
+                    transition: .3s;
+                    font-weight: 600;
+
+                    &:hover {
+                        transition: .3s;
+                        color: rgb(60, 60, 168);
+                    }
+                }
+            }
+
+            .credit-card-wrap {
+                position: relative;
+                width: 335px;
+                height: 200px;
+                border-radius: 20px;
+                background: linear-gradient(to left, #6309a8, #ff00c8);
+                margin-top: 40px;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+                &::after {
+                    content: "";
+                    border-radius: 20px;
+                    width: 335px;
+                    height: 200px;
+                    background-color: black;
+                    opacity: .3;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+
+                .pull-left {
+                    width: 100% !important;
+                    float: left;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row-reverse;
+                    justify-content: space-between;
+
+                }
+
+                .clearfix {
+                    align-items: flex-end;
+                    display: flex;
+                    width: 100% !important;
+                }
+
+                .pull-right {
+                    float: right
+                }
+
+                .clearfix:after,
+                .clearfix:before {
+                    content: '';
+                    display: table
+                }
+
+                .clearfix:after {
+                    clear: both;
+                    display: block
+                }
+
+                .credit-card-inner {
+                    z-index: 100;
+                    padding: 10px;
+                    width: inherit;
+                    height: inherit;
+                    position: relative;
+                }
+
+                .credit-logo .text {
+                    font-size: 18px;
+                    font-weight: 500;
+                    margin-left: 10px;
+                    text-transform: uppercase;
+                    color: rgb(255, 255, 255);
+                    letter-spacing: 1px;
+                }
+
+                .credit-logo .shape {
+                    width: 40px;
+                    height: 40px;
+                    display: inline-block;
+                    background-color: #fff;
+                    border-radius: 40px 0 40px 40px;
+                    transform: rotate(-45deg);
+                }
+
+                .credit-logo .shape>.txt {
+                    color: #660a79;
+                    display: block;
+                    width: inherit;
+                    font-size: 14px;
+                    height: inherit;
+                    font-weight: 500;
+                    line-height: 40px;
+                    text-align: center;
+                    transform: rotate(45deg);
+                }
+
+                .credit-font {
+                    color: #fff;
+                    font-size: 18px;
+                    font-family: ocr_a_std, sans-serif;
+                    text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.3), 1px 1px 0px rgba(0, 0, 0, 0.8);
+                }
+
+                .credit-card-number {
+                    font-size: 20px;
+                    text-align: center;
+                    letter-spacing: 2px;
+                    margin: 16px 0 10px;
+                    white-space: nowrap;
+                    width: fit-content;
+                }
+
+                .credit-card-date {
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .credit-card-date .title {
+                    width: 50px;
+                    color: #deb887;
+                    font-size: 12px;
+                    line-height: 14px;
+                    text-align: right;
+                    display: inline-block;
+                    text-transform: uppercase;
+                }
+
+                .credit-card-date .credit-font {
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+
+                .credit-author {
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+
+                .mk-icon-sim {
+                    width: 45px;
+                    height: 30px;
+                    border-radius: 8px;
+                    background-color: #fdd76f;
+                }
+
+                .mk-icon-visa {
+                    width: 90px;
+                    height: 45px;
+                    bottom: -10px;
+                    position: relative;
+                }
+
+                .credit-card-inner-bottom .pull-left {
+                    width: 70%;
+                }
+            }
+
+            &__userData {
+                margin-top: 20px;
+                font-size: 14px;
+
+                th,
+                td {
+                    text-align: center;
+                    vertical-align: middle;
+                    padding: 5px 10px;
+                }
+
+                th {
+                    border: 1px solid;
+                    background-color: #6309a8;
+                    color: white;
+                }
+
+                td {
+                    font-weight: 600;
+                }
+            }
+
+            &__typeOfPay {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 30px;
+                background-color: rgba(180, 180, 180, 0.4);
+                width: 335px;
+                padding: 10px;
+
+                img {
+                    width: 65px;
+                    max-height: 40px;
+
+                    &:nth-child(2) {
+                        width: 45px;
+                    }
+
+                    &:nth-child(3) {
+                        width: 45px;
+                    }
+
+                    &:last-child {
+                        width: 75px;
+                    }
+
+                }
+            }
+
+            &__buyButton {
+                padding: 10px;
+                width: 335px;
+                border-radius: 3px;
+                color: white;
+                margin-top: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 600;
+                font-size: 18px;
+                background-color: #279f00;
+                transition: .4s;
+
+                &:hover {
+                    transform: scale(.95);
+                    background-color: #6309a8;
+                    transition: .4s;
+                }
+            }
+        }
+
+        &__right {
+            display: flex;
+            align-items: center;
+            &__content {
+                &__wrapper {
+                    background-color: #660a79;
+                    padding: 20px 20px;
+                    border-radius: 6px;
+                    span {
+                        width: 300px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        overflow: hidden;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        border: 1px solid rgb(182, 182, 182);
+                        margin-bottom: 20px;
+                        background-color: white;
+                        padding: 10px 5px;
+                        font-weight: 600;
+
+                        img {
+                            width: 100%;
+                            transition: .4s;
+                        }
+
+                        &:hover {
+                            transition: .4s;
+
+                            img {
+                                transform: scale(1.25);
+                            }
+                        }
+                    }
+
+                    h4 {
+                        font-size: 16px;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+    .agreeGif--moified{
+        width: 300px;
+    }
+}

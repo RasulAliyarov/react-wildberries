@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom"
 import { Icons, Images } from "../../../Config/index"
 import { useDispatch, useSelector } from 'react-redux';
 import "./StartSeller.scss"
-import UserService from '../../../Services/UserService';
 import { startSellerModalReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
-
+import { toast } from "react-hot-toast"
+import UserService from '../../../Services/UserService';
 let startSellerData = {}
 
 function StartSell() {
@@ -20,6 +20,19 @@ function StartSell() {
             navigate("/")
         }
     })
+    const today = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
+
+    async function handlerModalState(state) {
+        dispatch(startSellerModalReduce(false))
+        if (state) {
+            UserService.updateStatus(admin.userState.id, { ...startSellerData })
+            formikStartSeller.resetForm()
+            navigate("/")
+        }
+        setTimeout(() => {
+            dispatch(yesNoReduce("neitral"))
+        }, 2400)
+    }
 
     const StartSellerValidation = Yup.object().shape({
         phonenumber: Yup.string().required(),
@@ -35,24 +48,27 @@ function StartSell() {
         validateOnBlur: "",
         validationSchema: StartSellerValidation,
         onSubmit: (values) => {
+            if (!admin?.userState?.activated) {
+                return (
+                    toast.error('Активируйте профиль.', { // saddddassssssssssssssssssss WRITE NAME
+                        style: {
+                            border: '1px solid #4C1174',
+                            padding: '16px',
+                            color: '#4C1174',
+                        },
+                        iconTheme: {
+                            primary: '#4C1174',
+                            secondary: '#FFFAEE',
+                        },
+                    })
+                )
+            }
+            console.log("salam")
             startSellerData = values
             dispatch(startSellerModalReduce(true))
         }
     })
 
-    const today = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now());
-
-    async function handlerModalState(state) {
-        dispatch(startSellerModalReduce(false))
-        if (state) {
-            UserService.updateStatus(admin.userState.id, { ...startSellerData })
-            formikStartSeller.resetForm()
-            navigate("/")
-        }
-        setTimeout(() => {
-            dispatch(yesNoReduce("neitral"))
-        }, 2400)
-    }
     return (
         <div className='startSell contentBg'>
             <div className="startSell__wrapper container1500">

@@ -11,11 +11,14 @@ const wildSlice = createSlice({
         accordionHeadinNumber: 0,
         favoriteState: [],
         sellerProducts: [],
+        buyProducts: [],
+        userData: {},
         sellerDeleteProducts: [],
         accordionChevronToggle: false,
         burgerModalToggle: false,
         totalPrice: 0,
         cart: localStorage.getItem("Products") ? JSON.parse(localStorage.getItem("Products")) : [],
+        imageUrl: ""
     },
     reducers: {
         scrollSizeReducer: (state, action) => {
@@ -43,14 +46,15 @@ const wildSlice = createSlice({
             localStorage.removeItem("Products")
         },
         deleteToCartByIdReducer: (state, action) => {
-            const id = action.payload
-            const cartData = JSON.parse(localStorage.getItem("Products"))
-            const filtered = cartData.filter(item => item.id !== id);
-            localStorage.removeItem('Products', JSON.stringify(filtered))
+            let id = action.payload;
+            const filtered = state.cart.filter(item => item.id !== id);
+            state.cart = filtered;
+            localStorage.setItem("Products", JSON.stringify(state.cart));
 
-            state.cart = state.cart.filter(v => v.id !== id)
+            state.totalPrice -= filtered.price
         },
         totalPriceReduce: (state, action) => {
+            console.log(action.payload)
             state.totalPrice += action.payload
         },
         favoriteReduce: (state, action) => {
@@ -62,6 +66,15 @@ const wildSlice = createSlice({
         sellerDeleteProductsReduce: (state, action) => {
             state.sellerDeleteProducts = action.payload
         },
+        imageUrlReduce: (state, action) => {
+            state.imageUrl = action.payload
+        },
+        userDataReduce: (state, action) => {
+            state.userData = action.payload
+        },
+        buyProductsReduce: (state, action) => {
+            state.buyProducts = action.payload
+        },
     },
 })
 
@@ -69,11 +82,14 @@ export const {
     totalPriceReduce,
     addToCartReducer,
     favoriteReduce,
+    imageUrlReduce,
     deleteToCartReducer,
     deleteToCartByIdReducer,
     sellerProductsReduce,
     burgerModaToggleReducer,
+    buyProductsReduce,
     scrollSizeReducer,
+    userDataReduce,
     sellerDeleteProductsReduce,
     accordionChevronToggleReducer,
     accordionHeadinNumberReducer,

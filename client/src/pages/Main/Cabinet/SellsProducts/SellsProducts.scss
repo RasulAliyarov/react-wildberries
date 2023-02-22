@@ -1,0 +1,16 @@
+.sellsProducts {
+    width: 100%;
+    overflow-x: auto;
+    position: relative;
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #9c9c9c;
+    }
+    .buyProducts__wrapper {
+        width: max-content;
+    }
+}

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { burgerModaToggleReducer, scrollSizeReducer } from "../../../redux/Slices/wildSlice"
+import { burgerModaToggleReducer, scrollSizeReducer, totalPriceReduce } from "../../../redux/Slices/wildSlice"
 import { logoutReduce, checkAuth } from "../../../redux/Slices/adminSlice"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
@@ -39,6 +39,10 @@ function Header() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
+        wildberries.cart.map((v, index) => {
+            dispatch(totalPriceReduce(parseInt(v.price)))
+        })
+        // dispatch(totalPriceReduce(wildberries.cart.map(p => parseFloat(p.price[0]) + parseFloat(wildberries.totalPrice))))
         if (localStorage.getItem("token")) {
             axios.get(`${API_URL}/refresh`, { withCredentials: true })
                 .then((value) => {
@@ -46,7 +50,6 @@ function Header() {
                 })
         }
     }, [])
-
     window.onscroll = function () {
         let scroll = window.pageYOffset;
         if (600 < scroll) {
@@ -145,10 +148,10 @@ function Header() {
                                         <ul className='dropdownuserCabinet__content__list'>
                                             <li><Link to={`/cabinet/${admin.userState.id}`}>Кабинет {Icons.LoginUser}</Link> </li>
                                             <li><Link to="/favorite">Понравившиеся {Icons.FillHeart}</Link></li>
-                                            <li><Link to="#">Покупки <img src={Images.ProductsCabinet} alt="" /></Link> </li>
+                                            <li><Link to={`/buyProducts/${admin.userState?.username}`}>Покупки <img src={Images.ProductsCabinet} alt="" /></Link> </li>
                                             <li><Link to="#">Настройки {Icons.Setting}</Link></li>
                                             <li style={admin.userState?.roles?.includes("USER") ? { display: "flex" } : { display: "none" }}>
-                                                <Link to="/sellerRegistration">Начать продавать    {Icons.Setting}</Link>
+                                                <Link to="/sellerRegistration">Начать продавать    {Icons.Sell}</Link>
                                             </li>
                                             <button onClick={() => {
                                                 dispatch(logoutReduce())

@@ -10,6 +10,7 @@ import { addToCartReducer, totalPriceReduce } from "../../../redux/Slices/wildSl
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-hot-toast"
 import UserService from "../../../Services/UserService"
+import { Link } from 'react-router-dom';
 function ProductModal() {
 
     const wildberries = useSelector(state => state.wildberries)
@@ -87,10 +88,10 @@ function ProductModal() {
                             img: reducrPath?.image,
                             name: reducrPath?.name,
                             brand: reducrPath?.brand,
+                            count: reducrPath?.count,
                             price: reducrPath?.price,
                             color: "black",
                         }))
-                        dispatch(totalPriceReduce(186))
                         toast.success('Товар в корзине.', { // saddddassssssssssssssssssss WRITE NAME
                             style: {
                                 border: '1px solid #4C1174',
@@ -104,8 +105,9 @@ function ProductModal() {
                         });
                     }}><img src={Images.Cart} alt="" /> Добавить в корзину</button>
                     <button className='addToFavorite' onClick={() => {
-                        UserService.addToFavorite(admin?.userState?.id, reducrPath._id)
+                        UserService.addToFavorite(admin?.userState?.id, reducrPath?._id)
                     }}>{Icons.OutlineHeart}</button>
+                    <Link to={`buy/${reducrPath?._id}`}>Купить</Link>
                 </span>
             </div>
 

@@ -3,6 +3,7 @@ import Home from "../pages/Main/Home"
 import Auth from "../pages/Main/Auth"
 import Services from "../pages/Main/Services"
 import Cart from "../pages/Main/Cart"
+import Buy from "../pages/Main/Buy"
 import AdminLogin from "../pages/Admin/AdminLogin"
 import ProductDetail from "../pages/Admin/ProductDetail"
 import Detail from "../pages/Main/Detail"
@@ -12,6 +13,7 @@ import MainRoot from "../components/Main/MainRoot"
 import AddProduct from "../pages/Main/Cabinet/AddProduct"
 import EditInfo from "../pages/Main/Cabinet/EditInfo"
 import DeleteProducts from "../pages/Main/Cabinet/DeleteProducts"
+import SellsProducts from "../pages/Main/Cabinet/SellsProducts"
 import SellerProducts from "../pages/Main/Cabinet/SellerProducts"
 import CabinetRoot from "../pages/Main/Cabinet/CabinetRoot"
 import Users from "../pages/Admin/Users"
@@ -20,6 +22,7 @@ import Sellers from "../pages/Admin/Sellers"
 import StartSell from "../pages/Sellers/StartSell"
 import Favorite from "../pages/Main/Favorite"
 import Categories from "../pages/Admin/Categories"
+import BuyProducts from "../pages/Main/BuyProducts"
 
 export const router = createBrowserRouter(
     [
@@ -57,6 +60,14 @@ export const router = createBrowserRouter(
                     element: <StartSell />
                 },
                 {
+                    path: "buyProducts/:userName",
+                    element: <BuyProducts />
+                },
+                {
+                    path: "buy/:id",
+                    element: <Buy />
+                },
+                {
                     path: "cabinet/:id",
                     element: <CabinetRoot />,
                     children: [
@@ -75,6 +86,10 @@ export const router = createBrowserRouter(
                         {
                             path: "deleteProducts",
                             element: <DeleteProducts />
+                        },
+                        {
+                            path: "sellProducts",
+                            element: <SellsProducts />
                         },
                     ]
                 },

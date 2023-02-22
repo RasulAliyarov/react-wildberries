@@ -3,6 +3,7 @@ const RoleModel = require("../Models/roles-model")
 const ProductModel = require("../Models/products-model")
 const TokenModel = require("../Models/token-model")
 const CategoryModel = require("../Models/category-model")
+const SellsModel = require("../Models/sells-model")
 
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -122,14 +123,26 @@ class UserService {
     }
 
     async getUserById(id) {
-        const users = UserModel.findById({ _id: id }).populate("favorite").exec(
-
-        )
+        const users = UserModel.findById({ _id: id }).populate("favorite").exec()
         return users;
     }
 
     async deleteUser(id) {
         const user = UserModel.findByIdAndUpdate(id, { deleteState: true });
+        return user;
+    }
+    async editUser(req) {
+        const { phonenumber, country, email, postIndex, bankCard, fullname, username } = req.body
+        const user = UserModel.findByIdAndUpdate(req.params.id, {
+            phonenumber: phonenumber,
+            postIndex: postIndex,
+            country: country,
+            bankCard: bankCard,
+            email: email,
+            fullname: fullname,
+            username: username,
+
+        });
         return user;
     }
 
@@ -162,6 +175,7 @@ class UserService {
         const product = ProductModel.findByIdAndUpdate(id, { deleteState: true });
         return product;
     }
+
     async restoreProduct(id) {
         const product = ProductModel.findByIdAndUpdate(id, { deleteState: false });
         return product;
@@ -186,12 +200,14 @@ class UserService {
     async updateStatus(req) {
         const { phonenumber, postIndex, country } = req.body
         const userRole = await RoleModel.findOne({ value: "SELLER" })
+        // let condidate = await findOne({_id: })
+        if (!condidate.bankCard || !condidate.country || !condidate.postIndex || !condidate.phonenumber) return res.status(400).send("Не все данные введены профиль")
 
         const user = UserModel.findByIdAndUpdate(req.params.id, {
             roles: [userRole.value],
             phonenumber: phonenumber,
             postIndex: postIndex,
-            country: country
+            country: country,
         });
         return user;
     }
@@ -245,6 +261,30 @@ class UserService {
             categoryİmage: categoryİmage
         });
         return updateCategory;
+    }
+
+
+    async getAllSells() {
+        const sells = SellsModel
+            .find()
+            .populate("productId", "user name brand price image color")
+            .populate("userId", "username email country phonenumber postIndex")
+            .exec();
+        return sells;
+    }
+    async getSellsById(id) {
+        const sells = SellsModel.findById(id);
+        return sells;
+    }
+    async newSell(data) {
+        const condidate = await UserModel.findOne({ _id: data.userId })
+        if (!condidate.activated || !condidate.bankCard || !condidate.country || !condidate.postIndex || !condidate.phonenumber) return res.status(400).send("Не все данные введены профиль")
+
+        const newSell = await new SellsModel({
+            productId: data.productId,
+            userId: data.userId
+        });
+        return newSell;
     }
 
 }

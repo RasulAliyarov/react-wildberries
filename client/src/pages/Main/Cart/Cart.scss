@@ -6,7 +6,7 @@
 
     &__wrapper {
         button {
-            padding: 15px 15px;
+            padding: 10px 10px;
             background-color: #CB11AB;
             border: none;
             border-radius: 8px;
@@ -33,14 +33,13 @@
             align-items: flex-start;
             justify-content: space-between;
             margin-top: 30px;
+            position: relative;
 
             &__table {
                 font-size: 14px;
                 border-collapse: collapse;
                 text-align: center;
                 width: 70%;
-                overflow: hidden;
-
                 thead {
                     tr {
                         th {
@@ -78,10 +77,12 @@
                 }
 
                 tbody {
+
                     .contentRow {
                         position: relative;
                         transition: .4s;
                         cursor: pointer;
+
                         .cartTd {
                             background-color: #db81ff;
                             vertical-align: middle;
@@ -99,7 +100,7 @@
 
                             .cartHeart {
                                 color: #fff;
-                                font-size: 30px;
+                                font-size: 28px;
                                 transition: .3s;
                                 display: flex;
                                 align-items: center;
@@ -135,7 +136,7 @@
                                 }
                             }
                         }
-                       
+
                         td:first-child {
                             background: #63117E;
                             color: rgb(255, 255, 255);
@@ -143,11 +144,12 @@
                             text-align: left;
 
                         }
+
                         td:last-child {
                             background: #63117E;
                             color: rgb(255, 255, 255);
                         }
-                       
+
 
                         &:hover {
                             td {
@@ -157,7 +159,8 @@
                                 &:first-child {
                                     background-color: #63117E;
                                 }
-                                &:last-child{
+
+                                &:last-child {
                                     background-color: #63117E;
                                 }
                             }
@@ -176,10 +179,87 @@
 
             &__bill {
                 width: 300px;
-                height: 200px;
+                height: 300px;
                 background-color: #63117E;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
                 border-radius: 6px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                color: white;
+
+                &__top {
+                    display: flex;
+                    align-items: center;
+                    text-align: start;
+                    padding: 10px 10px;
+                    height: 55px;
+                    font-weight: 600;
+                    border-bottom: 2px solid #fff;
+                }
+
+                &__middle {
+                    padding: 10px;
+                    height: 100%;
+                    overflow-y: auto;
+                    list-style: decimal;
+                    box-shadow: rgb(64, 0, 84) 3px 3px 6px 0px inset, rgba(62, 1, 70, 0.5) -3px -3px 6px 1px inset;
+                    line-height: 22px;
+
+                    li {
+                        text-transform: capitalize;
+                        display: flex;
+                        justify-content: space-between;
+                        position: relative;
+                        padding: 5px 0 0;
+                        border-bottom: 1px solid white;
+
+                    }
+
+                    &::-webkit-scrollbar {
+                        width: 5px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 10px;
+                        background-color: #9c9c9c;
+                    }
+                }
+
+                &__total {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px;
+                    border-top: 2px solid #fff;
+
+                    span {
+                        &:last-child {
+                            font-weight: 700;
+                        }
+                    }
+                }
+
+                &__bottom {
+                    border-top: 2px solid #fff;
+                    height: 80px;
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 10px;
+
+                    button {
+                        width: 100%;
+                        padding: 10px 10px;
+                        background-color: white;
+                        color: #63117E;
+                        font-weight: 700;
+                        transition: .4s;
+
+                        &:hover {
+                            background-color: white;
+                            opacity: .8;
+                        }
+                    }
+                }
             }
         }
 

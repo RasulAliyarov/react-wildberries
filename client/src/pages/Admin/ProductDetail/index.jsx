@@ -18,12 +18,12 @@ function ProductDetail() {
     const navigate = useNavigate()
 
     const { id } = useParams()
-    function getDataById() {
+    async function getDataById() {
         dispatch(isLoadingReduce(true))
-        axios.get(`http://localhost:8080/api/products/${id}`).then(res => {
+        await axios.get(`http://localhost:8080/api/products/${id}`).then(res => {
             dispatch(oneProductReduce(res.data))
-            dispatch(isLoadingReduce(false))
         })
+        dispatch(isLoadingReduce(false))
     }
     useEffect(() => {
         getDataById()

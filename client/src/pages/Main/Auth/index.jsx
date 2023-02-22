@@ -5,7 +5,7 @@ import "./Auth.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom"
-import { Icons,Images } from "../../../Config/index"
+import { Icons, Images } from "../../../Config/index"
 import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import _api from "../../../http";
@@ -51,7 +51,7 @@ function Auth() {
         .then((value) => {
           dispatch(loginReduce(value.data))
         })
-        
+
       formikSignIn.resetForm()
       navigate("/")
     }
@@ -72,8 +72,8 @@ function Auth() {
       _api.post("/registration", ({ ...values }))
         .then((value) => {
           dispatch(registrationReduce(value.data))
+          navigate("/")
         })
-      navigate("/auth")
       formikSignUp.resetForm()
     }
   })
@@ -153,7 +153,7 @@ function Auth() {
           </TabPanel>
 
         </Tabs>
-       
+
       </div>
     </div>
   );

@@ -1,22 +1,17 @@
-.sellerProducts {
-    min-height: 70vh;
-    width: 100%;
-    padding: 0 10px 20px;
+.favorite {
     position: relative;
     &__wrapper {
         &__products {
-            display: flex;
-            gap: 18.5px;
-            flex-wrap: wrap;
+            padding: 30px 0;
             &__product {
                 width: 150px;
+                overflow: hidden;
                 cursor: pointer;
                 position: relative;
                 transition: .4s;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                background-color: white;
 
                 &__top {
                     border-radius: 10px;
@@ -70,51 +65,20 @@
                         }
                     }
                 }
-
-                .cardButtons{
-                    display: none;
+                .cartHeart{
                     position: absolute;
-                    bottom: -45px;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 15px 0 5px;
-                    width: 100%;
-                    align-items: center;
-                    background-color: white;
-                    button{
-                        z-index: 10;
-                        padding: 5px 10px;
-                        border-radius: 4px;
-                        background-color: #481173;
-                        color: white;
-                        font-weight: 600;
+                    top: 10px;
+                    right: 10px;
+                    color: #520445;
+                    transition: .4s;
+                    &:hover{
+                        color: #520445;
                         transition: .4s;
-                    }
-                    &__delBtn{
-                        &:hover{
-                            transition: .4s;
-                            background-color: red;
-                        }
-                    }
-                    &__editBtn{
-                        &:hover{
-                            transition: .4s;
-                            background-color: rgb(29, 43, 172);
-                        }
-                    }
-                    &__restBtn{
-                        &:hover{
-                            transition: .4s;
-                            background-color: rgb(11, 185, 84);
-                        }
+                        transform: scale(1.4);
                     }
                 }
                 &:hover {
                     transform: scale(1.065);
-                    z-index: 10;
-                    .cardButtons{
-                        display: flex;
-                    }
                     transition: .4s;
                 }
             }

@@ -15,20 +15,23 @@ import { categoriesReduce } from "../../../redux/Slices/categorySlice"
 import _api from '../../../http';
 import { toast } from "react-hot-toast"
 import UserService from '../../../Services/UserService';
+import { isLoadingReduce } from "../../../redux/Slices/adminSlice"
+import { Images } from '../../../Config/index';
 
 function Categories() {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const category = useSelector(state => state.category)
     const admin = useSelector(state => state.admin)
 
-    function getCategories() {
-        _api.get("/categories")
+    async function getCategories() {
+        dispatch(isLoadingReduce(true))
+        await _api.get("/categories")
             .then((res) => {
                 dispatch(categoriesReduce(
                     res.data.filter(p => p.deleteState === false),
                 ))
             })
+        dispatch(isLoadingReduce(false))
     }
 
     useEffect(() => {
@@ -103,7 +106,7 @@ function Categories() {
                 toast.success('Category is deleted')
                 formikDeleteCategory.resetForm()
                 getCategories()
-            })  
+            })
         }
     })
 
@@ -204,11 +207,12 @@ function Categories() {
                         <h2 className='tabTtile catList'>Category list</h2>
                         <ul className='adminPages__category__content__list'>
                             {
-                                category.categoriesState?.map(c => {
-                                    return (
-                                        <li key={c?._id}>{c?.categoryName}</li>
-                                    )
-                                })
+                                admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
+                                    category.categoriesState?.map(c => {
+                                        return (
+                                            <li key={c?._id}>{c?.categoryName}</li>
+                                        )
+                                    })
                             }
                         </ul>
                     </span>
