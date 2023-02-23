@@ -94,3 +94,22 @@
         }
     }
 }
+
+@media(max-width: 1200px) {
+    .contentBg {
+        border-radius: 0;
+    }
+
+    .home {
+        &__wrapper {
+            &__products {
+                column-gap: 5px;
+                row-gap: 30px;
+
+                &__product {
+                    width: 185px;
+                }
+            }
+        }
+    }
+}

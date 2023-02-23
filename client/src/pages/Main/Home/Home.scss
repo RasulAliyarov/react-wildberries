@@ -11,15 +11,16 @@
 
 
         &__carousel {
+            width: 100%;
             .swiper {
                 height: 370px;
                 border-radius: 25px;
 
                 .swiper-slide {
+                    // width: 1225px !important;
                     a {
                         overflow: hidden;
                         border-radius: 25px;
-
                         img {
                             border-radius: 25px;
                             width: 100%;
@@ -129,4 +130,33 @@
     font-weight: 700;
     color: #242424;
     font-size: 24px;
+}
+
+@media(max-width: 1200px){
+    .home{
+        &__wrapper{
+            &__carousel{
+                .swiper{
+                    height: 315px;
+                }
+            }
+        }
+    }
+}
+@media(max-width: 1025px){
+    .contentBg{
+        border-radius: 0;
+    }
+    .home{
+        &__wrapper{
+            &__carousel{
+                .swiper{
+                    height: 240px;
+                }
+            }
+            &__products{
+                
+            }
+        }
+    }
 }

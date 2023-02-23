@@ -29,6 +29,7 @@
                         transform: scale(1.035);
                         transition: .4s;
                     }
+
                     &::after {
                         content: "";
                         position: absolute;
@@ -38,6 +39,22 @@
                         height: 227.5px;
                         opacity: .3;
                         transition: .4s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 1200px) {
+    .home {
+        &__wrapper {
+            &__salesmans {
+                &__salesman {
+                    width: 23%;
+
+                    img {
+                        width: 100% !important;
                     }
                 }
             }

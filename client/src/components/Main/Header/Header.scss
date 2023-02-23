@@ -171,202 +171,36 @@ body {
             justify-content: space-between;
             margin-top: 25px;
 
-            .logo {
-                margin-left: 20px;
+            span {
+                display: flex;
+                align-items: center;
 
-                img {
-                    width: 240px;
-                }
-            }
+                .logo {
+                    margin-left: 20px;
 
-            .burger {
-                padding: 2px;
-                border: 1px solid rgb(255, 255, 255, .4);
-                border-radius: 6px;
-                transition: .3s;
-
-                img {
-                    width: 40px;
-                }
-
-                &:hover {
-                    border: 1px solid white;
-                    transition: .3s;
-                }
-            }
-
-            .searchInput {
-                position: relative;
-                width: 100%;
-                margin: 0 20px 0 20px;
-
-                .cameraIcon {
-                    position: absolute;
-                    top: 50%;
-                    right: 3%;
-                    transform: translateY(-50%);
-                    transition: .3s;
-                    opacity: .6;
-                    z-index: 10;
-
-                    svg {
-                        font-size: 20px;
-                        color: white;
+                    img {
+                        width: 240px;
                     }
                 }
 
-                .searchIcon {
-                    position: absolute;
-                    top: 50%;
-                    left: 2%;
-                    transform: translateY(-50%);
-                    opacity: .6;
+                .burger {
+                    padding: 2px;
+                    border: 1px solid rgb(255, 255, 255, .4);
+                    border-radius: 6px;
                     transition: .3s;
-                    z-index: 10;
 
-                    svg {
-                        font-size: 23px;
-                        color: white;
+                    img {
+                        width: 40px;
                     }
-                }
-
-                span {
-                    cursor: pointer;
 
                     &:hover {
-                        opacity: 1;
+                        border: 1px solid white;
                         transition: .3s;
                     }
                 }
-
-                input {
-                    width: 100%;
-                    padding: 20px 15px 20px 40px;
-                    border: 0;
-                    border-radius: 25px;
-                    opacity: .2;
-                    cursor: pointer;
-                    transition: .4s;
-                    position: relative;
-                    z-index: 9;
-
-                    &:focus {
-                        outline: none;
-                        cursor: auto;
-
-                    }
-
-                    &:hover {
-                        opacity: .5;
-                        transition: .4s;
-                    }
-                }
-
-                [placeholder~="ищу..."] {
-                    font-size: 16px;
-                }
-
-                // .seacrchInputBody {
-                //     height: 350px;
-                //     background-color: white;
-                //     position: absolute;
-                //     width: 100%;
-                //     top: 0;
-                //     z-index: 1;
-                //     border-radius: 25px;
-                //     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                //     z-index: 5;
-                //     padding: 60px 4px 13px 8px;
-
-                //     &__list {
-                //         display: flex;
-                //         flex-direction: column;
-
-                //         &__link {
-                //             margin: 0;
-                //             padding: 6px 8px 6px;
-                //             display: flex;
-                //             align-items: center;
-                //             transition: .4s;
-                //             cursor: pointer;
-
-                //             svg {
-                //                 font-size: 23px;
-                //                 opacity: .4;
-                //                 transition: .4s;
-                //                 margin: 5px 8px 0 0;
-                //             }
-
-                //             &:hover {
-                //                 background-color: rgb(232, 232, 232);
-                //                 transition: .4s;
-                //                 border-radius: 10px;
-
-                //                 svg {
-                //                     opacity: 1;
-                //                     transition: .4s;
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
-
-                // .seacrchInputBodyNone {
-                //     display: none;
-                // }
-
-                .react-datalist-input__listbox {
-                    background-color: white;
-                    width: 100%;
-                    border-radius: 25px;
-                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                    z-index: 5;
-                    padding: 60px 4px 13px 8px;
-                    position: absolute;
-                    top: 0;
-                    margin: 0 !important;
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                .react-datalist-input__textbox {
-                    z-index: 5;
-
-                    &:focus {
-                        svg {
-
-                            color: black !important;
-                        }
-                    }
-                }
-
-                .react-datalist-input__listbox {
-                    z-index: 4;
-
-                    .react-datalist-input__listbox-option {
-                        margin: 0;
-                        padding: 6px 8px 8px 30px;
-                        display: flex;
-                        align-items: center;
-                        transition: .4s;
-                        cursor: pointer;
-                        background: url(../../../images/Icons/Search8.svg);
-                        background-size: 16px;
-                        background-repeat: no-repeat;
-                        background-position: 4px center;
-                        opacity: .8;
-
-                        &:hover {
-                            background-color: rgb(232, 232, 232);
-                            transition: .4s;
-                            border-radius: 10px;
-                        }
-
-                    }
-                }
             }
 
-            ul {
+            &__rightMenu {
                 display: flex;
 
                 li {
@@ -661,6 +495,189 @@ body {
                     }
                 }
             }
+
+            &__respRightMenu{
+                display: none;
+            }
+        }
+
+        &__respInput {
+            display: none;
+        }
+    }
+
+    .windowsBottom {
+        display: none;
+    }
+}
+
+.searchInput {
+    position: relative;
+    width: 100%;
+    margin: 0 20px 0 20px;
+
+    .cameraIcon {
+        position: absolute;
+        top: 50%;
+        right: 3%;
+        transform: translateY(-50%);
+        transition: .3s;
+        opacity: .6;
+        z-index: 10;
+
+        svg {
+            font-size: 20px;
+            color: white;
+        }
+    }
+
+    .searchIcon {
+        position: absolute;
+        top: 50%;
+        left: 2%;
+        transform: translateY(-50%);
+        opacity: .6;
+        transition: .3s;
+        z-index: 10;
+
+        svg {
+            font-size: 23px;
+            color: white;
+        }
+    }
+
+    span {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+            transition: .3s;
+        }
+    }
+
+    input {
+        width: 100%;
+        padding: 20px 15px 20px 40px;
+        border: 0;
+        border-radius: 25px;
+        opacity: .2;
+        cursor: pointer;
+        transition: .4s;
+        position: relative;
+        z-index: 9;
+
+        &:focus {
+            outline: none;
+            cursor: auto;
+
+        }
+
+        &:hover {
+            opacity: .5;
+            transition: .4s;
+        }
+    }
+
+    [placeholder~="ищу..."] {
+        font-size: 16px;
+    }
+
+    // .seacrchInputBody {
+    //     height: 350px;
+    //     background-color: white;
+    //     position: absolute;
+    //     width: 100%;
+    //     top: 0;
+    //     z-index: 1;
+    //     border-radius: 25px;
+    //     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    //     z-index: 5;
+    //     padding: 60px 4px 13px 8px;
+
+    //     &__list {
+    //         display: flex;
+    //         flex-direction: column;
+
+    //         &__link {
+    //             margin: 0;
+    //             padding: 6px 8px 6px;
+    //             display: flex;
+    //             align-items: center;
+    //             transition: .4s;
+    //             cursor: pointer;
+
+    //             svg {
+    //                 font-size: 23px;
+    //                 opacity: .4;
+    //                 transition: .4s;
+    //                 margin: 5px 8px 0 0;
+    //             }
+
+    //             &:hover {
+    //                 background-color: rgb(232, 232, 232);
+    //                 transition: .4s;
+    //                 border-radius: 10px;
+
+    //                 svg {
+    //                     opacity: 1;
+    //                     transition: .4s;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    // .seacrchInputBodyNone {
+    //     display: none;
+    // }
+
+    .react-datalist-input__listbox {
+        background-color: white;
+        width: 100%;
+        border-radius: 25px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        z-index: 5;
+        padding: 60px 4px 13px 8px;
+        position: absolute;
+        top: 0;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .react-datalist-input__textbox {
+        z-index: 5;
+
+        &:focus {
+            svg {
+
+                color: black !important;
+            }
+        }
+    }
+
+    .react-datalist-input__listbox {
+        z-index: 4;
+
+        .react-datalist-input__listbox-option {
+            margin: 0;
+            padding: 6px 8px 8px 30px;
+            display: flex;
+            align-items: center;
+            transition: .4s;
+            cursor: pointer;
+            background: url(../../../images/Icons/Search8.svg);
+            background-size: 16px;
+            background-repeat: no-repeat;
+            background-position: 4px center;
+            opacity: .8;
+
+            &:hover {
+                background-color: rgb(232, 232, 232);
+                transition: .4s;
+                border-radius: 10px;
+            }
+
         }
     }
 }
@@ -692,4 +709,115 @@ body {
 
 .UpToTop {
     display: none;
+}
+
+@media (max-width: 1200px) {
+    .container1500 {
+        width: 99%;
+    }
+
+    .header {
+        &__wrapper {
+            &__top {}
+
+            &__bottom {
+                .searchInput {
+                    display: none;
+                }
+            }
+
+            &__respInput {
+                display: block;
+                margin: 15px 0 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 1025px) {
+    .container1500 {
+        width: 99%;
+    }
+
+    .header {
+        padding: 10px 0;
+
+        &__wrapper {
+            &__top {
+                display: none;
+            }
+
+            &__bottom {
+                margin: 0;
+
+                span {
+                    .burger {
+                        display: none;
+                    }
+
+                    .logo {
+                        margin: 0;
+                       img{
+                        width: 180px;
+                       }
+                    }
+                }
+
+                &__respRightMenu{
+                    display: flex;
+                    gap: 15px;
+                    li{
+                       svg{
+                            color: white;
+                            font-size: 22px;
+                        }
+                    }
+                }
+                .searchInput {
+                    display: none;
+                }
+
+                &__rightMenu {
+                    display: none;
+                }
+            }
+
+            &__respInput {
+                display: none;
+            }
+        }
+
+
+        .windowsBottom {
+            width: 100%;
+            padding: 15px 25px;
+            background-color: #ffffff;
+            position: fixed;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 0 10px #a6a6ac;
+
+            .activeLink {
+                button {
+                    svg {
+                        color: #cb11ab !important;
+                    }
+                }
+            }
+
+            button {
+                svg {
+                    font-size: 28px;
+                    color: #9c9c9c;
+                }
+            }
+
+        }
+    }
+
+    .UpToTopActive {
+        display: none;
+    }
 }

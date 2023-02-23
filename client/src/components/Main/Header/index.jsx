@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, NavLink } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,11 +38,11 @@ function Header() {
     const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     useEffect(() => {
-        wildberries.cart.map((v, index) => {
+        wildberries.cart.map((v) => {
             dispatch(totalPriceReduce(parseInt(v.price)))
         })
-        // dispatch(totalPriceReduce(wildberries.cart.map(p => parseFloat(p.price[0]) + parseFloat(wildberries.totalPrice))))
         if (localStorage.getItem("token")) {
             axios.get(`${API_URL}/refresh`, { withCredentials: true })
                 .then((value) => {
@@ -99,15 +99,15 @@ function Header() {
                     </div>
 
                     <div className="header__wrapper__bottom">
-                        <button className='burger' onClick={() => {
+                        <span>  <button className='burger' onClick={() => {
                             dispatch(burgerModaToggleReducer(true))
                         }}><img src={Images.Burger} alt="" /></button>
-                        <Link to="/" className='logo'><img src={Images.Logo} alt="" /></Link>
-
+                            <Link to="/" className='logo'><img src={Images.Logo} alt="" /></Link>
+                        </span>
                         <div className="searchInput"  >
-                            <span className='searchIcon' >
+                            <i className='searchIcon' >
                                 {Icons.Search}
-                            </span>
+                            </i>
                             <DatalistInput
                                 placeholder="Я ищу..."
                                 onSelect={(item) => console.log(item.value)}
@@ -121,12 +121,12 @@ function Header() {
                                     { id: 'твое', value: 'твое' },
                                 ]}
                             />
-
-                            <span className='cameraIcon'>
+                            <i className='cameraIcon'>
                                 {Icons.Camera}
-                            </span>
+                            </i>
                         </div>
-                        <ul>
+
+                        <ul className='header__wrapper__bottom__rightMenu'>
                             <li>
                                 <Link to="/services">
                                     <img src={Images.Location} alt="" />
@@ -210,8 +210,54 @@ function Header() {
                                 </div>
                             </li>
                         </ul>
+
+                        <ul className='header__wrapper__bottom__respRightMenu'>
+                            <li>{Icons.World}</li>
+                            <li><Link to="/services">{Icons.Location}</Link></li>
+                            <li>{Icons.Search}</li>
+                        </ul>
+                    </div>
+
+                    <div className="header__wrapper__respInput searchInput">
+                        <i className='searchIcon' >
+                            {Icons.Search}
+                        </i>
+                        <DatalistInput
+                            placeholder="Я ищу..."
+                            onSelect={(item) => console.log(item.value)}
+                            items={[
+                                { id: 'джинсы', value: "джинсы" },
+                                { id: 'косметика', value: 'косметика' },
+                                { id: 'zarina', value: 'zarina' },
+                                { id: 'платье женское', value: 'платье женское' },
+                                { id: 'шуба', value: 'шуба' },
+                                { id: 'футболка', value: 'футболка' },
+                                { id: 'твое', value: 'твое' },
+                            ]}
+                        />
+                        <i className='cameraIcon'>
+                            {Icons.Camera}
+                        </i>
                     </div>
                 </div>
+
+                <section className="windowsBottom">
+                    <NavLink to="/" className={({ isActive }) => isActive ? "activeLink" : null}>
+                        <button className="windowsBottom__wishlist">{Icons.Home}</button>
+                    </NavLink>
+                    <NavLink to="/cc" className={({ isActive }) => isActive ? "activeLink" : null}>
+                        <button className="windowsBottom__search"> {Icons.ListSearch} </button>
+                    </NavLink>
+                    <NavLink to="/cart" className={({ isActive }) => isActive ? "activeLink" : null}>
+                        <button className="windowsBottom__wishlist">{Icons.CartFill}</button>
+                    </NavLink>
+                    <NavLink to="/favorite" className={({ isActive }) => isActive ? "activeLink" : null}>
+                        <button className="windowsBottom__categories">{Icons.FillHeart}</button>
+                    </NavLink>
+                    <NavLink to="/auth" className={({ isActive }) => isActive ? "activeLink" : null}>
+                        <button className="windowsBottom__account">{Icons.Username}</button>
+                    </NavLink>
+                </section>
             </header>
 
             <button onClick={() => {

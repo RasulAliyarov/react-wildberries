@@ -10,8 +10,8 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from 'react-accessible-accordion';
-import { useDispatch, useSelector } from 'react-redux';
 import { accordionHeadinNumberReducer, accordionChevronToggleReducer } from "../../../redux/Slices/wildSlice"
+import { useDispatch, useSelector } from 'react-redux';
 import CountUp from 'react-countup';
 
 function Address() {

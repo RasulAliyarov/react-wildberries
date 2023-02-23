@@ -4,7 +4,7 @@ import { AiOutlineArrowUp, AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOut
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { GiConverseShoe, GiSmartphone, GiPostStamp } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
-import { HiUserCircle } from "react-icons/hi";
+import { HiUserCircle,HiHome } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
@@ -12,6 +12,7 @@ import { BiLogOut } from "react-icons/bi";
 import { TbWorld } from "react-icons/tb";
 import { BsFillCartFill } from "react-icons/bs";
 import { TiArrowUnsorted } from "react-icons/ti";
+import { TbListSearch } from "react-icons/tb";
 
 
 import RusFlag from "../images/Flags/RusFlag.svg"
@@ -89,6 +90,8 @@ export const Icons = {
     CartFill: <BsFillCartFill />,
     Sort: <TiArrowUnsorted />,
     Sell: <MdSell />,
+    ListSearch: <TbListSearch />,
+    Home: <HiHome />,
 }
 
 
