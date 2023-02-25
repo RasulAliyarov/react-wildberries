@@ -12,10 +12,13 @@ const wildSlice = createSlice({
         favoriteState: [],
         sellerProducts: [],
         buyProducts: [],
+        counterState: 1,
         userData: {},
         sellerDeleteProducts: [],
         accordionChevronToggle: false,
+        respCabinetNavToggle: false,
         burgerModalToggle: false,
+        respCabinetToggle: false,
         totalPrice: 0,
         cart: localStorage.getItem("Products") ? JSON.parse(localStorage.getItem("Products")) : [],
         imageUrl: ""
@@ -27,6 +30,7 @@ const wildSlice = createSlice({
         productModalReducer: (state, action) => {
             state.productModalState.state = action.payload.state
             state.productModalState.productData = action.payload.productData
+            state.counterState = 0
         },
         accordionHeadinNumberReducer: (state, action) => {
             state.accordionHeadinNumber = action.payload
@@ -46,16 +50,16 @@ const wildSlice = createSlice({
             localStorage.removeItem("Products")
         },
         deleteToCartByIdReducer: (state, action) => {
-            let id = action.payload;
+            let id = action.payload.id;
             const filtered = state.cart.filter(item => item.id !== id);
             state.cart = filtered;
             localStorage.setItem("Products", JSON.stringify(state.cart));
 
-            state.totalPrice -= filtered.price
+            state.totalPrice -=  action.payload.price * action.payload.count
         },
         totalPriceReduce: (state, action) => {
-            console.log(action.payload)
-            state.totalPrice += action.payload
+            console.log(action)
+            state.totalPrice += action.payload.price * action.payload.count
         },
         favoriteReduce: (state, action) => {
             state.favoriteState = action.payload
@@ -75,6 +79,22 @@ const wildSlice = createSlice({
         buyProductsReduce: (state, action) => {
             state.buyProducts = action.payload
         },
+        respCabinetReduce: (state, action) => {
+            state.respCabinetToggle = action.payload
+        },
+        respCabinetNavReduce: (state, action) => {
+            state.respCabinetNavToggle = action.payload
+        },
+        counterIncReduce: (state, action) => {
+            state.counterState += action.payload
+        },
+        counterDecReduce: (state, action) => {
+            if (state.counterState <= 1) {
+                state.counterState = 1
+                return
+            }
+            state.counterState -= action.payload
+        },
     },
 })
 
@@ -82,14 +102,18 @@ export const {
     totalPriceReduce,
     addToCartReducer,
     favoriteReduce,
+    respCabinetReduce,
     imageUrlReduce,
+    counterDecReduce,
     deleteToCartReducer,
     deleteToCartByIdReducer,
     sellerProductsReduce,
+    counterIncReduce,
     burgerModaToggleReducer,
     buyProductsReduce,
     scrollSizeReducer,
     userDataReduce,
+    respCabinetNavReduce,
     sellerDeleteProductsReduce,
     accordionChevronToggleReducer,
     accordionHeadinNumberReducer,

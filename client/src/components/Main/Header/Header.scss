@@ -496,7 +496,7 @@ body {
                 }
             }
 
-            &__respRightMenu{
+            &__respRightMenu {
                 display: none;
             }
         }
@@ -711,11 +711,13 @@ body {
     display: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .container1500 {
         width: 99%;
     }
+}
 
+@media (max-width: 1200px) {
     .header {
         &__wrapper {
             &__top {}
@@ -757,22 +759,25 @@ body {
 
                     .logo {
                         margin: 0;
-                       img{
-                        width: 180px;
-                       }
+
+                        img {
+                            width: 180px;
+                        }
                     }
                 }
 
-                &__respRightMenu{
+                &__respRightMenu {
                     display: flex;
                     gap: 15px;
-                    li{
-                       svg{
+
+                    li {
+                        svg {
                             color: white;
                             font-size: 22px;
                         }
                     }
                 }
+
                 .searchInput {
                     display: none;
                 }
@@ -819,5 +824,11 @@ body {
 
     .UpToTopActive {
         display: none;
+    }
+}
+
+@media(max-width: 380px) {
+    .container1500 {
+        padding: 0 5px;
     }
 }

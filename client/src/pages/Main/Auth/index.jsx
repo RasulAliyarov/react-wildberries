@@ -10,8 +10,6 @@ import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slice
 import { useDispatch, useSelector } from 'react-redux';
 import _api from "../../../http";
 
-
-
 function Auth() {
   const navigate = useNavigate()
   const admin = useSelector(state => state.admin)

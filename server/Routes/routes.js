@@ -43,4 +43,5 @@ router.put("/updateProduct/:id", roleMiddleWare(["ADMIN", "SELLER"]), controller
 
 router.put("/updateStatus/:id", controller.ChangeStatus)
 router.put("/addToFavorite/:id", controller.AddToFavorite)
+router.put("/deleteFavorite/:id", controller.DeleteFavorite)
 module.exports = router

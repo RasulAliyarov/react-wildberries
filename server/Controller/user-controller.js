@@ -90,6 +90,18 @@ class UserController {
             next(e)
         }
     }
+    // REFRESH
+    async AdminRefresh(req, res, next) {
+        try {
+            const { refreshToken } = req.cookies;
+            const userData = await userService.refresh(refreshToken)
+            res.cookie("adminRefreshToken", userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+            return res.json(userData)
+        }
+        catch (e) {
+            next(e)
+        }
+    }
 
 
 
@@ -228,8 +240,17 @@ class UserController {
             next(e)
         }
     }
-
-
+    // DELETE DeleteFavorite
+    async DeleteFavorite(req, res, next) {
+        try {
+            await userService.deleteFavorite(req)
+            res.json("Избранное удалено")
+        }
+        catch (e) {
+            next(e)
+        }
+    }
+    
     //  GET GetCategories
     async GetCategories(req, res, next) {
         try {

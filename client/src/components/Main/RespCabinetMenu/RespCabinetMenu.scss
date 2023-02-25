@@ -1,0 +1,76 @@
+.header {
+    .respCabinetMenuWrapper {
+        &__bg {
+            background-color: black;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: .4;
+            z-index: 4;
+            display: block;
+        }
+
+        &__content {
+            width: 220px;
+            height: 100vh;
+            background: linear-gradient(to top right, #cb11ab 0, #481173 100%) no-repeat;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            padding: 10px;
+            transition: .4s;
+
+            &__closeBtn {
+                color: white;
+                border: none;
+                background: none;
+                font-size: 16px;
+            }
+
+            &__list {
+                height: 100%;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                li {
+                    margin-bottom: 8px;
+
+                    a {
+                        font-size: 17px;
+                        color: white;
+
+                    }
+                }
+
+                button {
+                    color: white;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+
+                    svg {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .respCabinetMenuWrapperNone {
+        .respCabinetMenuWrapper__bg {
+            display: none;
+        }
+
+        .respCabinetMenuWrapper__content {
+            right: 100%;
+            top: -100%;
+            transition: .4s;
+
+        }
+    }
+}

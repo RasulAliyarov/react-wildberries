@@ -1,7 +1,7 @@
 .auth {
     display: flex;
     justify-content: center;
-    height: 85vh;
+    padding: 50px 0;
     align-items: center;
     &__content {
         width: 400px;
@@ -171,4 +171,95 @@
         z-index: 1;
     }
 
+}
+
+@media(max-width: 682px){
+    .auth{
+        &__content{
+            width: 80%;
+            .react-tabs {
+                &__tab-list {
+                    align-items: center;
+                    display: flex;
+                    border-bottom: 1px solid #cb11ab;
+                }
+    
+                &__tab {
+                    padding: 6px 5px !important;
+                    margin-right: 24px;
+                    opacity: .6;
+                    transition: .3s;
+                    align-items: center;
+                    display: flex;
+    
+                    span {
+                        margin-right: 5px;
+                    }
+    
+                    &--selected {
+                        position: relative;
+                        opacity: 1;
+                        border-top: 1px solid #cb11ab;
+                        border-right: 1px solid #cb11ab;
+                        border-left: 1px solid #cb11ab;
+    
+                        &:focus {
+                            &::after {
+                                height: 0 !important;
+                            }
+                        }
+                    }
+                }
+    
+                &__tab-panel {
+                    .tabTtile {
+                        margin: 20px 0 30px;
+                        font-weight: 700;
+                        color: #242424;
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media(max-width: 380px){
+    .auth{
+        &__content{
+            overflow: hidden;
+            padding: 10px 10px 15px;
+            height: fit-content;
+            width: 100%;
+            background-color: transparent;
+            box-shadow: none;
+            .form{
+                img{
+                    width: 90%;
+                }
+            }
+            .react-tabs {
+                &__tab-list {
+                }
+    
+                &__tab {
+    
+                    span {
+                        font-size: 14px;
+                    }
+    
+                    &--selected {
+                        &:focus {
+                            &::after {
+                            }
+                        }
+                    }
+                }
+    
+                &__tab-panel {
+                    .tabTtile {
+                    }
+                }
+            }
+        }
+    }
 }

@@ -1,6 +1,5 @@
 .burgerModal {
     position: relative;
-
     .burgerModal__content {
         // overflow-y: scroll;
         position: fixed;
@@ -10,8 +9,7 @@
         height: 100vh;
         background-color: white;
         z-index: 10;
-        transform: translateX(0);
-        transition: .8s;
+        transition: .4s;
         padding: 30px 0 20px 30px;
 
         &__close {
@@ -19,9 +17,9 @@
             top: 5px;
             right: 10px;
             border-radius: 50%;
-            background-color: #cb11ab;
-            color: white;
+            color: #cb11ab;
             font-weight: 600;
+            font-size: 17px;
             padding: 3px 5px;
         }
 
@@ -202,14 +200,7 @@
 
 .burgerModalUnCloseContent {
     position: fixed;
+    left: -100%;
     top: 0;
-    background-color: white;
-    transform: translateX(-100%);
-    transition: .1s;
-    height: 100vh;
-}
-
-.burgerModalUnVisible {
-    position: fixed;
-    z-index: 10;
+    transition: .4s;
 }

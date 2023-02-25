@@ -12,6 +12,7 @@ const mailService = require("./mail-service")
 const tokenService = require("../Services/token-service")
 const UserDto = require("../dtos/user-dto")
 const ApiError = require("../exceptions/api-error")
+const { default: mongoose } = require("mongoose")
 
 class UserService {
     async registration(fullname, phonenumber, email, username, password, repeatpassword) {
@@ -213,10 +214,32 @@ class UserService {
     }
 
     async addToFavorite(req) {
+        const user = await UserModel.findOne({ _id: req.params.id })
+        if (!user) throw new Error("Пользователь не найден")
+
         const newFav = await UserModel.findByIdAndUpdate(req.params.id, {
-            favorite: req.body.data
+            favorite: [
+                ...user.favorite,
+                req.body.data
+            ]
         });
         return newFav;
+    }
+    async deleteFavorite(req) {
+        const user = await UserModel.findOne({ _id: req.params.id })
+        if (!user) throw new Error("Пользователь не найден")
+
+        let o_id = new mongoose.Types.ObjectId(req.body?.favId);
+
+        const indexFav = user?.favorite.indexOf(o_id)
+        user?.favorite?.splice(indexFav, 1)
+
+        const updateFav = await UserModel.findByIdAndUpdate(req.params.id, {
+            favorite: [
+                ...user?.favorite
+            ]
+        });
+        return updateFav;
     }
 
 
@@ -224,6 +247,7 @@ class UserService {
         const categories = await CategoryModel.find();
         return categories;
     }
+
 
     async addCategory(categoryName, categoryİmage) {
         const checkCategory = await CategoryModel.findOne({ categoryName: categoryName });
@@ -237,12 +261,10 @@ class UserService {
         });
         return newCategory;
     }
-
     async deleteCategory(name) {
         const category = await CategoryModel.findOneAndUpdate({ categoryName: name }, { deleteState: true });
         return category;
     }
-
     async updateCategory(req) {
         const { categoryName, categoryİmage } = req.body
         let name = req.params.name

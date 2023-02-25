@@ -8,6 +8,7 @@ const adminSlice = createSlice({
     initialState: {
         isAuth: false,
         userState: {},
+        adminState: {},
         isLoadingState: false,
         productsState: [],
         sellersState: [],
@@ -39,14 +40,13 @@ const adminSlice = createSlice({
         loginAdminReduce: (state, action) => {
             try {
                 localStorage.setItem('admintoken', action.payload.accessToken);
-                state.userState = action.payload.user;
+                state.adminState = action.payload.user;
                 state.isAuth = true
             }
             catch (e) {
                 console.log({ error: e })
             }
         },
-
         registrationReduce: (state, action) => {
             try {
                 localStorage.setItem("token", action.payload.accessToken)
@@ -57,12 +57,10 @@ const adminSlice = createSlice({
                 console.log({ error: e })
             }
         },
-
         logoutReduce: (state, action) => {
             try {
                 AuthService.logout().then(res => res.data);
                 localStorage.removeItem("token");
-                localStorage.removeItem("admintoken");
                 state.isAuth = false
                 state.userState = {}
             }
@@ -70,7 +68,17 @@ const adminSlice = createSlice({
                 console.log({ error: e })
             }
         },
-
+        adminLogoutReuce: (state, action) => {
+            try {
+                AuthService.logout().then(res => res.data);
+                localStorage.removeItem("admintoken");
+                state.isAuth = false
+                state.adminState = {}
+            }
+            catch (e) {
+                console.log({ error: e })
+            }
+        },
         checkAuth: (state, action) => {
             try {
                 localStorage.setItem('token', action.payload.accessToken);
@@ -86,7 +94,7 @@ const adminSlice = createSlice({
         checkAdminAuth: (state, action) => {
             try {
                 localStorage.setItem('admintoken', action.payload.accessToken);
-                state.userState = action.payload.user
+                state.adminState = action.payload.user
                 state.isAuth = true
             }
             catch (e) {
@@ -139,6 +147,7 @@ export const {
     loginReduce,
     searchStringReduce,
     logoutReduce,
+    adminLogoutReuce,
     priceToggleReduce,
     registrationReduce,
     deleteProduct,

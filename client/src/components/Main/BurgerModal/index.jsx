@@ -10,14 +10,12 @@ function BurgerModal() {
     const dispatch = useDispatch()
 
     return (
-        <div className={wildberries.burgerModalToggle ? "burgerModal " : "burgerModalUnVisible"}>
+        <div className={wildberries.burgerModalToggle ? "burgerModal " : "burgerModalUnCloseContent"}>
             <div className='burgerModal__background' onClick={() => {
                 dispatch(burgerModaToggleReducer(false))
-            }}>
+            }}></div>
 
-            </div>
-
-            <div className={wildberries.burgerModalToggle ? "burgerModal__content" : "burgerModalUnCloseContent"}>
+            <div className={wildberries.burgerModalToggle ? "burgerModal__content" : null}>
                 <button className='burgerModal__content__close' onClick={() => {
                     dispatch(burgerModaToggleReducer(false))
                 }}>⨉</button>

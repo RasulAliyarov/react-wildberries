@@ -5,7 +5,7 @@ import { Icons, Images } from "../../../Config"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import _api, { API_URL } from '../../../http';
-import { logoutReduce, checkAdminAuth} from "../../../redux/Slices/adminSlice"
+import { adminLogoutReuce, checkAdminAuth} from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 
 function AdminNav() {
@@ -49,7 +49,7 @@ function AdminNav() {
                     </li>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? "activeLink" : ""} to="/" onClick={() => {
-                            dispatch(logoutReduce())
+                            dispatch(adminLogoutReuce())
                         }}><span>Logout</span>{Icons.Logout} </NavLink>
                     </li>
                 </ul>

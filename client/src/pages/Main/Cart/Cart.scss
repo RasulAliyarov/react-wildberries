@@ -35,143 +35,147 @@
             margin-top: 30px;
             position: relative;
 
-            &__table {
-                font-size: 14px;
-                border-collapse: collapse;
-                text-align: center;
+            &__tableWrapper {
                 width: 70%;
-                thead {
-                    tr {
-                        th {
-                            border-style: solid;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            background-color: #63117E;
-                            border-width: 0 1px 1px 0;
-                            color: rgb(255, 255, 255);
-                            border-bottom: 2px solid rgb(255, 255, 255);
-                            border-color: white;
-                            max-width: 100px;
-                            margin: 0 auto;
-                            font-weight: 600;
-                            font-size: 15px;
-                            height: 45px;
-                            vertical-align: middle;
-                        }
+                &__table {
+                    font-size: 14px;
+                    border-collapse: collapse;
+                    text-align: center;
+                    width: 100%;
 
-                        th:first-child {
-                            background: #63117E;
-                            color: rgb(255, 255, 255);
-                            padding: 10px 20px;
-                            width: 2%;
-                            text-align: left;
-                        }
+                    thead {
+                        tr {
+                            th {
+                                border-style: solid;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                background-color: #63117E;
+                                border-width: 0 1px 1px 0;
+                                color: rgb(255, 255, 255);
+                                border-bottom: 2px solid rgb(255, 255, 255);
+                                border-color: white;
+                                max-width: 100px;
+                                margin: 0 auto;
+                                font-weight: 600;
+                                font-size: 15px;
+                                height: 45px;
+                                vertical-align: middle;
+                            }
 
-                        .delTh,
-                        .editTh {
-                            width: 20px;
-                            padding: 10px 10px;
+                            th:first-child {
+                                background: #63117E;
+                                color: rgb(255, 255, 255);
+                                padding: 10px 20px;
+                                width: 2%;
+                                text-align: left;
+                            }
+
+                            .delTh,
+                            .editTh {
+                                width: 20px;
+                                padding: 10px 10px;
+                            }
                         }
                     }
-                }
 
-                tbody {
+                    tbody {
 
-                    .contentRow {
-                        position: relative;
-                        transition: .4s;
-                        cursor: pointer;
-
-                        .cartTd {
-                            background-color: #db81ff;
-                            vertical-align: middle;
-                            height: 50px !important;
-                            font-size: 16px;
+                        .contentRow {
+                            position: relative;
                             transition: .4s;
-                            border-style: solid;
-                            border-width: 0 1px 1px 0;
-                            border-color: white;
-                            max-width: 100px;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            margin: 0 auto;
+                            cursor: pointer;
 
-                            .cartHeart {
-                                color: #fff;
-                                font-size: 28px;
-                                transition: .3s;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                cursor: pointer;
+                            .cartTd {
+                                background-color: #db81ff;
+                                vertical-align: middle;
+                                height: 50px !important;
+                                font-size: 16px;
+                                transition: .4s;
+                                border-style: solid;
+                                border-width: 0 1px 1px 0;
+                                border-color: white;
+                                max-width: 100px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                margin: 0 auto;
 
-                                .cartTick {
-                                    position: absolute;
-                                    color: #63117E;
-                                    font-size: 14px;
-                                }
-
-                                .cartTickX {
-                                    position: absolute;
-                                    display: none;
-                                    font-size: 14px;
-                                    color: #63117E;
-                                }
-
-                                &:hover {
-                                    transform: scale(1.075);
+                                .cartHeart {
+                                    color: #fff;
+                                    font-size: 28px;
                                     transition: .3s;
-                                    color: red;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    cursor: pointer;
 
                                     .cartTick {
-                                        display: none;
+                                        position: absolute;
+                                        color: #63117E;
+                                        font-size: 14px;
                                     }
 
                                     .cartTickX {
-                                        display: block;
-                                        color: white;
+                                        position: absolute;
+                                        display: none;
+                                        font-size: 14px;
+                                        color: #63117E;
+                                    }
+
+                                    &:hover {
+                                        transform: scale(1.075);
+                                        transition: .3s;
+                                        color: red;
+
+                                        .cartTick {
+                                            display: none;
+                                        }
+
+                                        .cartTickX {
+                                            display: block;
+                                            color: white;
+                                        }
+                                    }
+                                }
+                            }
+
+                            td:first-child {
+                                background: #63117E;
+                                color: rgb(255, 255, 255);
+                                padding: 10px 20px;
+                                text-align: left;
+
+                            }
+
+                            td:last-child {
+                                background: #63117E;
+                                color: rgb(255, 255, 255);
+                            }
+
+
+                            &:hover {
+                                td {
+                                    background-color: #b9f591;
+                                    transition: .4s;
+
+                                    &:first-child {
+                                        background-color: #63117E;
+                                    }
+
+                                    &:last-child {
+                                        background-color: #63117E;
                                     }
                                 }
                             }
                         }
 
-                        td:first-child {
-                            background: #63117E;
-                            color: rgb(255, 255, 255);
-                            padding: 10px 20px;
-                            text-align: left;
+                        .imgTd {
+                            width: 60px;
 
-                        }
-
-                        td:last-child {
-                            background: #63117E;
-                            color: rgb(255, 255, 255);
-                        }
-
-
-                        &:hover {
-                            td {
-                                background-color: #b9f591;
-                                transition: .4s;
-
-                                &:first-child {
-                                    background-color: #63117E;
-                                }
-
-                                &:last-child {
-                                    background-color: #63117E;
-                                }
+                            img {
+                                width: 100%;
                             }
-                        }
-                    }
-
-                    .imgTd {
-                        width: 60px;
-
-                        img {
-                            width: 100%;
                         }
                     }
                 }
@@ -282,4 +286,57 @@
         width: 35%;
     }
 
+}
+
+@media(max-width: 852px) {
+    .cart {
+        &__wrapper {
+            &__content {
+                flex-direction: column-reverse;
+                &__tableWrapper{
+                    width: 100%;
+                }
+                &__bill{
+                    width: 100%;
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 682px) {
+    .cart {
+        padding: 20px 0;
+
+        &__wrapper {
+            min-height: 80vh;
+
+            button {
+                padding: 5px 5px;
+                font-size: 10px;
+            }
+
+            .CartEmpty {
+                height: 60vh;
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 70%;
+                }
+            }
+
+            &__content {
+                &__tableWrapper {
+                    width: 100%;
+                    overflow-x: auto;
+                    position: relative;
+                    &__table {
+                        width: 600px;
+                    }
+                }
+            }
+        }
+    }
 }

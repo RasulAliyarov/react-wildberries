@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { favoriteReduce } from "../../../redux/Slices/wildSlice"
 import { isLoadingReduce } from '../../../redux/Slices/adminSlice'
 import { useDispatch, useSelector } from "react-redux"
@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast"
 import axios from 'axios'
 import { API_URL } from '../../../http'
 import "./Favorite.scss"
+import UserService from '../../../Services/UserService'
 
 function Favorite() {
     const wildberries = useSelector(state => state.wildberries)
@@ -30,6 +31,7 @@ function Favorite() {
                 admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
 
                     <div className="favorite__wrapper container1500">
+                        <h2 className='tabTtile tabTtile--favModiied'>Избранное</h2>
                         <div className="favorite__wrapper__products">
                             {
                                 wildberries.favoriteState.map((value, index) => {
@@ -49,6 +51,7 @@ function Favorite() {
                                                 </span>
                                             </div>
                                             <span className='cartHeart' onClick={() => {
+                                                UserService.deleteFavorite(admin?.userState?.id, value?._id, getFavorite)
                                             }}>{Icons.FillHeart}</span>
                                         </div>
                                     )

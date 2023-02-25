@@ -30,4 +30,7 @@ export default class UserService {
     static async deleteCategory(name) {
         return _api.delete(`/deleteCategory/${name}`)
     }
+    static async deleteFavorite(id, favId, getFavorite) {
+        return _api.put(`/deleteFavorite/${id}`, { favId: favId }).then(() => getFavorite())
+    }
 }

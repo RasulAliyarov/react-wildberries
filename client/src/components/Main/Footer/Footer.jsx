@@ -278,12 +278,12 @@ function Footer() {
 
                     <AccordionItem >
                         <AccordionItemHeading id='accordionHeadin4' onClick={() => {
-                            dispatch(accordionHeadinNumberReducer(4))
+                            dispatch(accordionHeadinNumberReducer(5))
                             callback()
                         }}>
                             <AccordionItemButton>
                                 <h3>Мы в соцсетях</h3>
-                                <span className={wildberries.accordionChevronToggle && wildberries.accordionHeadinNumber === 4 ? 'UpChevron' : 'DownChevron'}>{Icons.DownChevron}</span>
+                                <span className={wildberries.accordionChevronToggle && wildberries.accordionHeadinNumber === 5 ? 'UpChevron' : 'DownChevron'}>{Icons.DownChevron}</span>
                             </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>

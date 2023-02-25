@@ -2,18 +2,17 @@ import { ImLocation } from "react-icons/im";
 import { MdOutlinePhotoCamera, MdSell, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
 import { AiOutlineArrowUp, AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { GiConverseShoe, GiSmartphone, GiPostStamp } from "react-icons/gi";
+import { GiConverseShoe, GiSmartphone, GiPostStamp,GiHamburgerMenu } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
 import { HiUserCircle,HiHome } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaMoneyBillWave } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { TbWorld } from "react-icons/tb";
 import { BsFillCartFill } from "react-icons/bs";
 import { TiArrowUnsorted } from "react-icons/ti";
 import { TbListSearch } from "react-icons/tb";
-
 
 import RusFlag from "../images/Flags/RusFlag.svg"
 import BelFlag from "../images/Flags/BelFlag.svg"
@@ -92,6 +91,8 @@ export const Icons = {
     Sell: <MdSell />,
     ListSearch: <TbListSearch />,
     Home: <HiHome />,
+    HamburgerMenu: <GiHamburgerMenu />,
+    Dollar: <FaMoneyBillWave />,
 }
 
 

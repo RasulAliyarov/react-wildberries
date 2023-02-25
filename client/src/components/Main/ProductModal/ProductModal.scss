@@ -1,5 +1,4 @@
 .productModalWrapper {
-    height: 100vh;
     .productModalWrapperBg {
         background-color: rgba(0, 0, 0, .6);
         width: 100%;
@@ -15,7 +14,7 @@
         left: 50%;
         right: 50%;
         width: 70%;
-        height: 90%;
+        height: 600px;
         top: 50%;
         transform: translate(-50%, -50%);
         z-index: 10;
@@ -27,7 +26,9 @@
 
         &__left {
             width: 50%;
-
+            display: flex;
+            align-items: center;
+            padding: 30px;
             img {
                 width: 100%;
             }
@@ -57,19 +58,26 @@
                 margin: 12px 0 20px;
                 align-items: center;
                 font-size: 14px;
-
+                justify-content: space-between;
                 span {
                     svg {
                         color: #CB11AB;
                         font-size: 20px;
+                        transition: .4s;
+
+                        &:hover {
+                            color: rgb(255, 208, 0);
+                            cursor: pointer;
+                            transition: .4s;
+                        }
                     }
                 }
 
-                a {
+                &__commentCount {
                     color: #000000;
                     opacity: .6;
-                    margin: 0 15px;
-
+                    width: fit-content;
+                    cursor: pointer;
                     &:hover {
                         opacity: 1;
                     }
@@ -102,23 +110,28 @@
 
                 span {
                     color: black;
+                    text-transform: capitalize;
                 }
             }
 
             .swiper {
                 padding: 0 20px;
+
                 .swiper-slide {
                     position: relative;
                     border-radius: 8px;
                     overflow: hidden;
+
                     img {
                         width: 100%;
                     }
                 }
-                .sadad{
+
+                .sadad {
                     overflow: hidden;
                     width: 100px;
                 }
+
                 .swiper-button-next,
                 .swiper-button-prev {
                     opacity: .4;
@@ -150,33 +163,92 @@
                 }
             }
 
+            .counter {
+                display: flex;
+                margin: 20px 0;
+
+                button {
+                    width: 30px;
+                    height: 30px;
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #CB11AB;
+                    color: white;
+                    border-radius: 50%;
+
+                    &:active {
+                        transform: scale(0.8);
+                    }
+                }
+
+                span {
+                    width: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
             &__buttons {
                 display: flex;
                 align-items: center;
-                margin-top: 24px;
+                margin-top: 30px;
+                justify-content: space-between;
 
-                .addToCart {
-                    padding: 15px 15px;
-                    width: 90%;
+                button, a {
+                    padding: 15px 10px;
+                    width: 50%;
                     background-color: #CB11AB;
                     border: none;
                     border-radius: 8px;
                     color: white;
-                    font-size: 18px;
+                    font-size: 15px;
                     display: flex;
                     justify-content: center;
-                    img{
-                        margin-right: 10px;
-                        width: 22px;
-                    }
+                    transition: .4s;
+
                     &:hover {
                         opacity: .8;
+                        transition: .4s;
+                        transform: scale(0.95);
+                    }
+                }
+
+                .addToCart {
+                    img {
+                        margin-right: 10px;
+                        width: 22px;
                     }
                 }
 
                 .addToFavorite {
                     font-size: 26px;
-                    margin-left: 20px;
+                    transition: .4s;
+                    color: #CB11AB;
+                    cursor: pointer;
+                    &:hover {
+                        color: #CB11AB;
+                        transform: rotateY(360deg);
+                        transition: .4s;
+                    }
+                }
+
+                .buyBtn {
+                    background-color: #CB11AB;
+                    color: white;
+                    padding: 15px 13px;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    width: fit-content;
+                    i{
+                        display: flex;
+                        align-items: center;
+                        margin-right: 5px;
+                    }
+
                 }
             }
         }

@@ -3,12 +3,13 @@ import { Link, useNavigate, NavLink } from "react-router-dom"
 import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
-import { burgerModaToggleReducer, scrollSizeReducer, totalPriceReduce } from "../../../redux/Slices/wildSlice"
 import { logoutReduce, checkAuth } from "../../../redux/Slices/adminSlice"
+import { burgerModaToggleReducer, respCabinetReduce, scrollSizeReducer, totalPriceReduce } from "../../../redux/Slices/wildSlice"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import _api, { API_URL } from '../../../http';
 import DatalistInput from 'react-datalist-input';
+import RespCabinetMenu from '../RespCabinetMenu';
 
 const LNGUAGES = [
     {
@@ -41,7 +42,7 @@ function Header() {
 
     useEffect(() => {
         wildberries.cart.map((v) => {
-            dispatch(totalPriceReduce(parseInt(v.price)))
+            dispatch(totalPriceReduce({ price: parseInt(v.price), count: parseInt(v.count) }))
         })
         if (localStorage.getItem("token")) {
             axios.get(`${API_URL}/refresh`, { withCredentials: true })
@@ -50,6 +51,7 @@ function Header() {
                 })
         }
     }, [])
+
     window.onscroll = function () {
         let scroll = window.pageYOffset;
         if (600 < scroll) {
@@ -59,6 +61,7 @@ function Header() {
             dispatch(scrollSizeReducer(false))
         }
     }
+    console.log(wildberries.totalPrice, "total")
     return (
         <>
             <header id="top" className='header'>
@@ -136,7 +139,7 @@ function Header() {
 
                             <li className='userCabinet' style={!admin.isAuth ? { display: "none" } : { display: "block" }}>
                                 <Link to="/#" >
-                                    <div className='userCabinetİcon'>
+                                    <div className='userCabinetİcon' style={{ textTransform: "uppercase" }}>
                                         {
                                             admin.userState?.username?.charAt()
                                         }
@@ -254,10 +257,14 @@ function Header() {
                     <NavLink to="/favorite" className={({ isActive }) => isActive ? "activeLink" : null}>
                         <button className="windowsBottom__categories">{Icons.FillHeart}</button>
                     </NavLink>
-                    <NavLink to="/auth" className={({ isActive }) => isActive ? "activeLink" : null}>
-                        <button className="windowsBottom__account">{Icons.Username}</button>
+                    <NavLink to={localStorage.getItem("token") ? "#" : "/auth"} className={({ isActive }) => isActive ? "activeLink" : null}>
+                        <button className="windowsBottom__account" onClick={() =>
+                            localStorage.getItem("token") ? dispatch(respCabinetReduce(!wildberries.respCabinetToggle)) : null
+                        }>{Icons.Username}</button>
                     </NavLink>
                 </section>
+
+                <RespCabinetMenu />
             </header>
 
             <button onClick={() => {
