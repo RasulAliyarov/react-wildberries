@@ -103,11 +103,26 @@
     .home {
         &__wrapper {
             &__products {
-                column-gap: 5px;
+                column-gap: 15px;
                 row-gap: 30px;
 
                 &__product {
                     width: 185px;
+                    &__top{
+                        height: unset;
+                    }
+                }
+            }
+        }
+    }
+}
+@media(max-width: 680px) {
+    .home {
+        &__wrapper {
+            &__products {
+                column-gap: 5px;
+                &__product {
+                    width: calc((100% - 8px)/ 2);
                 }
             }
         }
@@ -126,4 +141,10 @@
             }
         }
     }
+}
+@media(max-width: 310px) {
+    .cardModalBtn{
+      display: none !important;
+    }
+    
 }

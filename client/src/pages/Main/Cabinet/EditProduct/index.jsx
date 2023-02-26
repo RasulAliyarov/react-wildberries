@@ -2,22 +2,35 @@ import React, { useEffect, useRef } from 'react'
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import "./ProductDetail.scss"
-import { oneProductReduce, isLoadingReduce } from "../../../redux/Slices/adminSlice"
+import "./EditProduct.scss"
+import { oneProductReduce, isLoadingReduce } from "../../../../redux/Slices/adminSlice"
+import { categoriesReduce } from "../../../../redux/Slices/categorySlice"
 import { Editor } from '@tinymce/tinymce-react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from "react-hot-toast"
-import { Images } from "../../../Config"
-import UserService from '../../../Services/UserService';
+import { Images } from "../../../../Config"
+import UserService from '../../../../Services/UserService';
 import { useNavigate } from "react-router-dom"
-function ProductDetail() {
+import { Helmet } from "react-helmet";
+import _api from '../../../../http';
+
+function EditProduct() {
     const admin = useSelector(state => state.admin)
+    const category = useSelector(state => state.category)
     const dispatch = useDispatch()
     const editorRef = useRef(null);
     const navigate = useNavigate()
 
     const { id } = useParams()
+    async function getCategories() {
+        await _api.get("/categories")
+            .then((res) => {
+                dispatch(categoriesReduce(
+                    res.data.filter(p => p?.deleteState === false),
+                ))
+            })
+    }
     async function getDataById() {
         dispatch(isLoadingReduce(true))
         await axios.get(`http://localhost:8080/api/products/${id}`).then(res => {
@@ -27,6 +40,7 @@ function ProductDetail() {
     }
     useEffect(() => {
         getDataById()
+        getCategories()
     }, [])
 
     const ProductDetailValidation = Yup.object().shape({
@@ -55,18 +69,19 @@ function ProductDetail() {
         onSubmit: (values) => {
             UserService.updateProduct(id, { ...values }).then(() => {
                 toast.success('Successfully edited!')
-                navigate("/admin/panel/products")
+                navigate(`/cabinet/${admin.userState?.id}`)
             }).catch(() => {
                 toast.error('Failed edited!')
             })
-
+            console.log(values)
         }
     })
+
     return (
-        <div div className='adminPages'>
+        <div className='editProduct'>
             {
                 admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
-                    <div className='productDetail '>
+                    <div className='productDetail editProduct'>
                         <span className='productDetail__left'>
                             <div>
                                 <img src={admin.oneProductState?.image} alt="" />
@@ -84,24 +99,22 @@ function ProductDetail() {
                                 <input defaultValue={admin.oneProductState.brand} id="brand" name="brand" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
                             </span>
                             <span className="productDetailField">
-                                <label htmlFor="image">İmage</label>
-                                {formikProductDetail.errors.image && formikProductDetail.touched.image ? (<div className="errorMessage">{formikProductDetail.errors.image}</div>) : null}
-                                <input defaultValue={admin.oneProductState.image} id="image" name="image" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
-                            </span>
-                            <span className="productDetailField">
                                 {formikProductDetail.errors.price && formikProductDetail.touched.price ? (<div className="errorMessage">{formikProductDetail.errors.price}</div>) : null}
                                 <label htmlFor="price">Price</label>
-                                <input defaultValue={admin.oneProductState.price} id="price" name="price" type="number" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                                <input defaultValue={admin.oneProductState.price} id="price" name="price" type="string" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
                             </span>
                             <span className="productDetailField">
                                 {formikProductDetail.errors.category && formikProductDetail.touched.category ? (<div className="errorMessage">{formikProductDetail.errors.category}</div>) : null}
                                 <label htmlFor="category">Category</label>
                                 <input defaultValue={admin.oneProductState.category} id="category" name="category" list='categories' type="text" placeholder="Category" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
                                 <datalist id="categories">
-                                    <option value="Cloth" />
-                                    <option value="Man" />
-                                    <option value="Woman" />
-                                    <option value="Home" />
+                                    {
+                                        category.categoriesState?.map(c => {
+                                            return (
+                                                <option key={c?._id} value={c?.categoryName} />
+                                            )
+                                        })
+                                    }
                                 </datalist>
                             </span>
                             <span className="productDetailField">
@@ -113,6 +126,21 @@ function ProductDetail() {
                                 {formikProductDetail.errors.color && formikProductDetail.touched.color ? (<div className="errorMessage">{formikProductDetail.errors.color}</div>) : null}
                                 <label htmlFor="color">Color</label>
                                 <input defaultValue={admin.oneProductState.color} id="color" name="color" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                            </span>
+                            <span className="productDetailField productDetailField--modified">
+                                {formikProductDetail.errors.image && formikProductDetail.touched.image ? (<div className="errorMessage">{formikProductDetail.errors.image}</div>) : null}
+                                <input id="image" multiple name="image" type="file" onChange={event => {
+                                    let reader = new FileReader();
+                                    reader.onload = () => {
+                                        if (reader.readyState === 2) {
+                                            formikProductDetail.setFieldValue("image", reader.result)
+                                        }
+                                    }
+                                    reader.readAsDataURL(event.target.files[0])
+                                }} onBlur={formikProductDetail.handleBlur} />
+                                <div className='productDetailField__img'>
+                                    <img src={formikProductDetail.values.image} alt="" />
+                                </div>
                             </span>
                             <span className="productDetailField productDetailField--desc">
                                 {formikProductDetail.errors.desc && formikProductDetail.touched.desc ? (<div className="errorMessage">{formikProductDetail.errors.desc}</div>) : null}
@@ -138,7 +166,6 @@ function ProductDetail() {
                                             'alignright alignjustify | bullist numlist outdent indent | ' +
                                             'removeformat | help',
                                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-
                                     }}
                                 />
                             </span>
@@ -146,8 +173,12 @@ function ProductDetail() {
                         </form>
                     </div>
             }
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title> {`Edit: ${admin.oneProductState?.name ? ': ' + admin.oneProductState?.name : ''}`}</title>
+            </Helmet>
         </div>
     )
 }
 
-export default ProductDetail
+export default EditProduct

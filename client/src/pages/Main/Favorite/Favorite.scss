@@ -1,7 +1,7 @@
 .favorite {
     position: relative;
     min-height: 500px;
-
+    
     &__wrapper {
         .tabTtile--favModiied{
             padding-top: 30px;
@@ -108,6 +108,9 @@
                 justify-content: space-between;
 
             }
+            .CartEmpty img{
+                width: 100%;
+            }
         }
     }
 
@@ -129,6 +132,7 @@
                     }
                 }
             }
+
         }
     }
 

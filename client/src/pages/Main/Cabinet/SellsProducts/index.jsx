@@ -6,6 +6,7 @@ import _api, { API_URL } from "../../../../http";
 import { useNavigate } from 'react-router-dom';
 import "./SellsProducts.scss"
 import { Images } from "../../../../Config/index"
+import { Helmet } from "react-helmet";
 
 function SellsProducts() {
 
@@ -72,6 +73,10 @@ function SellsProducts() {
             </div>
           </div>
       }
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{admin?.userState?.username} - Sells</title>
+      </Helmet>
     </div>
   )
 }

@@ -171,7 +171,9 @@ function ProductModal() {
                             });
                         })
                     }}>{Icons.FillHeart}</i>
-
+                    <button className='addToCart addToCartResp' onClick={() => handleAddToCart()}>
+                        <img src={Images.Cart} alt="" /> Добавить в корзину
+                    </button>
                 </span>
             </div>
 

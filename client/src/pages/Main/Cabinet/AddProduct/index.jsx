@@ -9,6 +9,7 @@ import { imageUrlReduce } from "../../../../redux/Slices/wildSlice"
 import { categoriesReduce } from "../../../../redux/Slices/categorySlice"
 import { useNavigate } from "react-router-dom"
 import _api, { API_URL } from '../../../../http';
+import { Helmet } from "react-helmet";
 
 function AddProduct() {
   const admin = useSelector(state => state.admin)
@@ -76,33 +77,33 @@ function AddProduct() {
         <span className='formFieldWrapper'>
           <span className="productDetailField">
             {formikAddProduct.errors.name && formikAddProduct.touched.name ? (<div className="errorMessage">{formikAddProduct.errors.name}</div>) : null}
-            <input defaultValue={admin.oneProductState.name} placeholder="Name" id='name' name="name" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+            <input value={formikAddProduct.values.name} placeholder="Name" id='name' name="name" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
           </span>
           <span className="productDetailField">
             {formikAddProduct.errors.brand && formikAddProduct.touched.brand ? (<div className="errorMessage">{formikAddProduct.errors.brand}</div>) : null}
-            <input defaultValue={admin.oneProductState.brand} placeholder="Brand" id="brand" name="brand" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+            <input value={formikAddProduct.values.brand} placeholder="Brand" id="brand" name="brand" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
           </span>
           <span className="productDetailField">
             {formikAddProduct.errors.count && formikAddProduct.touched.count ? (<div className="errorMessage">{formikAddProduct.errors.count}</div>) : null}
-            <input defaultValue={admin.oneProductState.count} placeholder="Count" id="count" name="count" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+            <input value={formikAddProduct.values.count} placeholder="Count" id="count" name="count" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
           </span>
           <span className="productDetailField">
             {formikAddProduct.errors.price && formikAddProduct.touched.price ? (<div className="errorMessage">{formikAddProduct.errors.price}</div>) : null}
-            <input defaultValue={admin.oneProductState.price} placeholder="Price" id="price" name="price" type="number" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+            <input value={formikAddProduct.values.price} placeholder="Price" id="price" name="price" type="number" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
           </span>
 
           <span className="productDetailField">
             {formikAddProduct.errors.color && formikAddProduct.touched.color ? (<div className="errorMessage">{formikAddProduct.errors.color}</div>) : null}
-            <input defaultValue={admin.oneProductState.color} placeholder="Color" id="color" name="color" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+            <input value={formikAddProduct.values.color} placeholder="Color" id="color" name="color" type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
           </span>
           <span className="productDetailField">
             {formikAddProduct.errors.category && formikAddProduct.touched.category ? (<div className="errorMessage">{formikAddProduct.errors.category}</div>) : null}
-            <input defaultValue={admin.oneProductState.category} placeholder="Category" id="category" name="category" list='categories' type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
+            <input value={formikAddProduct.values.category} placeholder="Category" id="category" name="category" list='categories' type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
             <datalist id="categories">
               {
-                category.categoriesState.map(c => {
+                category.categoriesState?.map(c => {
                   return (
-                    <option key={c._id} value={c?.categoryName} />
+                    <option key={c?._id} value={c?.categoryName} />
                   )
                 })
               }
@@ -112,7 +113,7 @@ function AddProduct() {
 
         <span className="productDetailField productDetailField--modified">
           {formikAddProduct.errors.image && formikAddProduct.touched.image ? (<div className="errorMessage">{formikAddProduct.errors.image}</div>) : null}
-          <input defaultValue={admin.oneProductState.image} multiple placeholder="Image" id="image" name="image" type="file" onChange={event => {
+          <input multiple placeholder="Image" id="image" name="image" type="file" onChange={event => {
             let reader = new FileReader();
             reader.onload = () => {
               if (reader.readyState === 2) {
@@ -155,6 +156,10 @@ function AddProduct() {
         </span>
         <button className="submitBtn" type="submit"><span className='btnName'>Add</span></button>
       </form>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{`${admin?.userState?.username ? '' + admin?.userState?.username : ''} - Add products`}</title>
+      </Helmet>
     </div>
   )
 }

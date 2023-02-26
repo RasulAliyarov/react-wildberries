@@ -11,6 +11,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import UserService from '../../../../Services/UserService';
 import { toast } from "react-hot-toast"
 import { Images } from "../../../../Config/index"
+import { Helmet } from "react-helmet";
 
 function DeleteProducts() {
   const wildberries = useSelector(state => state.wildberries)
@@ -99,6 +100,10 @@ function DeleteProducts() {
             </div>
           </div>
       }
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{admin?.userState?.username} - Delete products</title>
+      </Helmet>
     </div>
   )
 }

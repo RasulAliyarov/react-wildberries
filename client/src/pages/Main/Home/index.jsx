@@ -4,7 +4,6 @@ import { Images } from "../../../Config/index"
 import SMProduct from '../../../components/Main/SMProductCard/SMProduct';
 import ProductCard from '../../../components/Main/ProductCard/ProductCard';
 import ProductModal from "../../../components/Main/ProductModal"
-import BurgerModal from '../../../components/Main/BurgerModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { productModalReducer } from "../../../redux/Slices/wildSlice"
 import { productsReduce, isLoadingReduce } from "../../../redux/Slices/adminSlice"
@@ -17,6 +16,7 @@ import "swiper/css/effect-fade";
 import ShowMoreText from "react-show-more-text";
 import { API_URL } from '../../../http';
 import axios from 'axios';
+import {Helmet} from "react-helmet";
 
 function Home() {
   const wildberries = useSelector(state => state.wildberries)
@@ -100,7 +100,6 @@ function Home() {
 
         <section className='home__wrapper__text'>
           <h2 className='sectionTtile'>Широкий ассортимент и высокое качество</h2>
-
           <ShowMoreText
             lines={4}
             more="Читать далее"
@@ -143,9 +142,11 @@ function Home() {
         <ProductModal />
       </div>
 
-      <BurgerModal />
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Wildberries</title>
+      </Helmet>
     </div >
-
   )
 }
 

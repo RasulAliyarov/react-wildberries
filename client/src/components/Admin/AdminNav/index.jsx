@@ -5,8 +5,9 @@ import { Icons, Images } from "../../../Config"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
 import _api, { API_URL } from '../../../http';
-import { adminLogoutReuce, checkAdminAuth} from "../../../redux/Slices/adminSlice"
+import { adminLogoutReuce, checkAdminAuth } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
+import { Helmet } from "react-helmet";
 
 function AdminNav() {
     const admin = useSelector(state => state.admin)
@@ -58,6 +59,10 @@ function AdminNav() {
                 position="top-right"
                 reverseOrder={false}
             />
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Wildberries - Adminpanel</title>
+            </Helmet>
         </nav>
     )
 }

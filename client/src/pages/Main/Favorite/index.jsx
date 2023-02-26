@@ -8,6 +8,8 @@ import axios from 'axios'
 import { API_URL } from '../../../http'
 import "./Favorite.scss"
 import UserService from '../../../Services/UserService'
+import { Link } from "react-router-dom"
+import { Helmet } from "react-helmet";
 
 function Favorite() {
     const wildberries = useSelector(state => state.wildberries)
@@ -18,7 +20,7 @@ function Favorite() {
         dispatch(isLoadingReduce(true))
         await axios.get(`${API_URL}/getUserById/${admin.userState.id}`).then(u => {
             dispatch(favoriteReduce(u.data.favorite))
-        })
+        }).catch(e => { return })
         dispatch(isLoadingReduce(false))
     }
     useEffect(() => {
@@ -27,6 +29,7 @@ function Favorite() {
 
     return (
         <div className="favorite contentBg">
+         
             {
                 admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
 
@@ -36,34 +39,41 @@ function Favorite() {
                             {
                                 wildberries.favoriteState.map((value, index) => {
                                     return (
-                                        <div key={index} className="favorite__wrapper__products__product">
-                                            <div className="favorite__wrapper__products__product__top">
-                                                <img src={`${value.image}`} alt="" />
-                                                <span className='cardDiscount'>-30%</span>
+                                        <Link to={`/detail/${value._id}`}>
+                                            <div key={index} className="favorite__wrapper__products__product">
+                                                <div className="favorite__wrapper__products__product__top">
+                                                    <img src={`${value.image}`} alt="" />
+                                                    <span className='cardDiscount'>-30%</span>
+                                                </div>
+                                                <div className="favorite__wrapper__products__product__bottom">
+                                                    <span className='price'>
+                                                        <h5>{value.price} ₽ </h5>
+                                                        <span>615 ₽</span>
+                                                    </span>
+                                                    <span className='productTitle'>
+                                                        <p>{value.brand}/{value.name}</p>
+                                                    </span>
+                                                </div>
+                                                <span className='cartHeart' onClick={() => {
+                                                    UserService.deleteFavorite(admin?.userState?.id, value?._id, getFavorite)
+                                                }}>{Icons.FillHeart}</span>
                                             </div>
-                                            <div className="favorite__wrapper__products__product__bottom">
-                                                <span className='price'>
-                                                    <h5>{value.price} ₽ </h5>
-                                                    <span>615 ₽</span>
-                                                </span>
-                                                <span className='productTitle'>
-                                                    <p>{value.brand}/{value.name}</p>
-                                                </span>
-                                            </div>
-                                            <span className='cartHeart' onClick={() => {
-                                                UserService.deleteFavorite(admin?.userState?.id, value?._id, getFavorite)
-                                            }}>{Icons.FillHeart}</span>
-                                        </div>
+                                        </Link>
                                     )
                                 })
                             }
                         </div>
-
                         <div className={wildberries.favoriteState.length > 0 ? "CartFull" : "CartEmpty"}>
-                            <img src={Images.FavoriteBG} alt="" />
-                        </div>
+                <img src={Images.FavoriteBG} alt="" />
+            </div>
                     </div>
             }
+
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title> My favorite</title>
+            </Helmet>
         </div>
     )
 }

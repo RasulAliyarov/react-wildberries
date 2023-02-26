@@ -4,6 +4,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { Icons } from "../../../../Config/index"
 import { respCabinetNavReduce } from "../../../../redux/Slices/wildSlice"
+import { Helmet } from "react-helmet";
 
 function Cabinet() {
   const { id } = useParams()
@@ -61,6 +62,10 @@ function Cabinet() {
         </div>
 
       </div >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{admin?.userState?.username}</title>
+      </Helmet>
     </>
   )
 }

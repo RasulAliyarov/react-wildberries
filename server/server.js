@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
     res.send('cors problem fixed:)');
 });
-app.use(express.json({limit: '50mb'}))
+app.use(express.json({limit: '10mb'}))
 app.use(cors({
     credentials: true,
     origin: process.env.CLIENT_URL,

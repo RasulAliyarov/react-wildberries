@@ -13,6 +13,7 @@ import {
 import { accordionHeadinNumberReducer, accordionChevronToggleReducer } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import CountUp from 'react-countup';
+import { Helmet } from "react-helmet";
 
 function Address() {
   const wildberries = useSelector(state => state.wildberries)
@@ -400,7 +401,7 @@ function Address() {
                 </AccordionItemHeading>
 
                 <AccordionItemPanel>
-                <ul>
+                  <ul>
                     <li>
                       1.1. <p>В настоящих Правилах, если контекст не требует иного, нижеприведенные термины имеют следующие значения и являются их составной неотъемлемой частью:</p>
                     </li>
@@ -438,7 +439,7 @@ function Address() {
                 </AccordionItemHeading>
 
                 <AccordionItemPanel>
-                <ul>
+                  <ul>
                     <li>
                       2.1. <p>Пользуясь Торговой площадкой, Покупатель соглашается с условиями настоящих Правил.</p>
                     </li>
@@ -467,7 +468,7 @@ function Address() {
                 </AccordionItemHeading>
 
                 <AccordionItemPanel>
-                <ul>
+                  <ul>
                     <li>
                       3.1. <p>Оформить Заказ на Торговой площадке могут только зарегистрированные Покупатели, при этом Покупатель вправе зарегистрироваться на сайте только 1(один) раз, т.е. может иметь только один Личный кабинет.</p>
                     </li>
@@ -627,6 +628,10 @@ function Address() {
         </Tabs>
 
       </div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title> Wildberries - About us</title>
+      </Helmet>
     </div>
   )
 }

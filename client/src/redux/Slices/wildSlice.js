@@ -18,6 +18,7 @@ const wildSlice = createSlice({
         sellerDeleteProducts: [],
         accordionChevronToggle: false,
         respCabinetNavToggle: false,
+        respSearchToggle: false,
         burgerModalToggle: false,
         respCabinetToggle: false,
         totalPrice: 0,
@@ -56,7 +57,7 @@ const wildSlice = createSlice({
             state.cart = filtered;
             localStorage.setItem("Products", JSON.stringify(state.cart));
 
-            state.totalPrice -=  action.payload.price * action.payload.count
+            state.totalPrice -= action.payload.price * action.payload.count
         },
         totalPriceReduce: (state, action) => {
             console.log(action)
@@ -96,8 +97,14 @@ const wildSlice = createSlice({
             }
             state.counterState -= action.payload
         },
+        counterReduce: (state, action) => {
+            state.counterState = action.payload
+        },
         productForBuyReduce: (state, action) => {
             state.productForBuyState = action.payload
+        },
+        respSearchReduce: (state, action) => {
+            state.respSearchToggle = action.payload
         },
     },
 })
@@ -107,10 +114,12 @@ export const {
     addToCartReducer,
     favoriteReduce,
     respCabinetReduce,
+    respSearchReduce,
     productForBuyReduce,
     imageUrlReduce,
     counterDecReduce,
     deleteToCartReducer,
+    counterReduce,
     deleteToCartByIdReducer,
     sellerProductsReduce,
     counterIncReduce,

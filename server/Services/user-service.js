@@ -183,7 +183,7 @@ class UserService {
     }
 
     async updateProduct(req) {
-        const { name, category, brand, count, image, desc, color } = req.body
+        const { name, category, brand, price, count, image, desc, color } = req.body
         const product = ProductModel.findByIdAndUpdate(req.params.id, {
             name: name,
             category: category,
@@ -191,7 +191,8 @@ class UserService {
             image: image,
             count: count,
             color: color,
-            desc: desc
+            desc: desc,
+            price: price,
 
         });
         return product;

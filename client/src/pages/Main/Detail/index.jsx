@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import "./Detail.scss"
 import { Icons, Images } from "../../../Config/index"
-import { addToCartReducer, productForBuyReduce, counterIncReduce, totalPriceReduce, counterDecReduce } from "../../../redux/Slices/wildSlice"
+import { addToCartReducer, productForBuyReduce, counterReduce, counterIncReduce, totalPriceReduce, counterDecReduce } from "../../../redux/Slices/wildSlice"
 import { oneProductReduce, isLoadingReduce } from "../../../redux/Slices/adminSlice"
 import { toast } from "react-hot-toast"
 import UserService from "../../../Services/UserService"
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import axios from 'axios'
+import { Helmet } from "react-helmet";
 
 function Detail() {
   const { id } = useParams()
@@ -26,13 +27,14 @@ function Detail() {
     dispatch(isLoadingReduce(false))
   }
   useEffect(() => {
+    dispatch(counterReduce(1))
     getDataById()
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth"
     });
-  }, [])
+  }, [id])
 
   function handleAddToCart() {
     let item = wildberries.cart.filter(p => p.id === reducrPath?._id)
@@ -102,12 +104,12 @@ function Detail() {
 
               <div className="detail__wrapper__top__right">
                 <h3>{reducrPath?.price} ₽ <span>1 550 ₽</span></h3>
-                <h4>Бренд: {reducrPath?.brand}</h4>
                 <div className='counter'>
                   <button className='decrementBtn' onClick={() => dispatch(counterDecReduce(1))}>-</button>
                   <span>{wildberries.counterState}</span>
                   <button className='incrementBtn' onClick={() => dispatch(counterIncReduce(1))}>+</button>
                 </div>
+                <h5><span>Общая сумма: </span>{wildberries?.counterState * reducrPath?.price} ₽</h5>
                 <span className='detail__wrapper__top__right__buttons'>
                   <span>
                     <button className='addToCart' onClick={() => handleAddToCart()}>
@@ -144,10 +146,9 @@ function Detail() {
                         });
                       })
                     }}>{Icons.FillHeart}</i>
-
                   </span>
 
-                  <Link to={`buy/${reducrPath?._id}`} className="buyBtn" onClick={() => {
+                  <Link to={`/buy/${reducrPath?._id}`} className="buyBtn" onClick={() => {
                     dispatch(productForBuyReduce({
                       img: reducrPath?.image,
                       name: reducrPath?.name,
@@ -164,11 +165,15 @@ function Detail() {
             <div className="detail__wrapper__bottom">
               <h4>О товаре</h4>
               <span dangerouslySetInnerHTML={{ __html: reducrPath?.desc }}>
-
               </span>
             </div>
           </div>
       }
+
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{reducrPath?.name}</title>
+      </Helmet>
     </div >
   )
 }

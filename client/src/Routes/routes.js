@@ -13,6 +13,7 @@ import MainRoot from "../components/Main/MainRoot"
 import AddProduct from "../pages/Main/Cabinet/AddProduct"
 import EditInfo from "../pages/Main/Cabinet/EditInfo"
 import DeleteProducts from "../pages/Main/Cabinet/DeleteProducts"
+import EditProduct from "../pages/Main/Cabinet/EditProduct"
 import SellsProducts from "../pages/Main/Cabinet/SellsProducts"
 import SellerProducts from "../pages/Main/Cabinet/SellerProducts"
 import CabinetRoot from "../pages/Main/Cabinet/CabinetRoot"
@@ -91,6 +92,10 @@ export const router = createBrowserRouter(
                         {
                             path: "sellProducts",
                             element: <SellsProducts />
+                        },
+                        {
+                            path: "editProduct/:id",
+                            element: <EditProduct />
                         },
                     ]
                 },

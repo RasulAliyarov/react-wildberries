@@ -121,6 +121,14 @@
                     }
                 }
 
+                h5{
+                    margin-bottom: 30px;
+                    font-size: 22px;
+                    span{
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+                }
                 &__buttons {
                     margin-top: 30px;
 
@@ -151,10 +159,9 @@
                         gap: 30px;
 
                         .addToCart {
-                            display: flex;
-                                img {
-                                    margin-right: 10px;
-                                }
+                            img {
+                                margin-right: 10px;
+                            }
                         }
 
                         .addToFavorite {

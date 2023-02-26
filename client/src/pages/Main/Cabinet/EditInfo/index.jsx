@@ -8,6 +8,7 @@ import { userDataReduce } from "../../../../redux/Slices/wildSlice"
 import { isLoadingReduce } from "../../../../redux/Slices/adminSlice"
 import "./EditInfo.scss"
 import { Images } from "../../../../Config/index"
+import { Helmet } from "react-helmet";
 
 function EditInfo() {
   const wildberries = useSelector(state => state.wildberries)
@@ -18,13 +19,13 @@ function EditInfo() {
   async function getUser() {
     dispatch(isLoadingReduce(true))
     await _api.get(`${API_URL}/getUserById/${admin?.userState?.id}`)
-    .then(res => {
-      dispatch(userDataReduce(res?.data))
+      .then(res => {
+        dispatch(userDataReduce(res?.data))
       })
       .catch((e) => {
         if (e) console.log("UserState is Empty")
       })
-      dispatch(isLoadingReduce(false))
+    dispatch(isLoadingReduce(false))
   }
 
   useEffect(() => {
@@ -68,7 +69,7 @@ function EditInfo() {
   return (
     <div className="editInfo">
       {
-        admin.isLoadingState ? <div className='loader' style={{top:"60%"}}><img src={Images.Loader} alt="" /></div> :
+        admin.isLoadingState ? <div className='loader' style={{ top: "60%" }}><img src={Images.Loader} alt="" /></div> :
 
           <form className="form" onSubmit={formikUserInfo.handleSubmit}>
             <span className="form__field" >
@@ -125,6 +126,10 @@ function EditInfo() {
             </button>
           </form>
       }
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{admin?.userState?.username} - Edit</title>
+      </Helmet>
     </div>
   )
 }

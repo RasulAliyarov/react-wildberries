@@ -32,3 +32,29 @@
     }
 
 }
+
+@media(max-width: 1025px){
+    .pageNotFound {
+        &__content {
+            overflow: unset;
+            height: unset;
+            width: unset;
+        }
+    
+    }   
+}
+@media(max-width: 1025px){
+    .pageNotFound {
+        &__content {
+            overflow: unset;
+            height: unset;
+            width: unset;
+            a{
+                font-size: 14px;
+                padding: 10px 10px;
+                right: 30px;
+            }
+        }
+    
+    }   
+}
