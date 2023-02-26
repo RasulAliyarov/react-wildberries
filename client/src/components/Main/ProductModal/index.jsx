@@ -6,18 +6,18 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Icons, Images } from "../../../Config/index"
 import "./ProductModal.scss"
-import { addToCartReducer, counterIncReduce, totalPriceReduce, counterDecReduce } from "../../../redux/Slices/wildSlice"
+import { addToCartReducer, productForBuyReduce, counterIncReduce, totalPriceReduce, counterDecReduce } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-hot-toast"
 import UserService from "../../../Services/UserService"
 import { Link } from 'react-router-dom';
 
 function ProductModal() {
-
     const wildberries = useSelector(state => state.wildberries)
     const admin = useSelector(state => state.admin)
     const dispatch = useDispatch()
     const reducrPath = wildberries.productModalState?.productData
+
     useEffect(() => {
         localStorage.setItem("Products", JSON.stringify(wildberries.cart))
     }, [wildberries.cart])
@@ -63,7 +63,7 @@ function ProductModal() {
         dispatch(totalPriceReduce({ price: parseInt(reducrPath?.price), count: parseInt(wildberries?.counterState) }))
     }
     return (
-        <div className='productModalConent' >
+        <div className='productModalConent'>
             <div className="productModalConent__left"  >
                 <img src={reducrPath?.image} alt="" />
             </div>
@@ -131,7 +131,16 @@ function ProductModal() {
                         <img src={Images.Cart} alt="" /> Добавить в корзину
                     </button>
 
-                    <Link to={`buy/${reducrPath?._id}`} className="buyBtn"><i>{Icons.Dollar}</i>Купить</Link>
+                    <Link to={`buy/${reducrPath?._id}`} className="buyBtn" onClick={() => {
+                        dispatch(productForBuyReduce({
+                            img: reducrPath?.image,
+                            name: reducrPath?.name,
+                            brand: reducrPath?.brand,
+                            count: wildberries?.counterState,
+                            price: reducrPath?.price,
+                            color: reducrPath?.color,
+                        }))
+                    }}><i>{Icons.Dollar}</i>Купить</Link>
 
                     <i className='addToFavorite' onClick={() => {
                         UserService.addToFavorite(admin?.userState?.id, reducrPath?._id).then(r => {

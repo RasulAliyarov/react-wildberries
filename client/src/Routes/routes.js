@@ -23,6 +23,7 @@ import StartSell from "../pages/Sellers/StartSell"
 import Favorite from "../pages/Main/Favorite"
 import Categories from "../pages/Admin/Categories"
 import BuyProducts from "../pages/Main/BuyProducts"
+import UserDetail from "../pages/Admin/UserDetail"
 
 export const router = createBrowserRouter(
     [
@@ -48,7 +49,7 @@ export const router = createBrowserRouter(
                     element: <Cart />
                 },
                 {
-                    path: "detail",
+                    path: "detail/:id",
                     element: <Detail />
                 },
                 {
@@ -125,6 +126,10 @@ export const router = createBrowserRouter(
                         {
                             path: "users",
                             element: <Users />
+                        },
+                        {
+                            path: "user/:id",
+                            element: <UserDetail />
                         },
                         {
                             path: "sellers",

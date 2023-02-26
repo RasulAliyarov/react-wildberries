@@ -14,6 +14,7 @@ const wildSlice = createSlice({
         buyProducts: [],
         counterState: 1,
         userData: {},
+        productForBuyState: {},
         sellerDeleteProducts: [],
         accordionChevronToggle: false,
         respCabinetNavToggle: false,
@@ -30,7 +31,7 @@ const wildSlice = createSlice({
         productModalReducer: (state, action) => {
             state.productModalState.state = action.payload.state
             state.productModalState.productData = action.payload.productData
-            state.counterState = 0
+            state.counterState = 1
         },
         accordionHeadinNumberReducer: (state, action) => {
             state.accordionHeadinNumber = action.payload
@@ -95,6 +96,9 @@ const wildSlice = createSlice({
             }
             state.counterState -= action.payload
         },
+        productForBuyReduce: (state, action) => {
+            state.productForBuyState = action.payload
+        },
     },
 })
 
@@ -103,6 +107,7 @@ export const {
     addToCartReducer,
     favoriteReduce,
     respCabinetReduce,
+    productForBuyReduce,
     imageUrlReduce,
     counterDecReduce,
     deleteToCartReducer,

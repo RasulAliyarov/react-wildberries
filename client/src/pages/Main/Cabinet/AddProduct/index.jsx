@@ -6,21 +6,32 @@ import "../../../Admin/ProductDetail/ProductDetail.scss"
 import { Editor } from '@tinymce/tinymce-react';
 import { toast } from "react-hot-toast"
 import { imageUrlReduce } from "../../../../redux/Slices/wildSlice"
+import { categoriesReduce } from "../../../../redux/Slices/categorySlice"
 import { useNavigate } from "react-router-dom"
 import _api, { API_URL } from '../../../../http';
 
 function AddProduct() {
   const admin = useSelector(state => state.admin)
+  const category = useSelector(state => state.category)
   const dispatch = useDispatch()
   const editorRef = useRef(null);
   const navigate = useNavigate()
 
+  async function getCategories() {
+    await _api.get("/categories")
+      .then((res) => {
+        dispatch(categoriesReduce(
+          res.data.filter(p => p?.deleteState === false),
+        ))
+      })
+  }
   useEffect(() => {
     if (localStorage.getItem("token") && window.onload) {
       if (admin.userState.roles?.[0] !== "SELLER") {
         navigate("*")
       }
     }
+    getCategories()
   }, [])
 
   const AddProductValidation = Yup.object().shape({
@@ -47,7 +58,7 @@ function AddProduct() {
     validateOnBlur: "",
     validationSchema: AddProductValidation,
     onSubmit: (values) => {
-      _api.post(`${API_URL}/addProduct`, { ...values }, ).then(() => {
+      _api.post(`${API_URL}/addProduct`, { ...values },).then(() => {
         toast.success('Successfully added!')
         dispatch(imageUrlReduce())
         formikAddProduct.resetForm()
@@ -55,6 +66,7 @@ function AddProduct() {
       }).catch(() => {
         toast.error('Failed added!')
       })
+      // console.log(values)
     }
   })
 
@@ -87,26 +99,31 @@ function AddProduct() {
             {formikAddProduct.errors.category && formikAddProduct.touched.category ? (<div className="errorMessage">{formikAddProduct.errors.category}</div>) : null}
             <input defaultValue={admin.oneProductState.category} placeholder="Category" id="category" name="category" list='categories' type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
             <datalist id="categories">
-              <option value="Cloth" />
-              <option value="Man" />
-              <option value="Woman" />
-              <option value="Home" />
+              {
+                category.categoriesState.map(c => {
+                  return (
+                    <option key={c._id} value={c?.categoryName} />
+                  )
+                })
+              }
             </datalist>
           </span>
         </span>
 
-        <span className="productDetailField">
+        <span className="productDetailField productDetailField--modified">
           {formikAddProduct.errors.image && formikAddProduct.touched.image ? (<div className="errorMessage">{formikAddProduct.errors.image}</div>) : null}
-          <input defaultValue={admin.oneProductState.image} placeholder="Image" id="image" name="image" type="file" onChange={event=>{
-            let reader  = new FileReader();
-            reader.onload = ()=>{
-              if(reader.readyState === 2){
+          <input defaultValue={admin.oneProductState.image} multiple placeholder="Image" id="image" name="image" type="file" onChange={event => {
+            let reader = new FileReader();
+            reader.onload = () => {
+              if (reader.readyState === 2) {
                 formikAddProduct.setFieldValue("image", reader.result)
-                // serPreview(reader.result)
               }
             }
             reader.readAsDataURL(event.target.files[0])
           }} onBlur={formikAddProduct.handleBlur} />
+          <div className='productDetailField__img'>
+            <img src={formikAddProduct.values.image} alt="" />
+          </div>
         </span>
 
         <span className="productDetailField productDetailField--desc">

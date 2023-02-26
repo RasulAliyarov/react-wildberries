@@ -1,0 +1,25 @@
+.adminPages {
+    .userDetail {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        &__left {
+            img{
+                width: 300px;
+            }
+        }
+
+        &__right {
+            ul {
+                li {
+                    line-height: 31px;
+                    span {
+                        font-weight: 600;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

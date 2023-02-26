@@ -113,3 +113,17 @@
         }
     }
 }
+@media(max-width: 380px) {
+    .home {
+        &__wrapper {
+            &__products {
+                &__product {
+                    width: 100%;
+                    &__top{
+                        height: unset;
+                    }
+                }
+            }
+        }
+    }
+}

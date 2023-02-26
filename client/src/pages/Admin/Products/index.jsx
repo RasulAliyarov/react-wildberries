@@ -82,7 +82,7 @@ function Products() {
                   <th>Color</th>
                   <th className='descTh'>Description</th>
                   <th className='delTh'>Action</th>
-                  <th className='editTh'>Action</th>
+                  {/* <th className='editTh'>Action</th> */}
                   <th className='detailTh'>Action</th>
                 </tr>
                 {
@@ -105,9 +105,9 @@ function Products() {
                             dispatch(attentionReduce(true))
                             id = p._id
                           }}>Delete</button></td>
-                          <td className='editTd productsTd'><button className='productEdit'>Edit</button></td>
+                          {/* <td className='editTd productsTd'><button className='productEdit'>Edit</button></td> */}
                           <td className='detailTd productsTd'>
-                            <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
+                            <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Edit</Link>
                           </td>
                         </tr>
                       )

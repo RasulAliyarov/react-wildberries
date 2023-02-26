@@ -52,6 +52,7 @@
         &__respMenu {
             display: none;
         }
+
         &__respMenuNone {
             display: none;
         }
@@ -98,6 +99,21 @@
     border-bottom: 1px solid #a22bc0;
 }
 
+.productDetailField--modified {
+    flex-direction: column;
+    align-items: flex-start;
+    .productDetailField__img {
+        padding: 5px 5px;
+        border: 2px solid rgb(173, 173, 173);
+        width: 100%;
+        border-top: 0;
+        min-height: 100px;
+        img {
+            width: 150px;
+        }
+    }
+}
+
 @media(max-width: 680px) {
     .cabinet {
         .cabinetBurger {
@@ -117,6 +133,7 @@
 
             &__respMenu {
                 display: block;
+
                 &__bg {
                     width: 100%;
                     height: 100vh;
@@ -140,7 +157,8 @@
                     align-items: center;
                     flex-direction: column;
                     z-index: 10000;
-                    &__title{
+
+                    &__title {
                         position: absolute;
                         top: 5%;
                         text-transform: uppercase;
@@ -148,6 +166,7 @@
                         font-size: 22px;
                         font-weight: 600;
                     }
+
                     span {
                         margin-bottom: 10px;
                         font-weight: 600;
@@ -159,7 +178,7 @@
                 }
             }
 
-           
+
         }
     }
 }

@@ -50,6 +50,11 @@ function Header() {
                     dispatch(checkAuth(value.data))
                 })
         }
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          });
     }, [])
 
     window.onscroll = function () {
@@ -61,7 +66,6 @@ function Header() {
             dispatch(scrollSizeReducer(false))
         }
     }
-    console.log(wildberries.totalPrice, "total")
     return (
         <>
             <header id="top" className='header'>
@@ -194,10 +198,8 @@ function Header() {
                                                                     <img src={value?.img} alt="" />
                                                                     <span>
                                                                         <h2>{value?.name}</h2>
+                                                                        <h3>{value?.price} ₽</h3>
                                                                     </span>
-                                                                </div>
-                                                                <div>
-                                                                    <h3>{value?.price}</h3>
                                                                 </div>
                                                             </div>
                                                         )

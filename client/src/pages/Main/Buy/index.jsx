@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "./Buy.scss"
 import { Link, useParams } from 'react-router-dom'
-import { productModalReducer, userDataReduce } from "../../../redux/Slices/wildSlice"
+import { userDataReduce } from "../../../redux/Slices/wildSlice"
 import { yesNoReduce } from "../../../redux/Slices/adminSlice"
 import { Images } from "../../../Config/index"
 import { useDispatch, useSelector } from "react-redux"
@@ -24,22 +24,13 @@ function Buy() {
                 if (e) console.log("UserState is Empty")
             })
     }
-    function getProduct(id) {
-        axios.get(`${API_URL}/products/${id}`)
-            .then(res => {
-                dispatch(productModalReducer({ productData: res?.data }))
-            })
-            .catch((e) => {
-                if (e) console.log("Error with get product", e)
-            })
-    }
+
     useEffect(() => {
         window.scrollTo({
             top: 140,
             left: 0,
             behavior: "smooth"
         });
-        getProduct(id)
         getUser()
     }, [admin.userState])
 
@@ -147,10 +138,12 @@ function Buy() {
                             }
                         </ul>
                         <div className='buy__wrapper__right__content__wrapper'>
-                            <span><img src={wildberries?.productModalState?.productData?.image} alt="" /></span>
-                            <span>Name: <h4>{wildberries?.productModalState?.productData?.name}</h4></span>
-                            <span>Brand: <h4>{wildberries?.productModalState?.productData?.brand}</h4></span>
-                            <span>Price: <h4>{wildberries?.productModalState?.productData?.price} ₽</h4></span>
+                            <span><img src={wildberries?.productForBuyState?.img} alt="" /></span>
+                            <span>Name: <h4>{wildberries?.productForBuyState?.name}</h4></span>
+                            <span>Brand: <h4>{wildberries?.productForBuyState?.brand}</h4></span>
+                            <span>Count: <h4>{wildberries?.productForBuyState?.count}</h4></span>
+                            <span>Color: <h4>{wildberries?.productForBuyState?.color}</h4></span>
+                            <span>Total Price: <h4>{wildberries?.productForBuyState?.price * wildberries?.productForBuyState?.count} ₽</h4></span>
                         </div>
                     </div>
                 </div>

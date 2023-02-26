@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import "./Cabinet.scss"
 import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
-import { Icons, Images } from "../../../../Config/index"
+import { Icons } from "../../../../Config/index"
 import { respCabinetNavReduce } from "../../../../redux/Slices/wildSlice"
 
 function Cabinet() {
@@ -12,6 +12,10 @@ function Cabinet() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    // if (!admin?.userState?.roles) navigate("*")
+  }, [admin?.userState])
+  // console.log(message)
   return (
     <>
       <button className='cabinetBurger' onClick={() => dispatch(respCabinetNavReduce(!wildSlice?.respCabinetNavToggle))}>
@@ -36,7 +40,7 @@ function Cabinet() {
       </div >
 
       <div className={wildSlice?.respCabinetNavToggle ? "cabinet__wrapper__respMenu" : "cabinet__wrapper__respMenuNone"}>
-        <div className="cabinet__wrapper__respMenu__bg" onClick={()=> dispatch(respCabinetNavReduce(false))}></div>
+        <div className="cabinet__wrapper__respMenu__bg" onClick={() => dispatch(respCabinetNavReduce(false))}></div>
         <div className="cabinet__wrapper__respMenu__content">
           <h3 className='cabinet__wrapper__respMenu__content__title'>wilberries</h3>
           <span>

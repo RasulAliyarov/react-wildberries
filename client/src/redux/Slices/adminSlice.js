@@ -8,6 +8,7 @@ const adminSlice = createSlice({
     initialState: {
         isAuth: false,
         userState: {},
+        userDetailState: {},
         adminState: {},
         isLoadingState: false,
         productsState: [],
@@ -133,6 +134,10 @@ const adminSlice = createSlice({
         priceToggleReduce: (state, action) => {
             state.priceToggleState = action.payload
         },
+        userDetailReduce: (state, action) => {
+            state.userDetailState = action.payload
+   
+        },
         searchStringReduce: (state, action) => {
             state.searchString.string = action.payload.string
             state.searchString.category = action.payload.category
@@ -148,6 +153,7 @@ export const {
     searchStringReduce,
     logoutReduce,
     adminLogoutReuce,
+    userDetailReduce,
     priceToggleReduce,
     registrationReduce,
     deleteProduct,

@@ -347,7 +347,7 @@
 
                     &__left {
                         padding: 28px 28px 40px 28px;
-                        width: 100%;
+                        width: 50%;
 
                         &__top {
                             display: flex;
@@ -358,7 +358,6 @@
                             .baseSetTitle {
                                 font-weight: 700;
                                 color: rgb(36, 36, 36);
-
                             }
 
                             span {
@@ -398,7 +397,8 @@
                         }
 
                         &__addresses {
-                            overflow-y: scroll;
+                            overflow-y: auto;
+                            overflow-x: hidden;
                             height: 300px;
 
                             &::-webkit-scrollbar {
@@ -413,7 +413,7 @@
                             }
 
                             &__address {
-                                width: 450px;
+                                width: 100%;
                                 padding: 15px;
                                 border-radius: 8px;
                                 cursor: pointer;
@@ -454,6 +454,8 @@
                     }
 
                     &__right {
+                        width: 50%;
+
                         .deliveredMap {}
                     }
                 }
@@ -511,7 +513,7 @@
                 }
             }
         }
-        
+
         &__saleRules {
             ul {
                 padding-left: 20px;
@@ -530,11 +532,13 @@
         }
 
         &__useRules {
-            ul{
+            ul {
                 padding-left: 15px;
-                li{
+
+                li {
                     display: flex;
-                    p{
+
+                    p {
                         margin: 2px 3px 0;
                     }
                 }
@@ -681,6 +685,34 @@
                         }
                     }
                 }
+
+                &__bottom {
+                    &__map {
+                        &__left {
+                            &__top {
+                                flex-direction: column;
+                                align-items: unset;
+                                span {
+                                    margin-top: 10px;
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+
+                                    input {
+                                        width: 100%;
+                                    }
+                                }
+                            }
+
+                            &__addresses {
+                                &__address {
+                                    margin: 0;
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -713,30 +745,6 @@
                         }
                     }
                 }
-
-                &__bottom {
-                    &__map {
-                        &__left {
-                            width: 50%;
-
-                            &__top {
-                                flex-direction: column;
-                                align-items: unset;
-
-                                span {
-                                    margin-top: 10px;
-                                    width: 100%;
-                                    display: flex;
-                                    justify-content: space-between;
-
-                                    input {
-                                        width: 100%;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }
@@ -747,14 +755,13 @@
         &__wrapper {
             &__delivered {
                 &__top {
-                    padding: 48px 58px 30px;
+                    padding: 28px 38px 30px;
                     flex-direction: column;
 
                     &__left {
                         h1 {
-                            font-size: 36px;
+                            font-size: 30px;
                         }
-
                         div {
                             flex-direction: row;
                             gap: 15px;
@@ -767,7 +774,6 @@
                         }
                     }
                 }
-
                 &__bottom {
                     &__map {
                         display: flex;
@@ -782,6 +788,11 @@
                                     margin: 0;
                                     width: 100%;
                                 }
+                            }
+                        }
+                        &__right {
+                            .deliveredMap {
+                                height: 300px;
                             }
                         }
                     }
@@ -819,6 +830,46 @@
                     .accordion__heading {
                         h3 {
                             font-size: 14px;
+                        }
+                    }
+                }
+            }
+
+            &__delivered {
+                padding: 0 0 30px;
+                &__top {
+                    padding: 15px;
+                    &__left {
+                        h1 {
+                            font-size: 25px;
+                            line-height: 25px;
+                        }
+
+                        div {
+                            div {
+                                font-size: 15px;
+                                display: flex;
+                                align-items: center;
+                                gap: 0;
+
+                                img {
+                                    width: 15%;
+                                }
+
+                                span {
+                                    line-height: 22px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &__bottom {
+                    &__map {
+                        &__right {
+                            .deliveredMap {
+                                height: 200px;
+                            }
                         }
                     }
                 }

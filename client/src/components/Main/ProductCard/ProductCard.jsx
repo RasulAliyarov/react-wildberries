@@ -10,7 +10,7 @@ function ProductCard({ p }) {
 
     return (
         <div className='home__wrapper__products__product'>
-            <Link to="/detail">
+            <Link to={`/detail/${p?._id}`}>
                 <div className="home__wrapper__products__product__top">
                     <img src={p.image} alt="" />
 

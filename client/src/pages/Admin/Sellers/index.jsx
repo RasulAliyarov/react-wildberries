@@ -56,7 +56,6 @@ function Seller() {
                   <th>country</th>
                   <th>Roles</th>
                   <th className='delTh'>Action</th>
-                  <th className='editTh'>Action</th>
                   <th className='detailTh'>Action</th>
                 </tr>
                 {
@@ -77,10 +76,8 @@ function Seller() {
                             dispatch(attentionReduce(true))
                             id = p._id
                           }}>Delete</button></td>
-                          <td className='editTd userData productsTd'><button className='productEdit'>Edit</button></td>
                           <td className='detailTd userData productsTd'>
-                            <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Detail</Link>
-                          </td>
+                            <Link className='adminProductDetail' to={`/admin/panel/user/${p._id}`}>Detail</Link>                          </td>
                         </tr>
                       )
                     })

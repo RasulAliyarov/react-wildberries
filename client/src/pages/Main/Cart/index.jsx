@@ -76,7 +76,7 @@ function Cart() {
           </div>
           <div className='cart__wrapper__content__bill'>
             <div className="cart__wrapper__content__bill__top">
-              <h4>Общая сумма</h4>
+              <h4>Чек</h4>
             </div>
             <ul className="cart__wrapper__content__bill__middle">
               {
