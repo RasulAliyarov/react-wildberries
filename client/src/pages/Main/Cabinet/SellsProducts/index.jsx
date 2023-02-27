@@ -25,7 +25,12 @@ function SellsProducts() {
 
   useEffect(() => {
     getProduct()
-  }, [admin?.userState])
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, [wildberries?.buyProducts])
   return (
     <div className='buyProducts sellsProducts contentBg'>
       {

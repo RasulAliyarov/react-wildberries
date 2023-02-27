@@ -47,6 +47,7 @@ function Buy() {
             dispatch(yesNoReduce("neitral"))
         }, 2400)
     }
+
     return (
         <div className='buy contentBg'>
             <div className="buy__wrapper container1500">
@@ -126,18 +127,43 @@ function Buy() {
                         onClick={() => handleBuy()
                         }>Купить</button>
                 </div>
+
                 <div className="buy__wrapper__right">
                     <div className="buy__wrapper__right__content">
-                        <ul style={id ? { display: 'none' } : { display: 'block' }}>
-                            {
-                                wildberries.cart.map(p => {
-                                    return (
-                                        <li key={p.id}><span>{p.name}</span><span>{p.price} ₽</span></li>
-                                    )
-                                })
-                            }
-                        </ul>
-                        <div className='buy__wrapper__right__content__wrapper'>
+                        <div className="buy__wrapper__right__content__cover"
+                         style={id ? { display: 'none' } : { display: 'block' }}>
+                            <h6><span>Total price: </span>{wildberries.totalPrice}</h6>
+                            <table className='buy__wrapper__right__content__cover__list'>
+
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Count</th>
+                                        <th>Total price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        wildberries.cart.map(p => {
+                                            return (
+                                                <tr key={p.id}>
+                                                    <td><img src={p?.img} alt="" /></td>
+                                                    <td>{p?.name} ₽</td>
+                                                    <td>{p?.price} ₽</td>
+                                                    <td>{p?.count}</td>
+                                                    <td>{p?.price * p?.count}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody >
+                            </table>
+                        </div>
+
+                        <div className='buy__wrapper__right__content__wrapper'
+                            style={!id ? { display: 'none' } : { display: 'block' }}>
                             <span><img src={wildberries?.productForBuyState?.img} alt="" /></span>
                             <span>Name: <h4>{wildberries?.productForBuyState?.name}</h4></span>
                             <span>Brand: <h4>{wildberries?.productForBuyState?.brand}</h4></span>

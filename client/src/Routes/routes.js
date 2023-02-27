@@ -25,6 +25,7 @@ import Favorite from "../pages/Main/Favorite"
 import Categories from "../pages/Admin/Categories"
 import BuyProducts from "../pages/Main/BuyProducts"
 import UserDetail from "../pages/Admin/UserDetail"
+import ProductOfCategory from "../pages/Main/ProductOfCategory"
 
 export const router = createBrowserRouter(
     [
@@ -58,6 +59,10 @@ export const router = createBrowserRouter(
                     element: <Favorite />
                 },
                 {
+                    path: "productofcategory/:name",
+                    element: <ProductOfCategory />
+                },
+                {
                     path: "sellerRegistration",
                     element: <StartSell />
                 },
@@ -67,6 +72,10 @@ export const router = createBrowserRouter(
                 },
                 {
                     path: "buy/:id",
+                    element: <Buy />
+                },
+                {
+                    path: "buy",
                     element: <Buy />
                 },
                 {

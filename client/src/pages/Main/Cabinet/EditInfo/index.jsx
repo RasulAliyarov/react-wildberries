@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import _api, { API_URL } from "../../../../http";
 import { useFormik } from "formik"
-import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { userDataReduce } from "../../../../redux/Slices/wildSlice"
 import { isLoadingReduce } from "../../../../redux/Slices/adminSlice"
 import "./EditInfo.scss"
 import { Images } from "../../../../Config/index"
 import { Helmet } from "react-helmet";
+import { toast } from "react-hot-toast"
 
 function EditInfo() {
   const wildberries = useSelector(state => state.wildberries)
@@ -23,7 +23,8 @@ function EditInfo() {
         dispatch(userDataReduce(res?.data))
       })
       .catch((e) => {
-        if (e) console.log("UserState is Empty")
+        if (e) {
+        }
       })
     dispatch(isLoadingReduce(false))
   }
@@ -32,16 +33,6 @@ function EditInfo() {
     getUser()
   }, [admin?.userState])
 
-  const UserInfoValidation = Yup.object().shape({
-    // phonenumber: Yup.string().required("Requred"),
-    // postIndex: Yup.string().required("Requred"),
-    // country: Yup.string().required("Requred"),
-    // bankCard: Yup.string().required("Requred"),
-    email: Yup.string().required("Requred"),
-    // activated: Yup.string().required("Requred"),
-    fullname: Yup.string().required("Requred"),
-    username: Yup.string().required("Requred"),
-  })
   const formikUserInfo = useFormik({
     initialValues: {
       phonenumber: "",
@@ -49,23 +40,59 @@ function EditInfo() {
       country: "",
       bankCard: "",
       email: "",
-      // activated: "",
       fullname: "",
       username: "",
     },
     validateOnBlur: "",
-    validationSchema: UserInfoValidation,
     onSubmit: (values) => {
-      _api.put(`${API_URL}/editUser/${admin?.userState?.id}`, { ...values }).then(r => {
+      let entries = Object.entries(values)
+      let nonEmptyOrNull = entries.filter(([key, val]) => val !== '' && val !== null)
+      let output = Object.fromEntries(nonEmptyOrNull)
+      if (Object.keys(output).length === 0) {
+        toast.error(`Нет изменений.`, {
+          style: {
+            border: '1px solid #4C1174',
+            padding: '16px',
+            color: '#4C1174',
+          },
+          iconTheme: {
+            primary: '#4C1174',
+            secondary: '#FFFAEE',
+          },
+        });
+        return
+      }
+
+      _api.put(`${API_URL}/editUser/${admin?.userState?.id}`, { ...output }).then(r => {
         if (r?.data)
-          console.log("User is update")
+          toast.success(`Данные успешно изменены.`, {
+            style: {
+              border: '1px solid #4C1174',
+              padding: '16px',
+              color: '#4C1174',
+            },
+            iconTheme: {
+              primary: '#4C1174',
+              secondary: '#FFFAEE',
+            },
+          });
       }).catch(e => {
         if (e)
-          console.log(e, "Error")
+          toast.error(`Ошибка.`, {
+            style: {
+              border: '1px solid #4C1174',
+              padding: '16px',
+              color: '#4C1174',
+            },
+            iconTheme: {
+              primary: '#4C1174',
+              secondary: '#FFFAEE',
+            },
+          });
       })
-      console.log(values)
     }
   })
+
   return (
     <div className="editInfo">
       {
@@ -128,7 +155,7 @@ function EditInfo() {
       }
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{admin?.userState?.username} - Edit</title>
+        <title>{`${admin?.userState?.username ? ' ' + admin?.userState?.username : ''} - Edit`}</title>
       </Helmet>
     </div>
   )

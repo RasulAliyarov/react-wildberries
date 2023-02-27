@@ -3,10 +3,11 @@ import "./AdminLogin.scss"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import { Icons, Images } from "../../../Config"
-import { loginReduce, loginAdminReduce } from "../../../redux/Slices/adminSlice"
+import { loginAdminReduce } from "../../../redux/Slices/adminSlice"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import _api from '../../../http';
+import { toast } from "react-hot-toast"
 
 function AdminLogin() {
 
@@ -30,9 +31,25 @@ function AdminLogin() {
         onSubmit: (values) => {
             _api.post("/loginAdmin", ({ ...values }))
                 .then((value) => {
-                    dispatch(loginAdminReduce(value.data))
+                    dispatch(loginAdminReduce(value?.data))
                     navigate("/admin/panel")
                     formikAdminSignIn.resetForm()
+                })
+                .catch(e => {
+                    console.log(e)
+                    if (e) {
+                        toast.error(`Пользователь не обнаружен`, {
+                            style: {
+                                border: '1px solid #4C1174',
+                                padding: '16px',
+                                color: '#4C1174',
+                            },
+                            iconTheme: {
+                                primary: '#4C1174',
+                                secondary: '#FFFAEE',
+                            },
+                        });
+                    }
                 })
         }
     })

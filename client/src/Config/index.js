@@ -1,18 +1,26 @@
 import { ImLocation } from "react-icons/im";
-import { MdOutlinePhotoCamera, MdSell, MdOutlineAlternateEmail, MdOutlineChildFriendly, MdAppRegistration, MdOutlineSearch, MdPassword } from "react-icons/md";
-import { AiOutlineArrowUp, AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import {
+    MdOutlinePhotoCamera, MdBlender, MdOutlineSportsBaseball,
+    MdSell, MdOutlineAlternateEmail, MdOutlineChildFriendly,
+    MdAppRegistration, MdOutlineSearch, MdPassword, MdOutlineHealthAndSafety
+} from "react-icons/md";
+import {
+    AiOutlineArrowUp, AiOutlineMan, AiOutlineCar,
+    AiFillDelete, AiFillHeart, AiOutlineAlignRight, AiOutlineWoman, AiOutlineHeart, AiFillStar
+} from "react-icons/ai";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { GiConverseShoe, GiSmartphone, GiPostStamp,GiHamburgerMenu } from "react-icons/gi";
+import { GiConverseShoe,GiBigDiamondRing, GiDrill, GiJewelCrown, GiSmartphone, GiPostStamp, GiHamburgerMenu } from "react-icons/gi";
 import { CgLogIn } from "react-icons/cg";
-import { HiUserCircle,HiHome } from "react-icons/hi";
+import { HiUserCircle, HiHome } from "react-icons/hi";
 import { GrContactInfo } from "react-icons/gr";
-import { FaUserCircle, FaMoneyBillWave } from "react-icons/fa";
+import { FaUserCircle, FaPaw, FaMoneyBillWave } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
-import { TbWorld } from "react-icons/tb";
-import { BsFillCartFill } from "react-icons/bs";
+import { TbWorld,TbMountain, TbArmchair } from "react-icons/tb";
+import { BsFillCartFill, BsBook } from "react-icons/bs";
 import { TiArrowUnsorted } from "react-icons/ti";
-import { TbListSearch } from "react-icons/tb";
+import { TbListSearch, TbMeat } from "react-icons/tb";
+import { RiBearSmileLine, RiPencilRuler2Line } from "react-icons/ri";
 
 import RusFlag from "../images/Flags/RusFlag.svg"
 import BelFlag from "../images/Flags/BelFlag.svg"
@@ -93,6 +101,21 @@ export const Icons = {
     Home: <HiHome />,
     HamburgerMenu: <GiHamburgerMenu />,
     Dollar: <FaMoneyBillWave />,
+    Man: <AiOutlineMan />,
+    Toys: <RiBearSmileLine />,
+    Furnuture: <TbArmchair />,
+    Meat: <TbMeat />,
+    Blender: <MdBlender />,
+    Paw: <FaPaw />,
+    SportsBaseball: <MdOutlineSportsBaseball />,
+    Car: <AiOutlineCar />,
+    Book: <BsBook />,
+    JewelCrown: <GiJewelCrown />,
+    Drill: <GiDrill />,
+    Office: <RiPencilRuler2Line />,
+    Health: <MdOutlineHealthAndSafety />,
+    Mountain: <TbMountain />,
+    Ring: <GiBigDiamondRing />,
 }
 
 

@@ -1,6 +1,53 @@
-.editProduct{
+.editProduct {
     min-height: 500px;
     display: flex;
     width: 100%;
     justify-content: space-between;
+
+    .productDetail {
+        .productDetailField {
+            position: relative;
+        }
+    }
+}
+.dataListPlugin {
+    width: 100%;
+    .react-datalist-input__listbox {
+        background-color: white;
+        width: fit-content;
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        z-index: 5;
+        padding: 4px 0;
+        position: absolute;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        max-height: 230px;
+        overflow-y: auto;
+    }
+
+    .react-datalist-input__textbox {
+        width: 100% !important;
+    }
+
+    .react-datalist-input__listbox {
+        z-index: 4;
+
+        .react-datalist-input__listbox-option {
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            transition: .4s;
+            cursor: pointer;
+            opacity: .8;
+
+            &:hover {
+                background-color: rgb(232, 232, 232);
+                transition: .4s;
+            }
+
+        }
+    }
 }

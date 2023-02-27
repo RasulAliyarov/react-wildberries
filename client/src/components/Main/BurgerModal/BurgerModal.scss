@@ -26,7 +26,7 @@
         &__list {
             height: 100vh;
             overflow-y: auto;
-
+            padding-bottom: 30px;
             &::-webkit-scrollbar {
                 width: 5px;
                 display: none;

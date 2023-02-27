@@ -16,7 +16,7 @@ function StartSell() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (admin.userState.roles.includes("SELLER")) {
+        if (admin?.userState?.roles?.includes("SELLER")) {
             navigate("/")
         }
     })
@@ -27,10 +27,10 @@ function StartSell() {
         if (state) {
             UserService.updateStatus(admin.userState.id, { ...startSellerData })
             formikStartSeller.resetForm()
-            navigate("/")
         }
         setTimeout(() => {
             dispatch(yesNoReduce("neitral"))
+            navigate("/")
         }, 2400)
     }
 
@@ -50,7 +50,7 @@ function StartSell() {
         onSubmit: (values) => {
             if (!admin?.userState?.activated) {
                 return (
-                    toast.error('Активируйте профиль.', { // saddddassssssssssssssssssss WRITE NAME
+                    toast.error('Активируйте профиль.', { 
                         style: {
                             border: '1px solid #4C1174',
                             padding: '16px',
@@ -63,7 +63,6 @@ function StartSell() {
                     })
                 )
             }
-            console.log("salam")
             startSellerData = values
             dispatch(startSellerModalReduce(true))
         }

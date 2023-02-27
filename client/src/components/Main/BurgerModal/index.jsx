@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { burgerModaToggleReducer } from "../../../redux/Slices/wildSlice"
 import { Icons, Images } from "../../../Config/index"
+import { icons } from 'react-icons/lib';
 
 function BurgerModal() {
     const wildberries = useSelector(state => state.wildberries)
@@ -21,7 +22,7 @@ function BurgerModal() {
                 }}>⨉</button>
                 <ul className='burgerModal__content__list'>
                     <li >
-                        <Link to="#">{Icons.Woman} Женщинам</Link>
+                        <Link to="/productofcategory/Женщинам">{Icons.Woman} Женщинам</Link>
                         <ul className='underList'>
                             <h4>Женщинам</h4>
                             <li className='underList__link'>
@@ -110,7 +111,7 @@ function BurgerModal() {
                         </div>
                     </li>
                     <li>
-                        <Link to="#">{Icons.Shoes}Обувь</Link>
+                        <Link to="/productofcategory/Обувь">{Icons.Shoes}Обувь</Link>
                         <ul className='underList'>
                             <h4>Женщинам</h4>
                             <li className='underList__link'>
@@ -125,83 +126,63 @@ function BurgerModal() {
                         </ul>
                     </li>
                     <li>
-                        <Link to="#">{Icons.Child}Детям</Link>
+                        <Link to="/productofcategory/Детям">{Icons.Child}Детям</Link>
                     </li>
                     <li>
-                        <Link to="#">Мужчинам</Link>
+                        <Link to="/productofcategory/Мужчинам">{Icons.Man}Мужчинам</Link>
                     </li>
                     <li>
-                        <Link to="#">Дом</Link>
+                        <Link to="/productofcategory/Дом">{Icons.Home}Дом</Link>
                     </li>
                     <li>
-                        <Link to="#">Красота</Link>
+                        <Link to="/productofcategory/Аксессуары">{Icons.Ring}Аксессуары</Link>
                     </li>
                     <li>
-                        <Link to="#">Аксессуары</Link>
+                        <Link to="/productofcategory/Электроника">{Icons.Camera}Электроника</Link>
                     </li>
                     <li>
-                        <Link to="#">Электроника</Link>
+                        <Link to="/productofcategory/Игрушки">{Icons.Toys}Игрушки</Link>
                     </li>
                     <li>
-                        <Link to="#">Игрушки</Link>
+                        <Link to="/productofcategory/Мебель">{Icons.Furnuture}Мебель</Link>
                     </li>
                     <li>
-                        <Link to="#">Мебель</Link>
+                        <Link to="/productofcategory/Продукты">{Icons.Meat}Продукты</Link>
                     </li>
                     <li>
-                        <Link to="#">Товары для взрослых</Link>
+                        <Link to="/productofcategory/Бытовая техника">{Icons.Blender}Бытовая техника</Link>
                     </li>
                     <li>
-                        <Link to="#">Продукты</Link>
+                        <Link to="/productofcategory/Зоотовары">{Icons.Paw}Зоотовары</Link>
                     </li>
                     <li>
-                        <Link to="#">Бытовая техника</Link>
+                        <Link to="/productofcategory/Спорт">{Icons.SportsBaseball}Спорт</Link>
                     </li>
                     <li>
-                        <Link to="#">Зоотовары</Link>
+                        <Link to="/productofcategory/Автотовары">{Icons.Car}Автотовары</Link>
                     </li>
                     <li>
-                        <Link to="#">Спорт</Link>
+                        <Link to="/productofcategory/Книги">{Icons.Book}Книги</Link>
                     </li>
                     <li>
-                        <Link to="#">Автотовары</Link>
+                        <Link to="/productofcategory/Ювелирные изделия">{Icons.JewelCrown}Ювелирные изделия</Link>
                     </li>
                     <li>
-                        <Link to="#">Книги</Link>
+                        <Link to="/productofcategory/Для ремонта">{Icons.Drill}Для ремонта</Link>
                     </li>
                     <li>
-                        <Link to="#">Premium</Link>
+                        <Link to="/productofcategory/Канцтовары">{Icons.Office}Канцтовары</Link>
                     </li>
                     <li>
-                        <Link to="#">Ювелирные изделия</Link>
+                        <Link to="/productofcategory/Сад и дача">{Icons.Mountain}Сад и дача</Link>
                     </li>
                     <li>
-                        <Link to="#">Для ремонта</Link>
+                        <Link to="/productofcategory/Здоровье">{Icons.Health}Здоровье</Link>
                     </li>
                     <li>
-                        <Link to="#">Сад и дача</Link>
+                        <Link to="/productofcategory/Путешествия">{Icons.World}Путешествия</Link>
                     </li>
-                    <li>
-                        <Link to="#">Здоровье</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Канцтовары</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Цифровые товары</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Акции</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Сделано в Москве</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Путешествия</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Бренды</Link>
-                    </li>
+               
                 </ul>
             </div>
         </div>

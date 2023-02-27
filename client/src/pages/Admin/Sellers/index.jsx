@@ -23,6 +23,12 @@ function Seller() {
   }
   useEffect(() => {
     getData()
+    dispatch(searchStringReduce({
+      string: "",
+      category: "",
+      username: "",
+      country: ""
+    }))
   }, [])
 
   function handlerAttentioModal(state, imgState) {
@@ -47,41 +53,45 @@ function Seller() {
             </div>
             <div className="adminPages__wrapper__bottom">
               <table className='adminPages__wrapper__bottom__table'>
-                <tr>
-                  <th>#</th>
-                  <th>Full name</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Phone number</th>
-                  <th>country</th>
-                  <th>Roles</th>
-                  <th className='delTh'>Action</th>
-                  <th className='detailTh'>Action</th>
-                </tr>
-                {
-                  admin?.sellersState?.
-                    filter(s => s.username?.toLowerCase()?.includes(admin.searchString?.username?.toLowerCase())
-                      || s.country?.toLowerCase()?.includes(admin.searchString?.country?.toLowerCase())).
-                    map((p, index) => {
-                      return (
-                        <tr key={p._id} className="contentRow">
-                          <td className='userData productsTd'>{index}</td>
-                          <td className='userData productsTd'>{p?.fullname}</td>
-                          <td className='userData productsTd'>{p?.username}</td>
-                          <td className='userData productsTd'>{p?.email}</td>
-                          <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
-                          <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
-                          <td className='userData productsTd'>{p?.roles}</td>
-                          <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
-                            dispatch(attentionReduce(true))
-                            id = p._id
-                          }}>Delete</button></td>
-                          <td className='detailTd userData productsTd'>
-                            <Link className='adminProductDetail' to={`/admin/panel/user/${p._id}`}>Detail</Link>                          </td>
-                        </tr>
-                      )
-                    })
-                }
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Full name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>country</th>
+                    <th>Roles</th>
+                    <th className='delTh'>Action</th>
+                    <th className='detailTh'>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    admin?.sellersState?.
+                      filter(s => s.username?.toLowerCase()?.includes(admin.searchString?.username?.toLowerCase())
+                        || s.country?.toLowerCase()?.includes(admin.searchString?.country?.toLowerCase())).
+                      map((p, index) => {
+                        return (
+                          <tr key={p._id} className="contentRow">
+                            <td className='userData productsTd'>{index}</td>
+                            <td className='userData productsTd'>{p?.fullname}</td>
+                            <td className='userData productsTd'>{p?.username}</td>
+                            <td className='userData productsTd'>{p?.email}</td>
+                            <td className='userData productsTd'>{p?.phonenumber ? p?.phonenumber : "📞"}</td>
+                            <td className='userData productsTd'>{p?.country ? p?.country : "🏴"}</td>
+                            <td className='userData productsTd'>{p?.roles}</td>
+                            <td className='delTd userData productsTd'><button className='productDelete' onClick={() => {
+                              dispatch(attentionReduce(true))
+                              id = p._id
+                            }}>Delete</button></td>
+                            <td className='detailTd userData productsTd'>
+                              <Link className='adminProductDetail' to={`/admin/panel/user/${p._id}`}>Detail</Link>                          </td>
+                          </tr>
+                        )
+                      })
+                  }
+                </tbody>
               </table>
             </div>
             <div className={admin.attentionState ? "attentionModal " : "attentionModalNone"}>

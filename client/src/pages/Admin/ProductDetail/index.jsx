@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import "./ProductDetail.scss"
 import { oneProductReduce, isLoadingReduce } from "../../../redux/Slices/adminSlice"
+import { categoriesReduce } from "../../../redux/Slices/categorySlice"
 import { Editor } from '@tinymce/tinymce-react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -13,6 +14,7 @@ import UserService from '../../../Services/UserService';
 import { useNavigate } from "react-router-dom"
 function ProductDetail() {
     const admin = useSelector(state => state.admin)
+    const category = useSelector(state => state.category)
     const dispatch = useDispatch()
     const editorRef = useRef(null);
     const navigate = useNavigate()
@@ -25,20 +27,18 @@ function ProductDetail() {
         })
         dispatch(isLoadingReduce(false))
     }
+    async function getcategories() {
+        dispatch(isLoadingReduce(true))
+        await axios.get(`http://localhost:8080/api/categories`).then(res => {
+            dispatch(categoriesReduce(res.data))
+        })
+        dispatch(isLoadingReduce(false))
+    }
     useEffect(() => {
         getDataById()
+        getcategories()
     }, [])
 
-    const ProductDetailValidation = Yup.object().shape({
-        name: Yup.string().required("Required"),
-        brand: Yup.string().required("Required"),
-        price: Yup.number().required("Required"),
-        image: Yup.string().required("Required"),
-        category: Yup.string().required("Required"),
-        count: Yup.string().required("Required"),
-        color: Yup.string().required("Required"),
-        desc: Yup.string().required("Required"),
-    })
     const formikProductDetail = useFormik({
         initialValues: {
             name: "",
@@ -51,9 +51,26 @@ function ProductDetail() {
             desc: "",
         },
         validateOnBlur: "",
-        validationSchema: ProductDetailValidation,
         onSubmit: (values) => {
-            UserService.updateProduct(id, { ...values }).then(() => {
+            let entries = Object.entries(values)
+            let nonEmptyOrNull = entries.filter(([key, val]) => val !== '' && val !== null)
+            let output = Object.fromEntries(nonEmptyOrNull)
+            if (Object.keys(output).length === 0) {
+                toast.error(`Нет изменений.`, {
+                    style: {
+                        border: '1px solid #4C1174',
+                        padding: '16px',
+                        color: '#4C1174',
+                    },
+                    iconTheme: {
+                        primary: '#4C1174',
+                        secondary: '#FFFAEE',
+                    },
+                });
+                return
+            }
+
+            UserService.updateProduct(id, { ...output }).then(() => {
                 toast.success('Successfully edited!')
                 navigate("/admin/panel/products")
             }).catch(() => {
@@ -86,7 +103,15 @@ function ProductDetail() {
                             <span className="productDetailField">
                                 <label htmlFor="image">İmage</label>
                                 {formikProductDetail.errors.image && formikProductDetail.touched.image ? (<div className="errorMessage">{formikProductDetail.errors.image}</div>) : null}
-                                <input defaultValue={admin.oneProductState.image} id="image" name="image" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                                <input id="image" multiple name="image" type="file" onChange={event => {
+                                    let reader = new FileReader();
+                                    reader.onload = () => {
+                                        if (reader.readyState === 2) {
+                                            formikProductDetail.setFieldValue("image", reader.result)
+                                        }
+                                    }
+                                    reader.readAsDataURL(event.target.files[0])
+                                }} onBlur={formikProductDetail.handleBlur} />
                             </span>
                             <span className="productDetailField">
                                 {formikProductDetail.errors.price && formikProductDetail.touched.price ? (<div className="errorMessage">{formikProductDetail.errors.price}</div>) : null}
@@ -98,10 +123,13 @@ function ProductDetail() {
                                 <label htmlFor="category">Category</label>
                                 <input defaultValue={admin.oneProductState.category} id="category" name="category" list='categories' type="text" placeholder="Category" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
                                 <datalist id="categories">
-                                    <option value="Cloth" />
-                                    <option value="Man" />
-                                    <option value="Woman" />
-                                    <option value="Home" />
+                                    {
+                                        category.categoriesState?.map(c=>{
+                                            return(
+                                                <option value={c?.categoryName} />
+                                            )
+                                        })
+                                    }
                                 </datalist>
                             </span>
                             <span className="productDetailField">

@@ -26,6 +26,11 @@ function SellerProducts() {
     }
     useEffect(() => {
         getData()
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+        });
     }, [])
 
     function submit(id) {
@@ -96,7 +101,11 @@ function SellerProducts() {
                                 })
                             }
                         </div>
+                        {/* <div className={wildberries?.sellerProducts?.length > 0 ? "CartFull" : "CartEmpty"}>
+                            <img src={Images.FavoriteBG} alt="" />
+                        </div> */}
                     </div>
+
             }
             <Helmet>
                 <meta charSet="utf-8" />

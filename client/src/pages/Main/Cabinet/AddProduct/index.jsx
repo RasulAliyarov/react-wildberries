@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import "../../../Admin/ProductDetail/ProductDetail.scss"
 import { Editor } from '@tinymce/tinymce-react';
 import { toast } from "react-hot-toast"
-import { imageUrlReduce } from "../../../../redux/Slices/wildSlice"
+import { imageUrlReduce, sellerProductsReduce } from "../../../../redux/Slices/wildSlice"
 import { categoriesReduce } from "../../../../redux/Slices/categorySlice"
 import { useNavigate } from "react-router-dom"
 import _api, { API_URL } from '../../../../http';
 import { Helmet } from "react-helmet";
+import DatalistInput from 'react-datalist-input';
 
 function AddProduct() {
   const admin = useSelector(state => state.admin)
@@ -62,12 +63,16 @@ function AddProduct() {
       _api.post(`${API_URL}/addProduct`, { ...values },).then(() => {
         toast.success('Successfully added!')
         dispatch(imageUrlReduce())
+
+        _api.get(`${API_URL}/products`).then(r => {
+          dispatch(sellerProductsReduce(r.data.filter(p => p.user === admin.userState.id && p.deleteState === false)))
+        })
+
         formikAddProduct.resetForm()
-        navigate("/admin/panel/products")
+        navigate(`/cabinet/${admin?.userState?.username}`)
       }).catch(() => {
         toast.error('Failed added!')
       })
-      // console.log(values)
     }
   })
 
@@ -98,16 +103,26 @@ function AddProduct() {
           </span>
           <span className="productDetailField">
             {formikAddProduct.errors.category && formikAddProduct.touched.category ? (<div className="errorMessage">{formikAddProduct.errors.category}</div>) : null}
-            <input value={formikAddProduct.values.category} placeholder="Category" id="category" name="category" list='categories' type="text" onChange={formikAddProduct.handleChange} onBlur={formikAddProduct.handleBlur} />
-            <datalist id="categories">
-              {
+            <DatalistInput
+              inputProps={{
+                name: 'category',
+                onChange: formikAddProduct.handleChange,
+                onBlur: formikAddProduct.handleBlur
+              }}
+              className="dataListPlugin"
+              placeholder='Category'
+              onSelect={async (item) => {
+                await formikAddProduct.setFieldTouched('category');
+                await formikAddProduct.setFieldValue('category', item.value);
+              }}
+              items={
                 category.categoriesState?.map(c => {
                   return (
-                    <option key={c?._id} value={c?.categoryName} />
+                    { id: `${c?._id}`, value: `${c?.categoryName}` }
                   )
                 })
               }
-            </datalist>
+            />
           </span>
         </span>
 

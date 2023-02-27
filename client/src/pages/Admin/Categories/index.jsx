@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Accordion,
@@ -62,7 +61,20 @@ function Categories() {
         onSubmit: (values) => {
             _api.post("/addCategory", ({ ...values }))
                 .then((value) => {
-                    if (!value) return toast.error("Category added is failed")
+                    if (!value) {
+                        toast.error(`Category added is failed.`, {
+                            style: {
+                                border: '1px solid #4C1174',
+                                padding: '16px',
+                                color: '#4C1174',
+                            },
+                            iconTheme: {
+                                primary: '#4C1174',
+                                secondary: '#FFFAEE',
+                            },
+                        });
+                        return
+                    }
 
                     toast.success('Category is added')
                     getCategories()
@@ -80,15 +92,28 @@ function Categories() {
         validateOnBlur: "",
         validationSchema: updateCategoryValidation,
         onSubmit: (values) => {
-            UserService.updateCategory(values.category, values).then(res => {
-                console.log(res)
-                if (!res)
-                    return toast.error("Category edit is failed")
+            UserService.updateCategory(values.category, values)
+                .then(res => {
+                    if (!res) {
+                        toast.error(`Category edit is failed.`, {
+                            style: {
+                                border: '1px solid #4C1174',
+                                padding: '16px',
+                                color: '#4C1174',
+                            },
+                            iconTheme: {
+                                primary: '#4C1174',
+                                secondary: '#FFFAEE',
+                            },
+                        });
+                        return
+                    }
 
-                toast.success('Category is edit')
-                formikUpdateCategory.resetForm()
-                getCategories()
-            })
+                    toast.success('Category is edit')
+                    formikUpdateCategory.resetForm()
+                    getCategories()
+                })
+
         }
     })
 
@@ -100,8 +125,20 @@ function Categories() {
         validationSchema: deleteCategoryValidation,
         onSubmit: (values) => {
             UserService.deleteCategory(values.category).then(res => {
-                if (!res)
-                    return toast.error("Category delete is failed")
+                if (!res) {
+                    toast.error(`Category delete is failed.`, {
+                        style: {
+                            border: '1px solid #4C1174',
+                            padding: '16px',
+                            color: '#4C1174',
+                        },
+                        iconTheme: {
+                            primary: '#4C1174',
+                            secondary: '#FFFAEE',
+                        },
+                    });
+                    return
+                }
 
                 toast.success('Category is deleted')
                 formikDeleteCategory.resetForm()

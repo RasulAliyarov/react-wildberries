@@ -4,13 +4,15 @@
 
     &__wrapper {
         display: flex;
-        justify-content: space-around;  
+        justify-content: space-around;
         padding-top: 60px;
+
         &__left {
-            .sectionTtile{
+            .sectionTtile {
                 margin-top: 0;
             }
-            p { 
+
+            p {
                 a {
                     color: red;
                     transition: .3s;
@@ -22,6 +24,7 @@
                     }
                 }
             }
+
 
             .credit-card-wrap {
                 position: relative;
@@ -250,11 +253,13 @@
         &__right {
             display: flex;
             align-items: center;
+
             &__content {
                 &__wrapper {
                     background-color: #660a79;
                     padding: 20px 20px;
                     border-radius: 6px;
+
                     span {
                         width: 300px;
                         display: flex;
@@ -264,7 +269,7 @@
                         cursor: pointer;
                         border-radius: 5px;
                         border: 1px solid rgb(182, 182, 182);
-                        margin-bottom: 20px;
+                        margin-bottom: 15px;
                         background-color: white;
                         padding: 10px 5px;
                         font-weight: 600;
@@ -288,10 +293,77 @@
                         font-weight: 400;
                     }
                 }
+
+                &__cover {
+                    background-color: #6309a8;
+                    padding: 15px;
+                    border-radius: 10px;
+                    h6{
+                        span{
+                            font-weight: 600;
+                        }
+                        color: white;
+                        padding: 5px 0 15px;
+                    }
+                    &__list {
+                        max-height: 450px;
+                        overflow: auto;
+                        background-color: white;
+                        border-radius: 10px;
+                        &::-webkit-scrollbar {
+                            width: 5px;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            border-radius: 10px;
+                            background-color: #cccccc;
+                        }
+
+                        thead {
+                            border-bottom: 1px solid gray;
+
+                            tr {
+                                th {
+                                    padding: 10px;
+
+                                    &:first-child {
+                                        padding-left: 0;
+                                    }
+
+                                    &:last-child {
+                                        padding-right: 0;
+                                    }
+
+                                }
+                            }
+                        }
+
+                        tbody {
+                            padding: 10px 0;
+
+                            tr {
+                                td {
+                                    padding: 3px 0;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    max-width: 100px;
+                                    vertical-align: middle;
+                                    text-align: center;
+
+                                    img {
+                                        width: 60%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-    .agreeGif--moified{
+
+    .agreeGif--moified {
         width: 300px;
     }
 }

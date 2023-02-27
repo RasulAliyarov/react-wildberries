@@ -57,10 +57,10 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
-        if (user.deleteState) {
+        if (user?.deleteState) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
-        if (user.roles.map((r) => r) === "ADMIN") {
+        if (user?.roles?.includes("ADMIN")) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
 
@@ -80,6 +80,9 @@ class UserService {
         const user = await UserModel.findOne({ username });
 
         if (!user) {
+            throw ApiError.BadRequest("Пользователь не найден");
+        }
+        if(!user.roles.includes("ADMIN")){
             throw ApiError.BadRequest("Пользователь не найден");
         }
 
@@ -201,16 +204,21 @@ class UserService {
 
     async updateStatus(req) {
         const { phonenumber, postIndex, country } = req.body
+        console.log(req.body)
+        console.log(req.params)
         const userRole = await RoleModel.findOne({ value: "SELLER" })
-        // let condidate = await findOne({_id: })
-        if (!condidate.bankCard || !condidate.country || !condidate.postIndex || !condidate.phonenumber) return res.status(400).send("Не все данные введены профиль")
-
+        // let condidate = await UserModel.findOne({ _id: req.params.id })
+        if (!phonenumber || !postIndex|| !country ){
+            return res.status(400).send("Не все данные введены профиль")
+        }
+        console.log("message2")
         const user = UserModel.findByIdAndUpdate(req.params.id, {
             roles: [userRole.value],
             phonenumber: phonenumber,
             postIndex: postIndex,
             country: country,
         });
+            console.log("message3")
         return user;
     }
 

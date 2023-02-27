@@ -15,21 +15,22 @@ function BuyProducts() {
   async function getBuyProducts() {
     dispatch(isLoadingReduce(true))
     await _api.get("getSells").then(res => {
-      dispatch(buyProductsReduce(res.data.filter(p => p.userId._id === admin?.userState?.id)))
+      dispatch(buyProductsReduce(res.data.filter(p => p.userId?._id === admin?.userState?.id)))
+      console.log(res)
       dispatch(isLoadingReduce(false))
     })
   }
   useEffect(() => {
     getBuyProducts()
   }, [admin?.userState])
-  console.log(wildberries.buyProducts, "stte")
+
   return (
     <div className='buyProducts contentBg'>
       {
         admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
           <div className="buyProducts__wrapper container1500">
             <h2 className='sectionTtile sectionTtile--buyModified'>Приобретенные товары</h2>
-            <div className="buyProducts__wrapper__content">
+            <div className="buyProducts__wrapper__content" style={wildberries.buyProducts.length > 0 ? {display: "block"} : {display: "none"}}>
               <table>
                 <thead>
                   <tr>
@@ -68,6 +69,9 @@ function BuyProducts() {
                   }
                 </tbody>
               </table>
+            </div>
+            <div className={wildberries.buyProducts.length > 0 ? "CartFull" : "CartEmpty"}>
+              <img src={Images.FavoriteBG} alt="" />
             </div>
           </div>
       }

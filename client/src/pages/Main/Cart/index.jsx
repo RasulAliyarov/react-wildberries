@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Icons, Images } from "../../../Config/index"
 import "./Cart.scss"
 import { toast } from "react-hot-toast"
-
+import { Link } from "react-router-dom"
 function Cart() {
   const wildberries = useSelector(state => state.wildberries)
   const dispatch = useDispatch()
@@ -92,7 +92,7 @@ function Cart() {
               <span>{wildberries?.totalPrice} ₽</span>
             </div>
             <div className="cart__wrapper__content__bill__bottom">
-              <button onClick={() => { }}>Купить всё</button>
+              <Link className='cart__wrapper__content__bill__bottom__butBtn' to="/buy">Купить всё </Link>
             </div>
           </div>
         </div>

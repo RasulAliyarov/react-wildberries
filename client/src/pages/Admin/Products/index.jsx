@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect} from 'react'
 import "./AdminPanel.scss"
 import { Link } from "react-router-dom"
 import { productsReduce, isLoadingReduce, searchStringReduce, attentionReduce, priceToggleReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
@@ -25,6 +25,12 @@ function Products() {
   }
   useEffect(() => {
     getData()
+    dispatch(searchStringReduce({
+      string: "",
+      category: "",
+      username: "",
+      country: ""
+    }))
   }, [])
 
   function handlerAttentioModal(state, imgState) {
@@ -71,6 +77,7 @@ function Products() {
             </div>
             <div className="adminPages__wrapper__bottom">
               <table className='adminPages__wrapper__bottom__table'>
+                <thead>
                 <tr>
                   <th>#</th>
                   <th>Image</th>
@@ -85,7 +92,9 @@ function Products() {
                   {/* <th className='editTh'>Action</th> */}
                   <th className='detailTh'>Action</th>
                 </tr>
-                {
+                </thead>
+               <tbody>
+               {
                   admin?.productsState?.
                     filter(s => s.name?.toLowerCase()?.includes(admin.searchString?.string?.toLowerCase())
                       || s.category?.toLowerCase()?.includes(admin.searchString?.category?.toLowerCase())).
@@ -113,6 +122,7 @@ function Products() {
                       )
                     })
                 }
+               </tbody>
               </table>
             </div>
             <div className={admin.attentionState ? "attentionModal " : "attentionModalNone"}>

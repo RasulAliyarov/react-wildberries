@@ -28,7 +28,6 @@ function UserDetail() {
     useEffect(() => {
         getDataById()
     }, [])
-    console.log(wildberries?.sellerProducts)
     return (
         <div className='adminPages'>
             {

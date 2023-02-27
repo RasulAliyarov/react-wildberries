@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { useFormik } from "formik"
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import "./EditProduct.scss"
 import { oneProductReduce, isLoadingReduce } from "../../../../redux/Slices/adminSlice"
@@ -14,6 +13,7 @@ import UserService from '../../../../Services/UserService';
 import { useNavigate } from "react-router-dom"
 import { Helmet } from "react-helmet";
 import _api from '../../../../http';
+import DatalistInput from 'react-datalist-input';
 
 function EditProduct() {
     const admin = useSelector(state => state.admin)
@@ -43,16 +43,6 @@ function EditProduct() {
         getCategories()
     }, [])
 
-    const ProductDetailValidation = Yup.object().shape({
-        name: Yup.string().required("Required"),
-        brand: Yup.string().required("Required"),
-        price: Yup.number().required("Required"),
-        image: Yup.string().required("Required"),
-        category: Yup.string().required("Required"),
-        count: Yup.string().required("Required"),
-        color: Yup.string().required("Required"),
-        desc: Yup.string().required("Required"),
-    })
     const formikProductDetail = useFormik({
         initialValues: {
             name: "",
@@ -65,15 +55,54 @@ function EditProduct() {
             desc: "",
         },
         validateOnBlur: "",
-        validationSchema: ProductDetailValidation,
         onSubmit: (values) => {
-            UserService.updateProduct(id, { ...values }).then(() => {
-                toast.success('Successfully edited!')
+            let entries = Object.entries(values)
+            let nonEmptyOrNull = entries.filter(([key, val]) => val !== '' && val !== null )
+            let output = Object.fromEntries(nonEmptyOrNull)
+            if(Object.keys(output).length === 0)
+            {
+                toast.error(`Нет изменений.`, {
+                    style: {
+                      border: '1px solid #4C1174',
+                      padding: '16px',
+                      color: '#4C1174',
+                    },
+                    iconTheme: {
+                      primary: '#4C1174',
+                      secondary: '#FFFAEE',
+                    },
+                  });
+                  return
+                return 
+            }
+
+
+            UserService.updateProduct(id, {...output} ).then(() => {
+                toast.success(`${values.name} успешно изменен.`, {
+                    style: {
+                        border: '1px solid #4C1174',
+                        padding: '16px',
+                        color: '#4C1174',
+                    },
+                    iconTheme: {
+                        primary: '#4C1174',
+                        secondary: '#FFFAEE',
+                    },
+                });
                 navigate(`/cabinet/${admin.userState?.id}`)
             }).catch(() => {
-                toast.error('Failed edited!')
+                toast.error(`Ошибка.`, {
+                    style: {
+                        border: '1px solid #4C1174',
+                        padding: '16px',
+                        color: '#4C1174',
+                    },
+                    iconTheme: {
+                        primary: '#4C1174',
+                        secondary: '#FFFAEE',
+                    },
+                });
             })
-            console.log(values)
         }
     })
 
@@ -106,16 +135,27 @@ function EditProduct() {
                             <span className="productDetailField">
                                 {formikProductDetail.errors.category && formikProductDetail.touched.category ? (<div className="errorMessage">{formikProductDetail.errors.category}</div>) : null}
                                 <label htmlFor="category">Category</label>
-                                <input defaultValue={admin.oneProductState.category} id="category" name="category" list='categories' type="text" placeholder="Category" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
-                                <datalist id="categories">
-                                    {
+                                <DatalistInput
+                                    value={admin.oneProductState.category}
+                                    className="dataListPlugin"
+                                    inputProps={{
+                                        name: 'category',
+                                        onChange: formikProductDetail.handleChange,
+                                        onBlur: formikProductDetail.handleBlur
+                                    }}
+
+                                    onSelect={async (item) => {
+                                        await formikProductDetail.setFieldTouched('category');
+                                        await formikProductDetail.setFieldValue('category', item.value);
+                                    }}
+                                    items={
                                         category.categoriesState?.map(c => {
                                             return (
-                                                <option key={c?._id} value={c?.categoryName} />
+                                                { id: `${c?._id}`, value: `${c?.categoryName}` }
                                             )
                                         })
                                     }
-                                </datalist>
+                                />
                             </span>
                             <span className="productDetailField">
                                 {formikProductDetail.errors.count && formikProductDetail.touched.count ? (<div className="errorMessage">{formikProductDetail.errors.count}</div>) : null}

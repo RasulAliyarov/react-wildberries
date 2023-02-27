@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Icons, Images } from "../../../Config/index"
 import "./ProductModal.scss"
-import { addToCartReducer, productForBuyReduce, counterIncReduce, totalPriceReduce, counterDecReduce } from "../../../redux/Slices/wildSlice"
+import { addToCartReducer, productForBuyReduce, productModalReducer, counterIncReduce, totalPriceReduce, counterDecReduce } from "../../../redux/Slices/wildSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-hot-toast"
 import UserService from "../../../Services/UserService"
@@ -139,6 +139,9 @@ function ProductModal() {
                             count: wildberries?.counterState,
                             price: reducrPath?.price,
                             color: reducrPath?.color,
+                        }))
+                        dispatch(productModalReducer({
+                            state: false,
                         }))
                     }}><i>{Icons.Dollar}</i>Купить</Link>
 

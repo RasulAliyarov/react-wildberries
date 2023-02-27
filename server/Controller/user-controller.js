@@ -224,6 +224,7 @@ class UserController {
         try {
             await userService.updateStatus(req)
             res.json("Статус изменен")
+            console.log("message1")
         }
         catch (e) {
             next(e)

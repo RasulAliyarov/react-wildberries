@@ -14,9 +14,12 @@ function Cabinet() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // if (!admin?.userState?.roles) navigate("*")
-  }, [admin?.userState])
-  // console.log(message)
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, [])
   return (
     <>
       <button className='cabinetBurger' onClick={() => dispatch(respCabinetNavReduce(!wildSlice?.respCabinetNavToggle))}>

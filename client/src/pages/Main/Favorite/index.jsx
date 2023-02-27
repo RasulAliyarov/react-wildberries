@@ -29,7 +29,7 @@ function Favorite() {
 
     return (
         <div className="favorite contentBg">
-         
+
             {
                 admin.isLoadingState ? <div className='loader'><img src={Images.Loader} alt="" /></div> :
 
@@ -64,8 +64,8 @@ function Favorite() {
                             }
                         </div>
                         <div className={wildberries.favoriteState.length > 0 ? "CartFull" : "CartEmpty"}>
-                <img src={Images.FavoriteBG} alt="" />
-            </div>
+                            <img src={Images.FavoriteBG} alt="" />
+                        </div>
                     </div>
             }
 

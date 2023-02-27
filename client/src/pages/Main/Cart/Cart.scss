@@ -250,16 +250,17 @@
                     align-items: center;
                     padding: 5px 10px;
 
-                    button {
+                    &__butBtn {
                         width: 100%;
                         padding: 10px 10px;
                         background-color: white;
                         color: #63117E;
                         font-weight: 700;
                         transition: .4s;
-
+                        border-radius: 4px;
+                        text-align: center;
                         &:hover {
-                            background-color: white;
+                            background-color: rgb(255, 255, 255);
                             opacity: .8;
                         }
                     }

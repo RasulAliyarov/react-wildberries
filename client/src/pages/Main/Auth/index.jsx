@@ -9,6 +9,7 @@ import { Icons, Images } from "../../../Config/index"
 import { loginReduce, registrationReduce, checkAuth } from "../../../redux/Slices/adminSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import _api from "../../../http";
+import { toast } from "react-hot-toast"
 
 function Auth() {
   const navigate = useNavigate()
@@ -31,7 +32,6 @@ function Auth() {
     fullname: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите полное имя"),
     email: Yup.string().email("Не корректный формат").required("Введите емайл"),
     username: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите логин"),
-    // phonenumber: Yup.string().required("Введите номер телефона"),
     password: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите пароль"),
     repeatpassword: Yup.string().max(20, "Cимволов не должно быть больше 20").required("Введите повторно пароль"),
   })
@@ -48,10 +48,24 @@ function Auth() {
       _api.post("/login", ({ ...values }))
         .then((value) => {
           dispatch(loginReduce(value.data))
+          formikSignIn.resetForm()
+          navigate("/")
         })
-
-      formikSignIn.resetForm()
-      navigate("/")
+        .catch(e => {
+          if (e) {
+            toast.error(`Пользователь не обнаружен`, {
+              style: {
+                border: '1px solid #4C1174',
+                padding: '16px',
+                color: '#4C1174',
+              },
+              iconTheme: {
+                primary: '#4C1174',
+                secondary: '#FFFAEE',
+              },
+            });
+          }
+        })
     }
   })
 
@@ -69,10 +83,25 @@ function Auth() {
     onSubmit: (values) => {
       _api.post("/registration", ({ ...values }))
         .then((value) => {
-          dispatch(registrationReduce(value.data))
+          dispatch(registrationReduce(value?.data))
           navigate("/")
+          formikSignUp.resetForm()
         })
-      formikSignUp.resetForm()
+        .catch((e) => {
+          if (e) {
+            toast.error(`Ошибка авторизации`, {
+              style: {
+                border: '1px solid #4C1174',
+                padding: '16px',
+                color: '#4C1174',
+              },
+              iconTheme: {
+                primary: '#4C1174',
+                secondary: '#FFFAEE',
+              },
+            });
+          }
+        })
     }
   })
 
