@@ -116,7 +116,8 @@
                 border: 1px solid #ebebeb;
                 border-radius: 6px;
                 position: relative;
-
+                display: flex;
+                flex-direction: column-reverse;
                 li {
                     padding: 10px;
                     padding: 10px 5px;

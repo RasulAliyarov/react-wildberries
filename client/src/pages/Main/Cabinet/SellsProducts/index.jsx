@@ -30,7 +30,7 @@ function SellsProducts() {
       left: 0,
       behavior: "smooth"
     });
-  }, [wildberries?.buyProducts])
+  }, [admin.userState])
   return (
     <div className='buyProducts sellsProducts contentBg'>
       {
@@ -80,7 +80,7 @@ function SellsProducts() {
       }
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{admin?.userState?.username} - Sells</title>
+        <title>{`${admin?.userState?.username} - Sells`}</title>
       </Helmet>
     </div>
   )

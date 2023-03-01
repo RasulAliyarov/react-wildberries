@@ -4,7 +4,10 @@ import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import { Icons } from "../../../../Config/index"
 import { respCabinetNavReduce } from "../../../../redux/Slices/wildSlice"
+import { checkAuth } from "../../../../redux/Slices/adminSlice"
 import { Helmet } from "react-helmet";
+import { API_URL } from '../../../../http';
+import axios from 'axios';
 
 function Cabinet() {
   const { id } = useParams()
@@ -19,6 +22,11 @@ function Cabinet() {
       left: 0,
       behavior: "smooth"
     });
+
+    axios.get(`${API_URL}/refresh`, { withCredentials: true })
+      .then((value) => {
+        dispatch(checkAuth(value?.data))
+      })
   }, [])
   return (
     <>

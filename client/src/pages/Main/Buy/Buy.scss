@@ -298,18 +298,22 @@
                     background-color: #6309a8;
                     padding: 15px;
                     border-radius: 10px;
-                    h6{
-                        span{
+
+                    h6 {
+                        span {
                             font-weight: 600;
                         }
+
                         color: white;
                         padding: 5px 0 15px;
                     }
+
                     &__list {
                         max-height: 450px;
                         overflow: auto;
                         background-color: white;
                         border-radius: 10px;
+
                         &::-webkit-scrollbar {
                             width: 5px;
                         }

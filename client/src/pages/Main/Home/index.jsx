@@ -72,7 +72,7 @@ function Home() {
             </SwiperSlide>
             <SwiperSlide>
               <a href='#'>
-                <img src={Images.Flaer2} alt="" />
+                <img src={Images.Flaer4} alt="" />
               </a>
             </SwiperSlide>
             <SwiperSlide>
@@ -80,7 +80,32 @@ function Home() {
                 <img src={Images.Flaer3} alt="" />
               </a>
             </SwiperSlide>
+            <SwiperSlide>
+              <a href='#'>
+                <img src={Images.Flaer5} alt="" />
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href='#'>
+                <img src={Images.Flaer6} alt="" />
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href='#'>
+                <img src={Images.Flaer7} alt="" />
+              </a>
+            </SwiperSlide>
 
+            <SwiperSlide>
+              <a href='#'>
+                <img src={Images.Flaer8} alt="" />
+              </a>
+            </SwiperSlide>
+            <SwiperSlide>
+              <a href='#'>
+                <img src={Images.Flaer9} alt="" />
+              </a>
+            </SwiperSlide>
           </Swiper>
         </div>
 

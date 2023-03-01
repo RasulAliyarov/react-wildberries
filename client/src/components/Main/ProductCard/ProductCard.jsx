@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "./ProductCard.scss"
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { productModalReducer } from "../../../redux/Slices/wildSlice"
 import { Link } from "react-router-dom"
 
 function ProductCard({ p }) {
-    const wildberries = useSelector(state => state.wildberries)
     const dispatch = useDispatch()
 
     return (
@@ -18,8 +17,8 @@ function ProductCard({ p }) {
                 </div>
                 <div className="home__wrapper__products__product__bottom">
                     <span className='price'>
-                        <h5>{p.price} ₽ </h5>
-                        <span>615 ₽</span>
+                        <h5><span className='price__price'>{p.price}</span> <span className='price__valyuta'>₽</span> </h5>
+                        <span className='price__lastPrice'>615 ₽</span>
                     </span>
                     <span className='productTitle'>
                         <p>{p.brand}/{p.name}</p>

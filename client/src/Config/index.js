@@ -28,8 +28,13 @@ import KzFlag from "../images/Flags/KzFlag.svg"
 import UzbFlag from "../images/Flags/UzbFlag.png"
 import KirgizFlag from "../images/Flags/KirgizFlag.svg"
 import Flaer1 from "../images/Flaer/Flaer1.jpg"
-import Flaer2 from "../images/Flaer/Flaer2.jpg"
+import Flaer4 from "../images/Flaer/Flaer4.jpg"
 import Flaer3 from "../images/Flaer/Flaer3.jpg"
+import Flaer5 from "../images/Flaer/Flaer5.jpg"
+import Flaer6 from "../images/Flaer/Flaer6.jpg"
+import Flaer7 from "../images/Flaer/Flaer7.jpg"
+import Flaer8 from "../images/Flaer/Flaer8.jpg"
+import Flaer9 from "../images/Flaer/Flaer9.jpg"
 import HowDoOrder1 from "../images/Services/HowDoOrder1.jpg"
 import HowDoOrder2 from "../images/Services/HowDoOrder2.jpg"
 import HowDoOrder3 from "../images/Services/HowDoOrder3.jpg"
@@ -133,8 +138,13 @@ export const Images = {
     Cart: Cart,
 
     Flaer1: Flaer1,
-    Flaer2: Flaer2,
     Flaer3: Flaer3,
+    Flaer4: Flaer4,
+    Flaer5: Flaer5,
+    Flaer6: Flaer6,
+    Flaer7: Flaer7,
+    Flaer8: Flaer8,
+    Flaer9: Flaer9,
 
     FooterApple: FooterApple,
     FooterGoogleplay: FooterGoogleplay,

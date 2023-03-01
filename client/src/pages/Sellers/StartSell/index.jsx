@@ -26,14 +26,14 @@ function StartSell() {
         dispatch(startSellerModalReduce(false))
         if (state) {
             UserService.updateStatus(admin.userState.id, { ...startSellerData })
+           
             formikStartSeller.resetForm()
         }
         setTimeout(() => {
             dispatch(yesNoReduce("neitral"))
-            navigate("/")
+            navigate(`/cabinet/${admin.userState?.id}`)
         }, 2400)
     }
-
     const StartSellerValidation = Yup.object().shape({
         phonenumber: Yup.string().required(),
         postIndex: Yup.string().required(),
@@ -50,7 +50,7 @@ function StartSell() {
         onSubmit: (values) => {
             if (!admin?.userState?.activated) {
                 return (
-                    toast.error('Активируйте профиль.', { 
+                    toast.error('Активируйте профиль.', {
                         style: {
                             border: '1px solid #4C1174',
                             padding: '16px',

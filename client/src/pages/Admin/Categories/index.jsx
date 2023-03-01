@@ -62,7 +62,7 @@ function Categories() {
             _api.post("/addCategory", ({ ...values }))
                 .then((value) => {
                     if (!value) {
-                        toast.error(`Category added is failed.`, {
+                        toast.error(`${values.categoryName} added is failed.`, {
                             style: {
                                 border: '1px solid #4C1174',
                                 padding: '16px',
@@ -76,7 +76,7 @@ function Categories() {
                         return
                     }
 
-                    toast.success('Category is added')
+                    toast.success(`${values.categoryName} is added`)
                     getCategories()
                     formikAddCategory.resetForm()
                 })
@@ -95,7 +95,7 @@ function Categories() {
             UserService.updateCategory(values.category, values)
                 .then(res => {
                     if (!res) {
-                        toast.error(`Category edit is failed.`, {
+                        toast.error(`${values.categoryName} edit is failed.`, {
                             style: {
                                 border: '1px solid #4C1174',
                                 padding: '16px',
@@ -109,7 +109,7 @@ function Categories() {
                         return
                     }
 
-                    toast.success('Category is edit')
+                    toast.success(`${values.categoryName} is edit`)
                     formikUpdateCategory.resetForm()
                     getCategories()
                 })
@@ -126,7 +126,7 @@ function Categories() {
         onSubmit: (values) => {
             UserService.deleteCategory(values.category).then(res => {
                 if (!res) {
-                    toast.error(`Category delete is failed.`, {
+                    toast.error(`${values.category} delete is failed.`, {
                         style: {
                             border: '1px solid #4C1174',
                             padding: '16px',

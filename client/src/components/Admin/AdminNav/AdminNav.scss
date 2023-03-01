@@ -5,22 +5,21 @@
 
     .adminNav {
         width: 300px;
-        height: 100vh;
         background: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/51708d08-0e1c-4701-85da-8de9c20e6b4f/ddve3n8-02e38e2e-f6a8-4a48-8cb5-712d12e01e4b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzUxNzA4ZDA4LTBlMWMtNDcwMS04NWRhLThkZTljMjBlNmI0ZlwvZGR2ZTNuOC0wMmUzOGUyZS1mNmE4LTRhNDgtOGNiNS03MTJkMTJlMDFlNGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.zW7S0eO0njCYJa7P29vpD4Whtyq8D3JmG_jn3ZlCcuA);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
         position: relative;
-
+        min-height: 100vh;
         &::after {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             background-color: black;
             width: 100%;
             opacity: .4;
-            height: 100vh;
-            content: "";
+            height: 100%;
         }
 
         &__wrapper {

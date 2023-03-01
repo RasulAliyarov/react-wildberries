@@ -8,7 +8,7 @@ import { } from "../../../redux/Slices/wildSlice";
 import { productsReduce, isLoadingReduce } from "../../../redux/Slices/adminSlice";
 import { Images } from "../../../Config/index"
 import { Link } from "react-router-dom"
-import { productModalReducer } from "../../../redux/Slices/wildSlice"
+import { productModalReducer,burgerModaToggleReducer} from "../../../redux/Slices/wildSlice"
 import "./ProductOfCategory.scss"
 import ProductModal from "../../../components/Main/ProductModal"
 
@@ -29,9 +29,9 @@ function ProductOfCategory() {
     }
     useEffect(() => {
         getData()
-    }, [])
+        dispatch(burgerModaToggleReducer(false))
+    }, [name])
 
-    console.log(admin.productsState)
     return (
         <div className='productOfCategory contentBg'>
             {
@@ -40,16 +40,11 @@ function ProductOfCategory() {
                         <div className="productOfCategory__wrapper__content">
                             <h2 className='sectionTtile sectionTtile--modified'>{name}</h2>
 
-                            <div className="productOfCategory__wrapper__content__top">
-                                <input type="text" />
-                                <input type="text" />
-                                <button>Sort</button>
-                            </div>
                             <div className="productOfCategory__wrapper__content__products">
                                 {
                                     admin.productsState?.map(p => {
                                         return (
-                                            <div className="productOfCategory__wrapper__content__products__product">
+                                            <div key={p._id} className="productOfCategory__wrapper__content__products__product">
                                                 <Link to={`/detail/${p?._id}`}>
                                                     <div className="productOfCategory__wrapper__content__products__product__top">
                                                         <img src={p.image} alt="" />

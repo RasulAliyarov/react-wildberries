@@ -13,6 +13,7 @@ const wildSlice = createSlice({
         sellerProducts: [],
         buyProducts: [],
         counterState: 1,
+        languageState: "RUB",
         userData: {},
         productForBuyState: {},
         sellerDeleteProducts: [],
@@ -60,7 +61,6 @@ const wildSlice = createSlice({
             state.totalPrice -= action.payload.price * action.payload.count
         },
         totalPriceReduce: (state, action) => {
-            console.log(action)
             state.totalPrice += action.payload.price * action.payload.count
         },
         favoriteReduce: (state, action) => {
@@ -86,6 +86,9 @@ const wildSlice = createSlice({
         },
         respCabinetNavReduce: (state, action) => {
             state.respCabinetNavToggle = action.payload
+        },
+        languageReduce: (state, action) => {
+            state.languageState = action.payload
         },
         counterIncReduce: (state, action) => {
             state.counterState += action.payload
@@ -116,6 +119,7 @@ export const {
     respCabinetReduce,
     respSearchReduce,
     productForBuyReduce,
+    languageReduce,
     imageUrlReduce,
     counterDecReduce,
     deleteToCartReducer,

@@ -31,7 +31,7 @@ function SellerProducts() {
             left: 0,
             behavior: "smooth"
         });
-    }, [])
+    }, [admin.userState])
 
     function submit(id) {
         confirmAlert({

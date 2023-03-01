@@ -37,11 +37,9 @@ function Buy() {
     async function handleBuy() {
         await axios.post(`${API_URL}/newSell`, { userId: admin?.userState?.id, productId: id }).then(r => {
             if (r) {
-                console.log("succes", r)
                 dispatch(yesNoReduce("yes"))
             }
         }).catch(e => {
-            console.log("error", e)
         })
         setTimeout(() => {
             dispatch(yesNoReduce("neitral"))

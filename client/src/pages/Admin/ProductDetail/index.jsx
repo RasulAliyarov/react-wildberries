@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { useFormik } from "formik"
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import "./ProductDetail.scss"
 import { oneProductReduce, isLoadingReduce } from "../../../redux/Slices/adminSlice"
@@ -12,6 +11,8 @@ import { toast } from "react-hot-toast"
 import { Images } from "../../../Config"
 import UserService from '../../../Services/UserService';
 import { useNavigate } from "react-router-dom"
+import {DatalistInput} from "react-datalist-input"
+
 function ProductDetail() {
     const admin = useSelector(state => state.admin)
     const category = useSelector(state => state.category)
@@ -91,18 +92,50 @@ function ProductDetail() {
                         </span>
                         <form onSubmit={formikProductDetail.handleSubmit} className='productDetail__right' >
                             <span className="productDetailField">
-                                {formikProductDetail.errors.name && formikProductDetail.touched.name ? (<div className="errorMessage">{formikProductDetail.errors.name}</div>) : null}
                                 <label htmlFor="name">Name</label>
                                 <input defaultValue={admin.oneProductState.name} id='name' name="name" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
                             </span>
                             <span className="productDetailField">
-                                {formikProductDetail.errors.brand && formikProductDetail.touched.brand ? (<div className="errorMessage">{formikProductDetail.errors.brand}</div>) : null}
                                 <label htmlFor="brand">Brand</label>
                                 <input defaultValue={admin.oneProductState.brand} id="brand" name="brand" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
                             </span>
                             <span className="productDetailField">
-                                <label htmlFor="image">İmage</label>
-                                {formikProductDetail.errors.image && formikProductDetail.touched.image ? (<div className="errorMessage">{formikProductDetail.errors.image}</div>) : null}
+                                <label htmlFor="price">Price</label>
+                                <input defaultValue={admin.oneProductState.price} id="price" name="price" type="number" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                            </span>
+                            <span className="productDetailField">
+                                <label htmlFor="category">Category</label>
+                                <DatalistInput
+                                    value={admin.oneProductState.category}
+                                    className="dataListPlugin"
+                                    inputProps={{
+                                        name: 'category',
+                                        onChange: formikProductDetail.handleChange,
+                                        onBlur: formikProductDetail.handleBlur
+                                    }}
+
+                                    onSelect={async (item) => {
+                                        await formikProductDetail.setFieldTouched('category');
+                                        await formikProductDetail.setFieldValue('category', item.value);
+                                    }}
+                                    items={
+                                        category.categoriesState?.map(c => {
+                                            return (
+                                                { id: `${c?._id}`, value: `${c?.categoryName}` }
+                                            )
+                                        })
+                                    }
+                                />
+                            </span>
+                            <span className="productDetailField">
+                                <label htmlFor="count">Count</label>
+                                <input defaultValue={admin.oneProductState.count} id="count" name="count" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                            </span>
+                            <span className="productDetailField">
+                                <label htmlFor="color">Color</label>
+                                <input defaultValue={admin.oneProductState.color} id="color" name="color" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                            </span>
+                            <span className="productDetailField productDetailField--modified ">
                                 <input id="image" multiple name="image" type="file" onChange={event => {
                                     let reader = new FileReader();
                                     reader.onload = () => {
@@ -112,38 +145,11 @@ function ProductDetail() {
                                     }
                                     reader.readAsDataURL(event.target.files[0])
                                 }} onBlur={formikProductDetail.handleBlur} />
-                            </span>
-                            <span className="productDetailField">
-                                {formikProductDetail.errors.price && formikProductDetail.touched.price ? (<div className="errorMessage">{formikProductDetail.errors.price}</div>) : null}
-                                <label htmlFor="price">Price</label>
-                                <input defaultValue={admin.oneProductState.price} id="price" name="price" type="number" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
-                            </span>
-                            <span className="productDetailField">
-                                {formikProductDetail.errors.category && formikProductDetail.touched.category ? (<div className="errorMessage">{formikProductDetail.errors.category}</div>) : null}
-                                <label htmlFor="category">Category</label>
-                                <input defaultValue={admin.oneProductState.category} id="category" name="category" list='categories' type="text" placeholder="Category" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
-                                <datalist id="categories">
-                                    {
-                                        category.categoriesState?.map(c=>{
-                                            return(
-                                                <option value={c?.categoryName} />
-                                            )
-                                        })
-                                    }
-                                </datalist>
-                            </span>
-                            <span className="productDetailField">
-                                {formikProductDetail.errors.count && formikProductDetail.touched.count ? (<div className="errorMessage">{formikProductDetail.errors.count}</div>) : null}
-                                <label htmlFor="count">Count</label>
-                                <input defaultValue={admin.oneProductState.count} id="count" name="count" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
-                            </span>
-                            <span className="productDetailField">
-                                {formikProductDetail.errors.color && formikProductDetail.touched.color ? (<div className="errorMessage">{formikProductDetail.errors.color}</div>) : null}
-                                <label htmlFor="color">Color</label>
-                                <input defaultValue={admin.oneProductState.color} id="color" name="color" type="text" onChange={formikProductDetail.handleChange} onBlur={formikProductDetail.handleBlur} />
+                                  <div className='productDetailField__img'>
+                                    <img src={formikProductDetail.values.image} alt="" />
+                                </div>
                             </span>
                             <span className="productDetailField productDetailField--desc">
-                                {formikProductDetail.errors.desc && formikProductDetail.touched.desc ? (<div className="errorMessage">{formikProductDetail.errors.desc}</div>) : null}
                                 <label htmlFor="desc">Description</label>
                                 <Editor
                                     name="desc"

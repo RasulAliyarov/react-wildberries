@@ -39,8 +39,9 @@ function Favorite() {
                             {
                                 wildberries.favoriteState.map((value, index) => {
                                     return (
-                                        <Link to={`/detail/${value._id}`}>
-                                            <div key={index} className="favorite__wrapper__products__product">
+
+                                        <div key={index} className="favorite__wrapper__products__product">
+                                            <Link to={`/detail/${value._id}`}>
                                                 <div className="favorite__wrapper__products__product__top">
                                                     <img src={`${value.image}`} alt="" />
                                                     <span className='cardDiscount'>-30%</span>
@@ -54,11 +55,11 @@ function Favorite() {
                                                         <p>{value.brand}/{value.name}</p>
                                                     </span>
                                                 </div>
-                                                <span className='cartHeart' onClick={() => {
-                                                    UserService.deleteFavorite(admin?.userState?.id, value?._id, getFavorite)
-                                                }}>{Icons.FillHeart}</span>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                            <span className='cartHeart' onClick={() => {
+                                                UserService.deleteFavorite(admin?.userState?.id, value?._id, getFavorite)
+                                            }}>{Icons.FillHeart}</span>
+                                        </div>
                                     )
                                 })
                             }

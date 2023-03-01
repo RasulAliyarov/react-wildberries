@@ -8,40 +8,46 @@
             height: 120px;
             gap: 15px;
             align-items: center;
-            input{
+
+            input {
                 padding: 5px 40px 5px 5px;
                 border: 2px solid rgba(0, 0, 0, .3);
                 border-radius: 6px;
                 height: 40px;
                 cursor: pointer;
                 transition: .4s;
-                &:focus{
+
+                &:focus {
                     cursor: text;
                     outline: none;
                 }
-                &:hover{
+
+                &:hover {
                     transition: .4s;
-                    border:2px solid #6423af;
+                    border: 2px solid #6423af;
                 }
             }
-            button{
-                padding: 5px 40px ;
+
+            button {
+                padding: 5px 40px;
                 background-color: #592396;
                 border-radius: 6px;
                 height: 40px;
                 color: white;
                 text-align: center;
                 transition: .4s;
-                svg{
+
+                svg {
                     transition: .4s;
                     margin-right: 5px;
                     font-size: 18px;
                 }
-                &:hover{
+
+                &:hover {
                     transition: .4s;
                     background-color: #441975;
 
-                    svg{
+                    svg {
                         transform: scale(1.085);
                     }
                 }
@@ -91,7 +97,7 @@
                 .descTh {
                     width: 17%;
                 }
-
+                
                 .descTd {
                     margin: 0;
                 }
@@ -132,10 +138,11 @@
                     }
 
                     .adminProductDetail {
-                            background-color: #280055 ;
-                            &:hover{
-                                background-color: #ffa000;
-                            }
+                        background-color: #280055;
+
+                        &:hover {
+                            background-color: #ffa000;
+                        }
                     }
 
                     .productDelete {
@@ -154,11 +161,12 @@
                         }
                     }
 
-                } 
-                
-                .userData{
+                }
+
+                .userData {
                     height: 60px !important;
                 }
+
                 .delTh,
                 .editTh {
                     width: 20px;
@@ -178,7 +186,8 @@
                         td {
                             background-color: #b9f591;
                             transition: .4s;
-                            &:first-child{
+
+                            &:first-child {
                                 background-color: #280055;
                             }
                         }
@@ -188,7 +197,7 @@
         }
     }
 
-   
+
     .attentionModal {
         display: block;
 

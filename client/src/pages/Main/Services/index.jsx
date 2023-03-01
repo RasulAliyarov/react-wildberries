@@ -28,13 +28,13 @@ function Address() {
       <div className="services__wrapper  container1500">
         <Tabs defaultIndex={2}>
           <TabList>
-            <Tab>Как сделать заказ</Tab>
-            <Tab>Способы оплаты</Tab>
-            <Tab >Доставка</Tab>
-            <Tab>Возврат товара</Tab>
-            <Tab>Возврат денежных средств</Tab>
-            <Tab>Правила продажи</Tab>
-            <Tab>Правила пользования торговой площадкой</Tab>
+            <Tab><span>Как сделать заказ</span></Tab>
+            <Tab><span>Способы оплаты</span></Tab>
+            <Tab ><span>Доставка</span></Tab>
+            <Tab><span>Возврат товара</span></Tab>
+            <Tab><span>Возврат денежных средств</span></Tab>
+            <Tab><span>Правила продажи</span></Tab>
+            <Tab><span>Правила пользования торговой площадкой</span></Tab>
           </TabList>
 
           {/* Как сделать заказ */}

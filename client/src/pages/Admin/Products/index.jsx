@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import "./AdminPanel.scss"
 import { Link } from "react-router-dom"
 import { productsReduce, isLoadingReduce, searchStringReduce, attentionReduce, priceToggleReduce, yesNoReduce } from "../../../redux/Slices/adminSlice"
@@ -78,51 +78,51 @@ function Products() {
             <div className="adminPages__wrapper__bottom">
               <table className='adminPages__wrapper__bottom__table'>
                 <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Image</th>
-                  <th>Brand</th>
-                  <th>Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Count</th>
-                  <th>Color</th>
-                  <th className='descTh'>Description</th>
-                  <th className='delTh'>Action</th>
-                  {/* <th className='editTh'>Action</th> */}
-                  <th className='detailTh'>Action</th>
-                </tr>
+                  <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Brand</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Count</th>
+                    <th>Color</th>
+                    <th className='descTh'>Description</th>
+                    <th className='delTh'>Action</th>
+                    {/* <th className='editTh'>Action</th> */}
+                    <th className='detailTh'>Action</th>
+                  </tr>
                 </thead>
-               <tbody>
-               {
-                  admin?.productsState?.
-                    filter(s => s.name?.toLowerCase()?.includes(admin.searchString?.string?.toLowerCase())
-                      || s.category?.toLowerCase()?.includes(admin.searchString?.category?.toLowerCase())).
-                    map((p, index) => {
-                      return (
-                        <tr key={p._id} className="contentRow">
-                          <td className='productsTd'>{index}</td>
-                          <td className='imgTd productsTd'><img src={p?.image} alt="" /></td>
-                          <td className='productsTd'>{p?.brand}</td>
-                          <td className='productsTd'>{p?.name}</td>
-                          <td className='productsTd'>{p?.category}</td>
-                          <td className='productsTd'>{p?.price}</td>
-                          <td className='productsTd'>{p?.count}</td>
-                          <td className='productsTd'>{p?.color}</td>
-                          <td className='descTd productsTd' dangerouslySetInnerHTML={{ __html: p.desc }}></td>
-                          <td className='delTd productsTd'><button className='productDelete' onClick={() => {
-                            dispatch(attentionReduce(true))
-                            id = p._id
-                          }}>Delete</button></td>
-                          {/* <td className='editTd productsTd'><button className='productEdit'>Edit</button></td> */}
-                          <td className='detailTd productsTd'>
-                            <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Edit</Link>
-                          </td>
-                        </tr>
-                      )
-                    })
-                }
-               </tbody>
+                <tbody>
+                  {
+                    admin?.productsState
+                    ?.filter(s => s.name?.toLowerCase()?.includes(admin.searchString?.string?.toLowerCase())
+                        || s.category?.toLowerCase()?.includes(admin.searchString?.category?.toLowerCase()))
+                      .map((p, index) => {
+                        return (
+                          <tr key={p._id} className="contentRow">
+                            <td className='productsTd'>{index}</td>
+                            <td className='imgTd productsTd'><img src={p?.image} alt="" /></td>
+                            <td className='productsTd'>{p?.brand}</td>
+                            <td className='productsTd'>{p?.name}</td>
+                            <td className='productsTd'>{p?.category}</td>
+                            <td className='productsTd'>{p?.price}</td>
+                            <td className='productsTd'>{p?.count}</td>
+                            <td className='productsTd'>{p?.color}</td>
+                            <td className='descTd productsTd' dangerouslySetInnerHTML={{ __html: p.desc }}></td>
+                            <td className='delTd productsTd'><button className='productDelete' onClick={() => {
+                              dispatch(attentionReduce(true))
+                              id = p._id
+                            }}>Delete</button></td>
+                            {/* <td className='editTd productsTd'><button className='productEdit'>Edit</button></td> */}
+                            <td className='detailTd productsTd'>
+                              <Link className='adminProductDetail' to={`/admin/panel/products/${p._id}`}>Edit</Link>
+                            </td>
+                          </tr>
+                        )
+                      })
+                  }
+                </tbody>
               </table>
             </div>
             <div className={admin.attentionState ? "attentionModal " : "attentionModalNone"}>

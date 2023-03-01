@@ -82,7 +82,7 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
-        if(!user.roles.includes("ADMIN")){
+        if (!user.roles.includes("ADMIN")) {
             throw ApiError.BadRequest("Пользователь не найден");
         }
 
@@ -207,8 +207,7 @@ class UserService {
         console.log(req.body)
         console.log(req.params)
         const userRole = await RoleModel.findOne({ value: "SELLER" })
-        // let condidate = await UserModel.findOne({ _id: req.params.id })
-        if (!phonenumber || !postIndex|| !country ){
+        if (!phonenumber || !postIndex || !country) {
             return res.status(400).send("Не все данные введены профиль")
         }
         console.log("message2")
@@ -218,7 +217,7 @@ class UserService {
             postIndex: postIndex,
             country: country,
         });
-            console.log("message3")
+        console.log("message3")
         return user;
     }
 
@@ -226,6 +225,9 @@ class UserService {
         const user = await UserModel.findOne({ _id: req.params.id })
         if (!user) throw new Error("Пользователь не найден")
 
+        if (user.favorite.includes(req.body.data)) {
+            throw new Error("Already have in favorite")
+        }
         const newFav = await UserModel.findByIdAndUpdate(req.params.id, {
             favorite: [
                 ...user.favorite,
@@ -313,7 +315,8 @@ class UserService {
 
         const newSell = await new SellsModel({
             productId: data.productId,
-            userId: data.userId
+            userId: data.userId,
+            date: new Date().toLocaleString("en-US")
         });
         return newSell;
     }

@@ -110,6 +110,7 @@ function Detail() {
                   <button className='incrementBtn' onClick={() => dispatch(counterIncReduce(1))}>+</button>
                 </div>
                 <h5><span>Общая сумма: </span>{wildberries?.counterState * reducrPath?.price} ₽</h5>
+                <h5><span>Категория: </span>{reducrPath?.category} </h5>
                 <span className='detail__wrapper__top__right__buttons'>
                   <span>
                     <button className='addToCart' onClick={() => handleAddToCart()}>

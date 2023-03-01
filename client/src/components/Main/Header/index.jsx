@@ -4,10 +4,10 @@ import "./Header.scss"
 import { Icons, Images } from "../../../Config"
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutReduce, checkAuth, isLoadingReduce, productsReduce } from "../../../redux/Slices/adminSlice"
-import { burgerModaToggleReducer, respCabinetReduce, respSearchReduce, scrollSizeReducer, totalPriceReduce } from "../../../redux/Slices/wildSlice"
+import { burgerModaToggleReducer, respCabinetReduce, languageReduce, respSearchReduce, scrollSizeReducer, totalPriceReduce } from "../../../redux/Slices/wildSlice"
 import { Toaster } from "react-hot-toast"
 import axios from 'axios';
-import _api, { API_URL } from '../../../http';
+import { API_URL } from '../../../http';
 import DatalistInput, { useComboboxControls } from 'react-datalist-input';
 import RespCabinetMenu from '../RespCabinetMenu';
 import { Helmet } from "react-helmet";
@@ -31,7 +31,7 @@ const LNGUAGES = [
     },
     {
         flag: Images.KzFlag,
-        Valyuta: "RUB",
+        Valyuta: "KZ",
         ValyutaName: "Казахстанский тенге"
     },
 
@@ -52,11 +52,8 @@ function Header() {
                 value.data.filter(p => p.deleteState === false),
             ))
         })
-        console.log("serax")
-
         dispatch(isLoadingReduce(false))
     }
-
     useEffect(() => {
         wildberries.cart.map((v) => {
             dispatch(totalPriceReduce({ price: parseInt(v.price), count: parseInt(v.count) }))
@@ -81,7 +78,6 @@ function Header() {
     }
 
     async function searchData(e) {
-
         if (timer.current) {
             clearTimeout(timer.current)
         }
@@ -102,31 +98,43 @@ function Header() {
             <header id="top" className='header'>
                 <div className="header__wrapper container1500">
                     <div className="header__wrapper__top">
-                        <button className='headerLang'>
-                            <img className='headerLangImg' src={Images.RusFlag} alt="" />
-                            <span className='headerTitle' >RUB</span>
+                        {
+                            LNGUAGES.map(l => {
+                                return (
+                                    <button className='headerLang' style={l.Valyuta === wildberries.languageState ? { display: "block" } : { display: "none" }}>
 
-                            <div className="headerLanguageModal">
-                                <div className="headerLanguageModal__top">
-                                    <h3 className='headerLanguageModal__top__title'>Выберите валюту</h3>
-                                </div>
-                                <div className="headerLanguageModal__languages">
-                                    {
-                                        LNGUAGES.map((language, index) => {
-                                            return (
-                                                <span key={index} className='headerLanguageModal__languages__language'>
-                                                    <img src={language.flag} alt="" />
-                                                    <span>{language.Valyuta}</span>
-                                                    <h5>{language.ValyutaName}</h5>
-                                                    <span className='ActiveTick'></span>
-                                                </span>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                        </button>
+                                        <img className='headerLangImg' src={l.Valyuta === wildberries.languageState ? l.flag : null} alt="" />
+                                        <span className='headerTitle' >{l.Valyuta === wildberries.languageState ? l.Valyuta : null}</span>
 
+
+                                        <div className="headerLanguageModal">
+                                            <div className="headerLanguageModal__top">
+                                                <h3 className='headerLanguageModal__top__title'>Выберите валюту</h3>
+                                            </div>
+                                            <div className="headerLanguageModal__languages">
+                                                {
+                                                    LNGUAGES.map((language, index) => {
+                                                        return (
+                                                            <span
+                                                                key={index}
+                                                                onClick={() => {
+                                                                    dispatch(languageReduce(language.Valyuta))
+                                                                }}
+                                                                className='headerLanguageModal__languages__language'>
+                                                                <img src={language.flag} alt="" />
+                                                                <span>{language.Valyuta}</span>
+                                                                <h5>{language.ValyutaName}</h5>
+                                                                <span style={language.Valyuta === wildberries.languageState ? { display: "block" } : { display: "none" }} className='ActiveTick'></span>
+                                                            </span>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    </button>
+                                )
+                            })
+                        }
                         <button className='headerLocation' >
                             <img src={Images.Location} alt="" />
                             <span className='headerTitle'>Москва</span>
@@ -192,7 +200,7 @@ function Header() {
                                             <li><Link to="/favorite">Понравившиеся {Icons.FillHeart}</Link></li>
                                             <li><Link to={`/buyProducts/${admin.userState?.username}`}>Покупки <img src={Images.ProductsCabinet} alt="" /></Link> </li>
                                             <li><Link to="#">Настройки {Icons.Setting}</Link></li>
-                                            <li style={admin.userState?.roles?.includes("USER") ? { display: "flex" } : { display: "none" }}>
+                                            <li style={admin.userState?.roles?.includes("SELLER") ? { display: "none" } : { display: "flex" }}>
                                                 <Link to="/sellerRegistration">Начать продавать    {Icons.Sell}</Link>
                                             </li>
                                             <button onClick={() => {
@@ -252,7 +260,40 @@ function Header() {
                         </ul>
 
                         <ul className='header__wrapper__bottom__respRightMenu'>
-                            <li>{Icons.World}</li>
+                            <li>{
+                                LNGUAGES.map(l => {
+                                    return (
+                                        <button className='header__wrapper__bottom__respRightMenu__respHeaderLang' style={l.Valyuta === wildberries.languageState ? { display: "flex" } : { display: "none" }}>
+                                            <img className='header__wrapper__bottom__respRightMenu__respHeaderLang__headerLangImg' src={l.Valyuta === wildberries.languageState ? l.flag : null} alt="" />
+                                            <span className='header__wrapper__bottom__respRightMenu__respHeaderLang__headerTitle' >{l.Valyuta === wildberries.languageState ? l.Valyuta : null}</span>
+
+                                            <div className="header__wrapper__bottom__respRightMenu__respHeaderLang__headerLanguageModal respHeaderLanguageModal">
+                                                <div className="header__wrapper__bottom__respRightMenu__respHeaderLang__headerLanguageModal__top">
+                                                    <h3 className='header__wrapper__bottom__respRightMenu__respHeaderLang__headerLanguageModal__top__title'>Выберите валюту</h3>
+                                                </div>
+                                                <div className="header__wrapper__bottom__respRightMenu__respHeaderLang__headerLanguageModal__languages">
+                                                    {
+                                                        LNGUAGES.map((language, index) => {
+                                                            return (
+                                                                <span
+                                                                    key={index}
+                                                                    onClick={() => {
+                                                                        dispatch(languageReduce(language.Valyuta))
+                                                                    }}
+                                                                    className='header__wrapper__bottom__respRightMenu__respHeaderLang__headerLanguageModal__languages__language'>
+                                                                    <img src={language.flag} alt="" />
+                                                                    <span>{language.Valyuta}</span>
+                                                                    <span style={language.Valyuta === wildberries.languageState ? { display: "block" } : { display: "none" }} className='ActiveTick'></span>
+                                                                </span>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>
+                                        </button>
+                                    )
+                                })
+                            }</li>
                             <li><Link to="/services">{Icons.Location}</Link></li>
                             <li onClick={() => dispatch(respSearchReduce(true))}>{Icons.Search}</li>
                         </ul>
@@ -263,22 +304,22 @@ function Header() {
                             {Icons.Search}
                         </i>
                         <DatalistInput
-                                value={value}
-                                setValue={setValue}
-                                placeholder="Я ищу..."
-                                onChange={(e) => searchData(e)}
-                                onSelect={item => {
-                                    navigate(`/detail/${item.id}`)
-                                    setValue()
-                                }}
-                                items={
-                                    admin.productsState?.slice(0, 10).map(p => {
-                                        return (
-                                            { id: `${p?._id}`, value: `${p?.name}` }
-                                        )
-                                    })
-                                }
-                            />
+                            value={value}
+                            setValue={setValue}
+                            placeholder="Я ищу..."
+                            onChange={(e) => searchData(e)}
+                            onSelect={item => {
+                                navigate(`/detail/${item.id}`)
+                                setValue()
+                            }}
+                            items={
+                                admin.productsState?.slice(0, 10).map(p => {
+                                    return (
+                                        { id: `${p?._id}`, value: `${p?.name}` }
+                                    )
+                                })
+                            }
+                        />
                         <i className='cameraIcon'>
                             {Icons.Camera}
                         </i>
@@ -320,8 +361,10 @@ function Header() {
                     <NavLink to="/" className={({ isActive }) => isActive ? "activeLink" : null}>
                         <button className="windowsBottom__wishlist">{Icons.Home}</button>
                     </NavLink>
-                    <NavLink to="#" className={({ isActive }) => isActive ? "activeLink" : null}>
-                        <button className="windowsBottom__search"> {Icons.ListSearch} </button>
+                    <NavLink to="#" className={({ isActive }) => isActive ? "activeLink" : null} >
+                        <button className="windowsBottom__search" onClick={() => {
+                            dispatch(burgerModaToggleReducer(!wildberries.burgerModalToggle))
+                        }}> {Icons.ListSearch} </button>
                     </NavLink>
                     <NavLink to="/cart" className={({ isActive }) => isActive ? "activeLink" : null}>
                         <button className="windowsBottom__wishlist">{Icons.CartFill}</button>
