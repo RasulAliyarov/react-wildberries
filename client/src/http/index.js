@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const API_URL = 'http://localhost:8080/api';
+export const API_URL = 'https://react-wildberries.onrender.com/api';
 
 const _api = axios.create({
     withCredentials: true,
