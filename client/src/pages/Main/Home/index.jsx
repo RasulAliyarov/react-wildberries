@@ -28,6 +28,7 @@ function Home() {
     await axios.get(`${API_URL}/products`).then((value) => {
       dispatch(productsReduce(
         value.data.filter(p => p.deleteState === false),
+        console.log(value.data)
       ))
     })
     dispatch(isLoadingReduce(false))
